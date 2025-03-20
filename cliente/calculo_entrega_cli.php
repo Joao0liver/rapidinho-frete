@@ -84,9 +84,10 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
         $rodar_sql = mysqli_query($conn, $sql);
         $nome_user = mysqli_fetch_assoc($rodar_sql);
 
-        // Inserir no Banco - tbl_entrega
+        // Concatenar Endereços com os respectivos Bairros
 
-        $sql = "INSERT INTO tbl_entrega (id_user, inicio_ent)";
+        $ende_inicio = $ende_col.', '.$bairro_col;
+        $ende_fim = $ende_dest.', '.$bairro_dest;
 
     }
 
@@ -112,7 +113,16 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                         <li class="list-group-item bg-transparent"><p class="h4">Valor: <font color="green">R$<?php  echo $preco_total?></font></p></li>
                     </ul>
                     <p><img src="../layout/img/bandeiras_cartao.png" width="35%" height="35%"><div id="emailHelp" class="form-text"><font color="red">*Pagamento no ato da coleta</font></div></p>
-                    <button class="btn btn-primary w-100 m-2" type="button">Finalizar</button>
+                    <form method="post" action="solicitacao_aguardando_cli.php">
+                        <input type="hidden" name="id_user" value="<?php echo $id_user?>">
+                        <input type="hidden" name="valor_ent" value="<?php echo $preco_total?>">
+                        <input type="hidden" name="ende_orig" value="<?php echo $ende_inicio?>">
+                        <input type="hidden" name="ende_dest" value="<?php echo $ende_fim?>">
+                        <input type="hidden" name="peso_pac" value="<?php echo $peso_pac?>">
+                        <input type="hidden" name="larg_pac" value="<?php echo $larg_pac?>">
+                        <input type="hidden" name="comp_pac" value="<?php echo $comp_pac?>">
+                        <button class="btn btn-primary w-100 m-2" type="submit">Finalizar</button>
+                    </form>
                 </div>
             </div>
 <!-- Blank End -->
