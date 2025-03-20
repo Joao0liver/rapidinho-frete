@@ -93,6 +93,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
+                                    <th scope="col">Foto</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">E-mail</th>
                                     <th scope="col">CPF</th>
@@ -108,6 +109,7 @@
 
                                         echo '<tr>
                                         <th scope="row">'.$registro['id_user'].'</th>
+                                        <td><img src="../upload/img_mtboy/'.$registro['foto_mtboy'].'" height="50px" width="50px"></td>
                                         <td>'.$registro['nome_user'].'</td>
                                         <td>'.$registro['email_user'].'</td>
                                         <td>'.$registro['cpf_user'].'</td>

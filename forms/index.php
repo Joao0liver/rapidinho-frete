@@ -44,6 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../motoboy/menu.php');
             exit();
 
+        }elseif ($result['nivel_user'] == 777){
+
+            session_start();
+
+            $_SESSION['id_user'] = $result['id_user'];
+            $_SESSION['email_user'] = $result['email_user'];
+            $_SESSION['nivel_user'] = $result['nivel_user'];
+            header('Location: ../adm/menu.php');
+            exit();
+
         }
 
     } else {
@@ -104,9 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="index.php" class="">
-                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Rapidinho</h3>
+                                <h3 class="text-primary"><img src="../layout/img/logo.png" height="50px" width="50px" style="margin-right: 10px;"></i>Rapidinho Fretes</h3>
                             </a>
-                            <h3>Login</h3>
                         </div>
                         <form method="post" action="index.php">
                             <div class="form-floating mb-3">

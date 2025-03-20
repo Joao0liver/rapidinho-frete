@@ -14,13 +14,13 @@ $cliente = mysqli_fetch_array($sql);
 
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>Cliente - Rapidinho Fretes</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="../layout/img/favicon.ico" rel="icon">
+    <link href="../layout/img/rapidinho.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +61,6 @@ $cliente = mysqli_fetch_array($sql);
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="../layout/img/user.jpg" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -96,8 +95,8 @@ $cliente = mysqli_fetch_array($sql);
                             <span class="d-none d-lg-inline-flex"><?php echo $cliente['nome_user']; ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">Meu Perfil</a>
-                            <a href="#" class="dropdown-item">Logout</a>
+                            <a href="../motoboy/meu_perfil_adm.php" class="dropdown-item">Meu Perfil</a>
+                            <a href="../forms/logout.php" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>

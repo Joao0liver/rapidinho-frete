@@ -83,9 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="../layout/index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>RAPIDINHO</h3>
+                                <h3 class="text-primary"><img src="../layout/img/logo.png" height="50px" width="50px" style="margin-right: 10px;">Cadastro</h3>
                             </a>
-                            <h4>Cadastro</h4>
                         </div>
                         <form method="post" action="cadastro_user.php">
                             <div class="form-floating mb-3">
