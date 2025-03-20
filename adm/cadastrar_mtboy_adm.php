@@ -18,7 +18,7 @@
 
             $senha_cript = hash('sha256', $senha_mtboy);
 
-            $sql = "INSERT INTO tbl_motoboy (nome_mtboy, email_mtboy, cpf_mtboy, tel_mtboy, placa_mtboy, senha_mtboy) VALUES ('$nome_mtboy', '$email_mtboy', '$cpf_mtboy', '$tel_mtboy', '$placa_mtboy', '$senha_cript')";
+            $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, tel_mtboy, placa_mtboy, senha_user, nivel_user) VALUES ('$nome_mtboy', '$email_mtboy', '$cpf_mtboy', '$tel_mtboy', '$placa_mtboy', '$senha_cript', 100)";
             $rodar_sql = mysqli_query($conn, $sql);
 
             if($rodar_sql){

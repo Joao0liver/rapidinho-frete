@@ -2,9 +2,9 @@
 
 session_start();
 
-if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 10){
     
-    header('Location: ../index.php');
+    header('Location: ../forms/index.php');
     exit();
 
 }else{
@@ -38,16 +38,26 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 
     }
 
-    // Obter Informações do Motoboy
+    // Verificar se um motoboy já está atribuido ao pedido
 
-    $id_mtboy = $registros_entrega['id_mtboy'];
+    if ($registros_entrega['id_mtboy'] == null){
 
-    $sql = "SELECT * FROM tbl_motoboy WHERE id_mtboy = $id_mtboy";
-    $rodar_sql = mysqli_query($conn, $sql);
+        $nome_mtboy = '<font color="orange">Nenhum motoboy aceitou a solicitação ainda!</font>';
 
-    $registros_mtboy = mysqli_fetch_assoc($rodar_sql);
+    }else {
 
-    $nome_mtboy = $registros_mtboy['nome_mtboy'];
+        // Obter Informações do Motoboy
+
+        $id_mtboy = $registros_entrega['id_mtboy'];
+
+        $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+        $registros_mtboy = mysqli_fetch_assoc($rodar_sql);
+
+        $nome_mtboy = $registros_mtboy['nome_user'];
+
+    }
 
 
 ?>
@@ -70,8 +80,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                         <dd class="col-sm-8"><?php echo $registros_entrega['ende_dest'] ?></dd>
 
                         <dt class="col-sm-4 text-truncate">Características do Pacote:</dt>
-                        <dd class="col-sm-8">This can be useful when space is tight. Adds an ellipsis at the
-                            end.</dd>
+                        <dd class="col-sm-8"><?php echo $registros_entrega['peso_pac'].'kg - '.$registros_entrega['comp_pac'].'cm x '.$registros_entrega['larg_pac'].'cm'; ?></dd>
 
                         <dt class="col-sm-4">Status:</dt>
                         <dd class="col-sm-8">

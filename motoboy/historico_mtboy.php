@@ -1,61 +1,70 @@
 <?php
 
-include_once("../conexao.php");
-include_once("../funcoes.php");
-include_once("../layout/header_mtboy.php");
+session_start();
 
-function obterRegistros($pagina, $limite){
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 100){
+    
+    header('Location: ../forms/index.php');
+    exit();
+    
+}else{
 
-    $conn = conexao();
+    include_once("../conexao.php");
+    include_once("../funcoes.php");
+    include_once("../layout/header_mtboy.php");
 
-    $offset = ($pagina - 1) * $limite;
+    function obterRegistros($pagina, $limite){
 
-    $sql = "SELECT * FROM tbl_entrega LIMIT $limite OFFSET $offset";
-    $rodar_sql = mysqli_query($conn, $sql);
+        $conn = conexao();
 
-    $registros = [];
-    while ($registro = mysqli_fetch_assoc($rodar_sql)){
-        $registros[] = $registro;
+        $offset = ($pagina - 1) * $limite;
+
+        $sql = "SELECT * FROM tbl_entrega LIMIT $limite OFFSET $offset";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+        $registros = [];
+        while ($registro = mysqli_fetch_assoc($rodar_sql)){
+            $registros[] = $registro;
+        }
+
+        mysqli_close($conn);
+        return $registros;
+
     }
 
-    mysqli_close($conn);
-    return $registros;
+    function contarRegistros(){
 
-}
+        $conn = conexao();
 
-function contarRegistros(){
+        $sql = "SELECT COUNT(*) AS total FROM tbl_entrega";
+        $rodar_sql = mysqli_query($conn, $sql);
 
-    $conn = conexao();
+        $total = mysqli_fetch_assoc($rodar_sql)['total'];
 
-    $sql = "SELECT COUNT(*) AS total FROM tbl_entrega";
-    $rodar_sql = mysqli_query($conn, $sql);
+        mysqli_close($conn);
+        return $total;
 
-    $total = mysqli_fetch_assoc($rodar_sql)['total'];
+    }
 
-    mysqli_close($conn);
-    return $total;
+    $limite = 10;
 
-}
+    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-$limite = 10;
+    $totalRegistros = contarRegistros();
 
-$pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $registros = obterRegistros($pagina, $limite);
 
-$totalRegistros = contarRegistros();
+    $totalPaginas = ceil($totalRegistros/ $limite);
 
-$registros = obterRegistros($pagina, $limite);
+    // Limitação da quantidade de links visíveis da paginação V
 
-$totalPaginas = ceil($totalRegistros/ $limite);
+    $maxLinks = 5; // Número de links de página visíveis
 
-// Limitação da quantidade de links visíveis da paginação V
+    // Garante que o valor não seja inferior a 1
+    $inicio = max(1, $pagina - floor($maxLinks / 2));
 
-$maxLinks = 5; // Número de links de página visíveis
-
-// Garante que o valor não seja inferior a 1
-$inicio = max(1, $pagina - floor($maxLinks / 2));
-
-// Garante que o valor não ultrapasse o total de páginas
-$fim = min($totalPaginas, $inicio + $maxLinks - 1);
+    // Garante que o valor não ultrapasse o total de páginas
+    $fim = min($totalPaginas, $inicio + $maxLinks - 1);
 
 ?>
 
@@ -126,5 +135,6 @@ $fim = min($totalPaginas, $inicio + $maxLinks - 1);
 <?php
 
 include_once("../layout/footer.php");
+}
 
 ?>

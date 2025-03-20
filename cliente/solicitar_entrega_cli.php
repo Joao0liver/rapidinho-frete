@@ -2,9 +2,9 @@
 
 session_start();
 
-if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 10){
     
-    header('Location: ../index.php');
+    header('Location: ../forms/index.php');
     exit();
 
 }else{
@@ -12,6 +12,13 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
     include_once("../conexao.php");
     include_once("../funcoes.php");
     include_once("../layout/header_cliente.php");
+
+    $id_user = $_SESSION['id_user'];
+
+    $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_user";
+    $rodar_sql = mysqli_query($conn, $sql);
+
+    $result = mysqli_fetch_assoc($rodar_sql);
 
 ?>
 
@@ -22,9 +29,10 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                     <form method="post" action="calculo_entrega_cli.php">
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Endereço de Coleta <font color="red" size="2">*Obrigatório</font></label>
-                            <input name="ende_col" type="text" class="form-control mb-3" id="exampleInputPassword1" placeholder="Endereço" required>
+                            <input name="ende_col" type="text" class="form-control mb-3" id="exampleInputPassword1" placeholder="Endereço" value="<?php echo $result['ende_user'] ?>" required>
                             <select name="bairro_col" id="bairro_col" class="form-select mb-3" style="width: 200px;" required>
-                            <option>Aeroporto</option>
+                                <?php echo '<option>'.$result['bairro_user'].'</option>';?>
+                                <option>Aeroporto</option>
                                 <option>Adolfo Vireque</option>
                                 <option>Alto Grajau</option>
                                 <option>Alto dos Passos</option>

@@ -10,13 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $email_user = $_POST['email_user'];
     $cpf_user = $_POST['cpf_user'];
     $ende_user = $_POST['ende_user'];
+    $bairro_user = $_POST['bairro_user'];
     $senha_user = $_POST['senha_user'];
 
     if ($nome_user <> '' or $email_user <> '' or $cpf_user <> '' or $ende_user <> '' or $senha_user <> ''){
 
         $senha_cript = hash('sha256', $senha_user);
 
-        $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, ende_user, senha_user) VALUES ('$nome_user', '$email_user', '$cpf_user', '$ende_user', '$senha_cript')";
+        $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, ende_user, bairro_user, senha_user) VALUES ('$nome_user', '$email_user', '$cpf_user', '$ende_user', '$bairro_user', '$senha_cript')";
         $rodar_sql = mysqli_query($conn, $sql);
 
         if($rodar_sql){
@@ -102,6 +103,173 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                             <div class="form-floating mb-3">
                                 <input type="text" name="ende_user" class="form-control" id="floatingInput" required>
                                 <label for="floatingInput">Endereço</label>
+                            </div>
+                            <div class="">
+                                <select name="bairro_user" id="bairro_user" class="form-select mb-3" style="width: 150px;" required>
+                                    <option value="" disabled selected>Bairro</option>
+                                    <option>Aeroporto</option>
+                                    <option>Adolfo Vireque</option>
+                                    <option>Alto Grajau</option>
+                                    <option>Alto dos Passos</option>
+                                    <option>Alto dos Pinheiros</option>
+                                    <option>Amazonia</option>
+                                    <option>Araujo</option>
+                                    <option>Aracy</option>
+                                    <option>Arco Iris</option>
+                                    <option>Bairu</option>
+                                    <option>Bandeirantes</option>
+                                    <option>Barbosa Lage</option>
+                                    <option>Barreira do Triunfo</option>
+                                    <option>Bela Aurora</option>
+                                    <option>Benfica</option>
+                                    <option>Boa Vista</option>
+                                    <option>Bom Clima</option>
+                                    <option>Bom Jardim</option>
+                                    <option>Bom Pastor</option>
+                                    <option>Bonfim</option>
+                                    <option>Borboleta</option>
+                                    <option>Borborema</option>
+                                    <option>Bosque do Imperador</option>
+                                    <option>Bosque dos Pinheiros</option>
+                                    <option>Caete</option>
+                                    <option>Caicaras</option>
+                                    <option>Carlos Chagas</option>
+                                    <option>Cascatinha</option>
+                                    <option>Ceramica</option>
+                                    <option>Cidade do Sol</option>
+                                    <option>Cidade Jardim</option>
+                                    <option>Cidade Nova</option>
+                                    <option>Cidade Universitaria</option>
+                                    <option>Costa Carvalho</option>
+                                    <option>Cruzeiro do Sul</option>
+                                    <option>Democrata</option>
+                                    <option>Dias Tavares</option>
+                                    <option>Distrito Industrial</option>
+                                    <option>Dom Bosco</option>
+                                    <option>Dom Orione</option>
+                                    <option>Eldorado</option>
+                                    <option>Encosta do Sol</option>
+                                    <option>Esplanada</option>
+                                    <option>Estadio</option>
+                                    <option>Estrela Sul</option>
+                                    <option>Fabrica</option>
+                                    <option>Filgueiras</option>
+                                    <option>Floresta</option>
+                                    <option>Fontesville</option>
+                                    <option>Francisco Bernardino</option>
+                                    <option>Furtado de Menezes</option>
+                                    <option>Graminha</option>
+                                    <option>Granbery</option>
+                                    <option>Granjas Betania</option>
+                                    <option>Granville</option>
+                                    <option>Grajau</option>
+                                    <option>Grama</option>
+                                    <option>Igrejinha</option>
+                                    <option>Industrial</option>
+                                    <option>Ipiranga</option>
+                                    <option>Jardim Da Serra</option>
+                                    <option>Jardim De Ala</option>
+                                    <option>Jardim Do Sol</option>
+                                    <option>Jardim Gaucho</option>
+                                    <option>Jardim Gloria</option>
+                                    <option>Jardim Laranjeiras</option>
+                                    <option>Jardim Marajoara</option>
+                                    <option>Jardim Natal</option>
+                                    <option>Jardim Santa Izabel</option>
+                                    <option>Jardim Saudade</option>
+                                    <option>Jardim dos Alfineiros</option>
+                                    <option>JK</option>
+                                    <option>Jockey 1, 2 e 3</option>
+                                    <option>Ladeira</option>
+                                    <option>Linhares</option>
+                                    <option>Lourdes</option>
+                                    <option>Manoel Honorio</option>
+                                    <option>Mariano Procopio</option>
+                                    <option>Marilandia</option>
+                                    <option>Marumbi</option>
+                                    <option>Milho Branco</option>
+                                    <option>Monte Castelo</option>
+                                    <option>Morada do Serro</option>
+                                    <option>Morro do Imperador</option>
+                                    <option>Mundo Novo</option>
+                                    <option>Matias Barbosa</option>
+                                    <option>Nossa Senhora Aparecida</option>
+                                    <option>Nossa Senhora das Gracas</option>
+                                    <option>Nossa Senhora de Fatima</option>
+                                    <option>Nova Benfica</option>
+                                    <option>Nova California</option>
+                                    <option>Nova Era</option>
+                                    <option>Nova Suica</option>
+                                    <option>Novo horizonte</option>
+                                    <option>Olavo Costa</option>
+                                    <option>Parque Burnier</option>
+                                    <option>Parque das Torres</option>
+                                    <option>Parque Guarani</option>
+                                    <option>Parque Imperial</option>
+                                    <option>Parque Serra Verde</option>
+                                    <option>Parque Sul</option>
+                                    <option>Paineiras</option>
+                                    <option>Pio XII</option>
+                                    <option>Poco Rico</option>
+                                    <option>Ponte Preta</option>
+                                    <option>Previdenciarios</option>
+                                    <option>Progresso</option>
+                                    <option>Recanto Dos Lagos</option>
+                                    <option>Renascenca</option>
+                                    <option>Retiro</option>
+                                    <option>Rodoviaria</option>
+                                    <option>Quintas da Avenida</option>
+                                    <option>Sagrado</option>
+                                    <option>Santos Anjos</option>
+                                    <option>Santos Dumont</option>
+                                    <option>Sao Benedito</option>
+                                    <option>Sao Bernardo</option>
+                                    <option>Sao Conrado</option>
+                                    <option>Sao Damiao</option>
+                                    <option>Sao Dimas</option>
+                                    <option>Sao Francisco de Paula</option>
+                                    <option>Sao Geraldo</option>
+                                    <option>Sao Judas Tadeu</option>
+                                    <option>Sao Mateus</option>
+                                    <option>Sao Pedro</option>
+                                    <option>Sao Sebastiao</option>
+                                    <option>Sao Terezinha</option>
+                                    <option>Santa Amelia</option>
+                                    <option>Santa Candida</option>
+                                    <option>Santa Catarina</option>
+                                    <option>Santa Cecilia</option>
+                                    <option>Santa Cruz</option>
+                                    <option>Santa Efigenia</option>
+                                    <option>Santa Helena</option>
+                                    <option>Santa Lucia</option>
+                                    <option>Santa Luzia</option>
+                                    <option>Santa Maria</option>
+                                    <option>Santa Paula</option>
+                                    <option>Santa Rita de Cassia</option>
+                                    <option>Santa Tereza</option>
+                                    <option>Santo Antonio</option>
+                                    <option>Serro Azul</option>
+                                    <option>Shop Independencia</option>
+                                    <option>Solidariedade</option>
+                                    <option>Spina Ville</option>
+                                    <option>Teixeiras</option>
+                                    <option>Terras Altas</option>
+                                    <option>Tiguera</option>
+                                    <option>Tres Moinhos</option>
+                                    <option>Tupa</option>
+                                    <option>UFJF</option>
+                                    <option>Usina Quatro</option>
+                                    <option>Vale do Ipe</option>
+                                    <option>Vale Verde</option>
+                                    <option>Vila Alpina</option>
+                                    <option>Vila Ideal</option>
+                                    <option>Vila Montanhesa</option>
+                                    <option>Vila Olavo Costa</option>
+                                    <option>Vila Ozanan</option>
+                                    <option>Vila Sao Jose</option>
+                                    <option>Vina Del Mar</option>
+                                    <option>Vivendas da Serra</option>
+                                </select>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="password" name="senha_user" class="form-control" id="floatingInput" required>

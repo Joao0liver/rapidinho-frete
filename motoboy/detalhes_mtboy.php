@@ -1,6 +1,15 @@
 <?php
 
-include_once("../layout/header_mtboy.php");
+session_start();
+
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 100){
+    
+    header('Location: ../forms/index.php');
+    exit();
+    
+}else{
+
+    include_once("../layout/header_mtboy.php");
 
 ?>
 
@@ -17,5 +26,6 @@ include_once("../layout/header_mtboy.php");
 <?php
 
 include_once("../layout/footer.php");
+}
 
 ?>

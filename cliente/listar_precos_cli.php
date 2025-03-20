@@ -2,9 +2,9 @@
 
 session_start();
 
-if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 10){
     
-    header('Location: ../index.php');
+    header('Location: ../forms/index.php');
     exit();
 
 }else{

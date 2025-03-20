@@ -1,3 +1,14 @@
+<?php
+
+include_once("../conexao.php");
+
+$id_cliente = $_SESSION['id_user'];
+
+$sql = mysqli_query($conn, "SELECT nome_user FROM tbl_usuario WHERE id_user = $id_cliente");
+$cliente = mysqli_fetch_array($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -54,7 +65,7 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
+                        <h6 class="mb-0"><?php echo $cliente['nome_user']; ?></h6>
                         <span>Motoboy</span>
                     </div>
                 </div>

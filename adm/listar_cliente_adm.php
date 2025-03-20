@@ -4,7 +4,7 @@
     include_once("../funcoes.php");
     include_once("../layout/header_adm.php");
 
-    $sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
+    //$sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
 
     function obterRegistros($pagina, $limite){
 
@@ -12,7 +12,7 @@
 
         $offset = ($pagina - 1) * $limite;
         
-        $sql = "SELECT * FROM tbl_usuario LIMIT $limite OFFSET $offset";
+        $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 10 LIMIT $limite OFFSET $offset";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $registros = [];
@@ -28,7 +28,7 @@
 
         $conn = conexao();
 
-        $sql = "SELECT COUNT(*) AS total FROM tbl_usuario";
+        $sql = "SELECT COUNT(*) AS total FROM tbl_usuario WHERE nivel_user = 10";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $total = mysqli_fetch_assoc($rodar_sql)['total'];
@@ -55,7 +55,7 @@
     $inicio = max(1, $pagina - floor($maxLinks / 2));
 
     // Garante que o valor não ultrapasse o total de páginas
-    $fim = min($totalPaginas, $inicio + $maxLinks - 1);
+    $fim = min($totalPagina, $inicio + $maxLinks - 1);
 
 ?>
 
@@ -144,7 +144,7 @@
                                 }
                             }
     
-                            if ($pagina < $totalPaginas){
+                            if ($pagina < $totalPagina){
                                 echo '<a href="?page='.($pagina + 1).'">Próximo</a>';
                             }
 

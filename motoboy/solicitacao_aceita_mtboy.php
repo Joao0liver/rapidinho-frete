@@ -1,17 +1,26 @@
 <?php
 
-include_once("../conexao.php");
-include_once("../funcoes.php");
-include_once("../layout/header_mtboy.php");
+session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 100){
+    
+    header('Location: ../forms/index.php');
+    exit();
+    
+}else{
 
-    $id_ent = $_GET['id_ent'];
+    include_once("../conexao.php");
+    include_once("../funcoes.php");
+    include_once("../layout/header_mtboy.php");
 
-    $sql = "UPDATE tbl_entrega SET id_mtboy = 1, inicio_ent = NOW() WHERE id_ent = $id_ent";
-    $rodar_sql = mysqli_query($conn, $sql);
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-}
+        $id_ent = $_GET['id_ent'];
+
+        $sql = "UPDATE tbl_entrega SET id_mtboy = 1, inicio_ent = NOW() WHERE id_ent = $id_ent";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+    }
 
 ?>
 
@@ -28,5 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 <?php
 
 include_once("../layout/footer.php");
+}
 
 ?>

@@ -24,12 +24,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result['senha_user'] == $cript_senha_form and $result['status_user'] == 1) {    // as senhas conferem! - status (ativo/inativo) do usuário!
 
-        session_start();
+        if ($result['nivel_user'] == 10){
 
-        $_SESSION['id_user'] = $result['id_user'];
-        $_SESSION['email_user'] = $result['email_user'];
-        header('Location: ../cliente/menu.php');
-        exit();
+            session_start();
+
+            $_SESSION['id_user'] = $result['id_user'];
+            $_SESSION['email_user'] = $result['email_user'];
+            $_SESSION['nivel_user'] = $result['nivel_user'];
+            header('Location: ../cliente/menu.php');
+            exit();
+
+        }elseif ($result['nivel_user'] == 100){
+
+            session_start();
+
+            $_SESSION['id_user'] = $result['id_user'];
+            $_SESSION['email_user'] = $result['email_user'];
+            $_SESSION['nivel_user'] = $result['nivel_user'];
+            header('Location: ../motoboy/menu.php');
+            exit();
+
+        }
+
     } else {
         $msg = '<font color="red">E-mail ou senha inválidos!</font>';
     }

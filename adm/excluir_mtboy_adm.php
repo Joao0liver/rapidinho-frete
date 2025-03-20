@@ -2,9 +2,9 @@
 
     include_once("../conexao.php");
 
-    $id_mtboy = $_GET['id_mtboy'];
+    $id_mtboy = $_GET['id_user'];
 
-    $sql = "UPDATE tbl_motoboy SET status_mtboy = 0 WHERE id_mtboy = $id_mtboy";
+    $sql = "UPDATE tbl_usuario SET status_user = 0 WHERE id_user = $id_mtboy";
     $rodar_sql = mysqli_query($conn, $sql);
 
     if ($rodar_sql){

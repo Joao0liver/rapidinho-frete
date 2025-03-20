@@ -4,13 +4,13 @@
     include_once("../funcoes.php");
     include_once("../layout/header_adm.php");
 
-    $sql = mysqli_query($conn, 'SELECT * FROM tbl_motoboy');
+    $sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
 
     function contarRegistros(){
 
     $conn = conexao();
 
-    $sql = "SELECT COUNT(*) AS total FROM tbl_motoboy";
+    $sql = "SELECT COUNT(*) AS total FROM tbl_usuario WHERE nivel_user = 100";
     $rodar_sql = mysqli_query($conn, $sql);
 
     $total = mysqli_fetch_assoc($rodar_sql)['total'];
@@ -25,7 +25,7 @@
     $conn = conexao();
 
     $offset = ($pagina - 1) * $limite;
-    $sql = "SELECT * FROM tbl_motoboy LIMIT $limite OFFSET $offset";
+    $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 100 LIMIT $limite OFFSET $offset";
     $rodar_sql = mysqli_query($conn, $sql);
 
     $registros = [];
@@ -78,7 +78,7 @@
 
                                     if (confirmacao){
                                         
-                                        window.location.href = `excluir_mtboy_adm.php?id_mtboy=${id}`;
+                                        window.location.href = `excluir_mtboy_adm.php?id_user=${id}`;
                                         alert("Deletado com sucesso!");
 
                                     }else{
@@ -98,7 +98,6 @@
                                     <th scope="col">CPF</th>
                                     <th scope="col">Telefone</th>
                                     <th scope="col">Placa</th>
-                                    <th scope="col">Score</th>
                                     <th scope="col">Status</th>
                                 </tr>
                             </thead>
@@ -108,18 +107,17 @@
                                     foreach ($registros as $registro){
 
                                         echo '<tr>
-                                        <th scope="row">'.$registro['id_mtboy'].'</th>
-                                        <td>'.$registro['nome_mtboy'].'</td>
-                                        <td>'.$registro['email_mtboy'].'</td>
-                                        <td>'.$registro['cpf_mtboy'].'</td>
+                                        <th scope="row">'.$registro['id_user'].'</th>
+                                        <td>'.$registro['nome_user'].'</td>
+                                        <td>'.$registro['email_user'].'</td>
+                                        <td>'.$registro['cpf_user'].'</td>
                                         <td>'.$registro['tel_mtboy'].'</td>
                                         <td>'.$registro['placa_mtboy'].'</td>
-                                        <td>'.$registro['score_mtboy'].'</td>
-                                        <td>'.status($registro['status_mtboy']).'</td>
+                                        <td>'.status($registro['status_user']).'</td>
                                         <td>
-                                        <a href="editar_mtboy_adm.php?id_mtboy='.$registro['id_mtboy'].'"><img src="../layout/img/lapis.png" height="18px" width="18px" style="margin-right: 8px;"></a>';
-                                        if ($registro['status_mtboy'] == 1){
-                                        echo '<a href="excluir_mtboy_adm.php?id_mtboy='.$registro['id_mtboy'].'" onclick="confirmaDel(event, '.$registro['id_mtboy'].')"><img src="../layout/img/lixo.png" height="18px" width="18px"></a>
+                                        <a href="editar_mtboy_adm.php?id_user='.$registro['id_user'].'"><img src="../layout/img/lapis.png" height="18px" width="18px" style="margin-right: 8px;"></a>';
+                                        if ($registro['status_user'] == 1){
+                                        echo '<a href="excluir_mtboy_adm.php?id_user='.$registro['id_user'].'" onclick="confirmaDel(event, '.$registro['id_user'].')"><img src="../layout/img/lixo.png" height="18px" width="18px"></a>
                                         </td>
                                         </tr>';
                                         
