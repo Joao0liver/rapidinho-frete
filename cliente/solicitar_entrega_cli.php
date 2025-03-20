@@ -24,39 +24,13 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                             <label for="exampleInputPassword1" class="form-label">Endereço de Coleta <font color="red" size="2">*Obrigatório</font></label>
                             <input name="ende_col" type="text" class="form-control mb-3" id="exampleInputPassword1" placeholder="Endereço" required>
                             <select name="bairro_col" id="bairro_col" class="form-select mb-3" style="width: 200px;" required>
-                                <option>Aeroporto</option>
+                            <option>Aeroporto</option>
                                 <option>Adolfo Vireque</option>
-                                <option>Graminha</option>
-                                <option>Granbery</option>
-                                <option>Quintas da Avenida</option>
-                                <option>Recanto Dos Lagos</option>
-                                <option>Alto dos Passos</option>
-                                <option>Granjas Betania</option>
-                                <option>Alto dos Pinheiros</option>
-                                <option>Granville</option>
-                                <option>Renascenca</option>
-                                <option>Retiro</option>
                                 <option>Alto Grajau</option>
-                                <option>Grama</option>
-                                <option>Rodoviaria</option>
+                                <option>Alto dos Passos</option>
+                                <option>Alto dos Pinheiros</option>
                                 <option>Amazonia</option>
-                                <option>Guarua</option>
-                                <option>Sagrado</option>
                                 <option>Araujo</option>
-                                <option>Igrejinha</option>
-                                <option>Salvaterra</option>
-                                <option>Ipiranga</option>
-                                <option>Santa Amelia</option>
-                                <option>Industrial</option>
-                                <option>Santa Candida</option>
-                                <option>Jardim Da Serra</option>
-                                <option>Santa Catarina</option>
-                                <option>Jardim De Ala</option>
-                                <option>Santa Cecilia</option>
-                                <option>Jardim Do Sol</option>
-                                <option>Santa Cruz</option>
-                                <option>Jardim dos Alfineiros</option>
-                                <option>Santa Efigenia</option>
                                 <option>Aracy</option>
                                 <option>Arco Iris</option>
                                 <option>Bairu</option>
@@ -72,61 +46,17 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 <option>Bonfim</option>
                                 <option>Borboleta</option>
                                 <option>Borborema</option>
-                                <option>Jardim Gaucho</option>
-                                <option>Jardim Gloria</option>
-                                <option>Jardim Laranjeiras</option>
-                                <option>Jardim Marajoara</option>
-                                <option>Jardim Natal</option>
-                                <option>Jardim Santa Izabel</option>
-                                <option>Jardim Saudade</option>
-                                <option>JK</option>
-                                <option>Jockey 1, 2 e 3</option>
-                                <option>Ladeira</option>
-                                <option>Linhares</option>
-                                <option>Lourdes</option>
-                                <option>Santa Helena</option>
-                                <option>Santa Lucia</option>
-                                <option>Santa Luzia</option>
-                                <option>Santa Maria</option>
-                                <option>Santa Paula</option>
-                                <option>Santa Rita de Cassia</option>
-                                <option>Santa Tereza</option>
-                                <option>Santa Terezinha</option>
-                                <option>Santo Antonio</option>
-                                <option>Santos Anjos</option>
-                                <option>Santos Dumont</option>
-                                <option>Sao Benedito</option>
                                 <option>Bosque do Imperador</option>
                                 <option>Bosque dos Pinheiros</option>
-                                <option>Caicaras</option>
                                 <option>Caete</option>
-                                <option>Manoel Honorio</option>
-                                <option>Sao Bernardo</option>
-                                <option>Casa Blanca</option>
-                                <option>Mariano Procopio</option>
-                                <option>Sao Conrado</option>
+                                <option>Caicaras</option>
                                 <option>Carlos Chagas</option>
                                 <option>Cascatinha</option>
-                                <option>Marilandia</option>
-                                <option>Sao Damiao</option>
-                                <option>Marumbi</option>
-                                <option>Sao Dimas</option>
-                                <option>Centenario</option>
-                                <option>Matias Barbosa</option>
-                                <option>Sao Geraldo</option>
-                                <option>Centro</option>
-                                <option>Milho Branco</option>
-                                <option>Sao Francisco de Paula</option>
                                 <option>Ceramica</option>
-                                <option>Monte Castelo</option>
-                                <option>Sao Judas Tadeu</option>
-                                <option>Cesario Alvim</option>
                                 <option>Cidade do Sol</option>
-                                <option>Sao Mateus</option>
                                 <option>Cidade Jardim</option>
                                 <option>Cidade Nova</option>
                                 <option>Cidade Universitaria</option>
-                                <option>Chales do Imperador</option>
                                 <option>Costa Carvalho</option>
                                 <option>Cruzeiro do Sul</option>
                                 <option>Democrata</option>
@@ -145,10 +75,41 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 <option>Fontesville</option>
                                 <option>Francisco Bernardino</option>
                                 <option>Furtado de Menezes</option>
+                                <option>Graminha</option>
+                                <option>Granbery</option>
+                                <option>Granjas Betania</option>
+                                <option>Granville</option>
                                 <option>Grajau</option>
+                                <option>Grama</option>
+                                <option>Igrejinha</option>
+                                <option>Industrial</option>
+                                <option>Ipiranga</option>
+                                <option>Jardim Da Serra</option>
+                                <option>Jardim De Ala</option>
+                                <option>Jardim Do Sol</option>
+                                <option>Jardim Gaucho</option>
+                                <option>Jardim Gloria</option>
+                                <option>Jardim Laranjeiras</option>
+                                <option>Jardim Marajoara</option>
+                                <option>Jardim Natal</option>
+                                <option>Jardim Santa Izabel</option>
+                                <option>Jardim Saudade</option>
+                                <option>Jardim dos Alfineiros</option>
+                                <option>JK</option>
+                                <option>Jockey 1, 2 e 3</option>
+                                <option>Ladeira</option>
+                                <option>Linhares</option>
+                                <option>Lourdes</option>
+                                <option>Manoel Honorio</option>
+                                <option>Mariano Procopio</option>
+                                <option>Marilandia</option>
+                                <option>Marumbi</option>
+                                <option>Milho Branco</option>
+                                <option>Monte Castelo</option>
                                 <option>Morada do Serro</option>
                                 <option>Morro do Imperador</option>
                                 <option>Mundo Novo</option>
+                                <option>Matias Barbosa</option>
                                 <option>Nossa Senhora Aparecida</option>
                                 <option>Nossa Senhora das Gracas</option>
                                 <option>Nossa Senhora de Fatima</option>
@@ -158,15 +119,52 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 <option>Nova Suica</option>
                                 <option>Novo horizonte</option>
                                 <option>Olavo Costa</option>
-                                <option>Paineiras</option>
-                                <option>Parque das Torres</option>
                                 <option>Parque Burnier</option>
+                                <option>Parque das Torres</option>
                                 <option>Parque Guarani</option>
+                                <option>Parque Imperial</option>
                                 <option>Parque Serra Verde</option>
                                 <option>Parque Sul</option>
-                                <option>Parque Imperial</option>
+                                <option>Paineiras</option>
+                                <option>Pio XII</option>
+                                <option>Poco Rico</option>
+                                <option>Ponte Preta</option>
+                                <option>Previdenciarios</option>
+                                <option>Progresso</option>
+                                <option>Recanto Dos Lagos</option>
+                                <option>Renascenca</option>
+                                <option>Retiro</option>
+                                <option>Rodoviaria</option>
+                                <option>Quintas da Avenida</option>
+                                <option>Sagrado</option>
+                                <option>Santos Anjos</option>
+                                <option>Santos Dumont</option>
+                                <option>Sao Benedito</option>
+                                <option>Sao Bernardo</option>
+                                <option>Sao Conrado</option>
+                                <option>Sao Damiao</option>
+                                <option>Sao Dimas</option>
+                                <option>Sao Francisco de Paula</option>
+                                <option>Sao Geraldo</option>
+                                <option>Sao Judas Tadeu</option>
+                                <option>Sao Mateus</option>
                                 <option>Sao Pedro</option>
                                 <option>Sao Sebastiao</option>
+                                <option>Sao Terezinha</option>
+                                <option>Santa Amelia</option>
+                                <option>Santa Candida</option>
+                                <option>Santa Catarina</option>
+                                <option>Santa Cecilia</option>
+                                <option>Santa Cruz</option>
+                                <option>Santa Efigenia</option>
+                                <option>Santa Helena</option>
+                                <option>Santa Lucia</option>
+                                <option>Santa Luzia</option>
+                                <option>Santa Maria</option>
+                                <option>Santa Paula</option>
+                                <option>Santa Rita de Cassia</option>
+                                <option>Santa Tereza</option>
+                                <option>Santo Antonio</option>
                                 <option>Serro Azul</option>
                                 <option>Shop Independencia</option>
                                 <option>Solidariedade</option>
@@ -182,16 +180,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 <option>Vale Verde</option>
                                 <option>Vila Alpina</option>
                                 <option>Vila Ideal</option>
+                                <option>Vila Montanhesa</option>
                                 <option>Vila Olavo Costa</option>
                                 <option>Vila Ozanan</option>
-                                <option>Vila Montanhesa</option>
-                                <option>Parque Independencia</option>
-                                <option>Pio XII</option>
-                                <option>Poco Rico</option>
-                                <option>Ponte Preta</option>
-                                <option>Previdenciarios</option>
-                                <option>Progresso</option>
-                                <option>Vitorino Braga</option>
                                 <option>Vila Sao Jose</option>
                                 <option>Vina Del Mar</option>
                                 <option>Vivendas da Serra</option>
@@ -206,37 +197,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                             <select name="bairro_dest" id="bairro_dest" class="form-select mb-3" style="width: 200px;" required>
                                 <option>Aeroporto</option>
                                 <option>Adolfo Vireque</option>
-                                <option>Graminha</option>
-                                <option>Granbery</option>
-                                <option>Quintas da Avenida</option>
-                                <option>Recanto Dos Lagos</option>
-                                <option>Alto dos Passos</option>
-                                <option>Granjas Betania</option>
-                                <option>Alto dos Pinheiros</option>
-                                <option>Granville</option>
-                                <option>Renascenca</option>
-                                <option>Retiro</option>
                                 <option>Alto Grajau</option>
-                                <option>Grama</option>
-                                <option>Rodoviaria</option>
+                                <option>Alto dos Passos</option>
+                                <option>Alto dos Pinheiros</option>
                                 <option>Amazonia</option>
-                                <option>Guarua</option>
-                                <option>Sagrado</option>
                                 <option>Araujo</option>
-                                <option>Igrejinha</option>
-                                <option>Salvaterra</option>
-                                <option>Ipiranga</option>
-                                <option>Santa Amelia</option>
-                                <option>Industrial</option>
-                                <option>Santa Candida</option>
-                                <option>Jardim Da Serra</option>
-                                <option>Santa Catarina</option>
-                                <option>Jardim De Ala</option>
-                                <option>Santa Cecilia</option>
-                                <option>Jardim Do Sol</option>
-                                <option>Santa Cruz</option>
-                                <option>Jardim dos Alfineiros</option>
-                                <option>Santa Efigenia</option>
                                 <option>Aracy</option>
                                 <option>Arco Iris</option>
                                 <option>Bairu</option>
@@ -252,61 +217,17 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 <option>Bonfim</option>
                                 <option>Borboleta</option>
                                 <option>Borborema</option>
-                                <option>Jardim Gaucho</option>
-                                <option>Jardim Gloria</option>
-                                <option>Jardim Laranjeiras</option>
-                                <option>Jardim Marajoara</option>
-                                <option>Jardim Natal</option>
-                                <option>Jardim Santa Izabel</option>
-                                <option>Jardim Saudade</option>
-                                <option>JK</option>
-                                <option>Jockey 1, 2 e 3</option>
-                                <option>Ladeira</option>
-                                <option>Linhares</option>
-                                <option>Lourdes</option>
-                                <option>Santa Helena</option>
-                                <option>Santa Lucia</option>
-                                <option>Santa Luzia</option>
-                                <option>Santa Maria</option>
-                                <option>Santa Paula</option>
-                                <option>Santa Rita de Cassia</option>
-                                <option>Santa Tereza</option>
-                                <option>Santa Terezinha</option>
-                                <option>Santo Antonio</option>
-                                <option>Santos Anjos</option>
-                                <option>Santos Dumont</option>
-                                <option>Sao Benedito</option>
                                 <option>Bosque do Imperador</option>
                                 <option>Bosque dos Pinheiros</option>
-                                <option>Caicaras</option>
                                 <option>Caete</option>
-                                <option>Manoel Honorio</option>
-                                <option>Sao Bernardo</option>
-                                <option>Casa Blanca</option>
-                                <option>Mariano Procopio</option>
-                                <option>Sao Conrado</option>
+                                <option>Caicaras</option>
                                 <option>Carlos Chagas</option>
                                 <option>Cascatinha</option>
-                                <option>Marilandia</option>
-                                <option>Sao Damiao</option>
-                                <option>Marumbi</option>
-                                <option>Sao Dimas</option>
-                                <option>Centenario</option>
-                                <option>Matias Barbosa</option>
-                                <option>Sao Geraldo</option>
-                                <option>Centro</option>
-                                <option>Milho Branco</option>
-                                <option>Sao Francisco de Paula</option>
                                 <option>Ceramica</option>
-                                <option>Monte Castelo</option>
-                                <option>Sao Judas Tadeu</option>
-                                <option>Cesario Alvim</option>
                                 <option>Cidade do Sol</option>
-                                <option>Sao Mateus</option>
                                 <option>Cidade Jardim</option>
                                 <option>Cidade Nova</option>
                                 <option>Cidade Universitaria</option>
-                                <option>Chales do Imperador</option>
                                 <option>Costa Carvalho</option>
                                 <option>Cruzeiro do Sul</option>
                                 <option>Democrata</option>
@@ -325,10 +246,41 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 <option>Fontesville</option>
                                 <option>Francisco Bernardino</option>
                                 <option>Furtado de Menezes</option>
+                                <option>Graminha</option>
+                                <option>Granbery</option>
+                                <option>Granjas Betania</option>
+                                <option>Granville</option>
                                 <option>Grajau</option>
+                                <option>Grama</option>
+                                <option>Igrejinha</option>
+                                <option>Industrial</option>
+                                <option>Ipiranga</option>
+                                <option>Jardim Da Serra</option>
+                                <option>Jardim De Ala</option>
+                                <option>Jardim Do Sol</option>
+                                <option>Jardim Gaucho</option>
+                                <option>Jardim Gloria</option>
+                                <option>Jardim Laranjeiras</option>
+                                <option>Jardim Marajoara</option>
+                                <option>Jardim Natal</option>
+                                <option>Jardim Santa Izabel</option>
+                                <option>Jardim Saudade</option>
+                                <option>Jardim dos Alfineiros</option>
+                                <option>JK</option>
+                                <option>Jockey 1, 2 e 3</option>
+                                <option>Ladeira</option>
+                                <option>Linhares</option>
+                                <option>Lourdes</option>
+                                <option>Manoel Honorio</option>
+                                <option>Mariano Procopio</option>
+                                <option>Marilandia</option>
+                                <option>Marumbi</option>
+                                <option>Milho Branco</option>
+                                <option>Monte Castelo</option>
                                 <option>Morada do Serro</option>
                                 <option>Morro do Imperador</option>
                                 <option>Mundo Novo</option>
+                                <option>Matias Barbosa</option>
                                 <option>Nossa Senhora Aparecida</option>
                                 <option>Nossa Senhora das Gracas</option>
                                 <option>Nossa Senhora de Fatima</option>
@@ -338,15 +290,52 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 <option>Nova Suica</option>
                                 <option>Novo horizonte</option>
                                 <option>Olavo Costa</option>
-                                <option>Paineiras</option>
-                                <option>Parque das Torres</option>
                                 <option>Parque Burnier</option>
+                                <option>Parque das Torres</option>
                                 <option>Parque Guarani</option>
+                                <option>Parque Imperial</option>
                                 <option>Parque Serra Verde</option>
                                 <option>Parque Sul</option>
-                                <option>Parque Imperial</option>
+                                <option>Paineiras</option>
+                                <option>Pio XII</option>
+                                <option>Poco Rico</option>
+                                <option>Ponte Preta</option>
+                                <option>Previdenciarios</option>
+                                <option>Progresso</option>
+                                <option>Recanto Dos Lagos</option>
+                                <option>Renascenca</option>
+                                <option>Retiro</option>
+                                <option>Rodoviaria</option>
+                                <option>Quintas da Avenida</option>
+                                <option>Sagrado</option>
+                                <option>Santos Anjos</option>
+                                <option>Santos Dumont</option>
+                                <option>Sao Benedito</option>
+                                <option>Sao Bernardo</option>
+                                <option>Sao Conrado</option>
+                                <option>Sao Damiao</option>
+                                <option>Sao Dimas</option>
+                                <option>Sao Francisco de Paula</option>
+                                <option>Sao Geraldo</option>
+                                <option>Sao Judas Tadeu</option>
+                                <option>Sao Mateus</option>
                                 <option>Sao Pedro</option>
                                 <option>Sao Sebastiao</option>
+                                <option>Sao Terezinha</option>
+                                <option>Santa Amelia</option>
+                                <option>Santa Candida</option>
+                                <option>Santa Catarina</option>
+                                <option>Santa Cecilia</option>
+                                <option>Santa Cruz</option>
+                                <option>Santa Efigenia</option>
+                                <option>Santa Helena</option>
+                                <option>Santa Lucia</option>
+                                <option>Santa Luzia</option>
+                                <option>Santa Maria</option>
+                                <option>Santa Paula</option>
+                                <option>Santa Rita de Cassia</option>
+                                <option>Santa Tereza</option>
+                                <option>Santo Antonio</option>
                                 <option>Serro Azul</option>
                                 <option>Shop Independencia</option>
                                 <option>Solidariedade</option>
@@ -362,19 +351,13 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 <option>Vale Verde</option>
                                 <option>Vila Alpina</option>
                                 <option>Vila Ideal</option>
+                                <option>Vila Montanhesa</option>
                                 <option>Vila Olavo Costa</option>
                                 <option>Vila Ozanan</option>
-                                <option>Vila Montanhesa</option>
-                                <option>Parque Independencia</option>
-                                <option>Pio XII</option>
-                                <option>Poco Rico</option>
-                                <option>Ponte Preta</option>
-                                <option>Previdenciarios</option>
-                                <option>Progresso</option>
-                                <option>Vitorino Braga</option>
                                 <option>Vila Sao Jose</option>
                                 <option>Vina Del Mar</option>
                                 <option>Vivendas da Serra</option>
+
                             </select>
                             <input name="cep_dest" type="number" class="form-control mb-3" id="exampleInputPassword1" placeholder="CEP" style="width: 150px;">
                             <input name="nome_dest" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome do Destinatário" required>

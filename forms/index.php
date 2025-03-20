@@ -28,14 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['id_user'] = $result['id_user'];
         $_SESSION['email_user'] = $result['email_user'];
-        echo 'entrou';
         header('Location: ../cliente/menu.php');
         exit();
     } else {
-        $msg = '<div class="alert alert-error">
-        <button class="close" data-dismiss="alert">×</button>
-        <strong>Erro!</strong> Login ou senha inválida.
-      </div>';
+        $msg = '<font color="red">E-mail ou senha inválidos!</font>';
     }
 
 }
@@ -104,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="form-floating mb-4">
                                 <input type="password" class="form-control" id="floatingPassword" name="senha" placeholder="Password">
                                 <label for="floatingPassword">Senha</label>
+                                <?php echo '<br>'.$msg; ?>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <a href="">Esqueci minha senha</a>

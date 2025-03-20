@@ -12,7 +12,7 @@
 
         $offset = ($pagina - 1) * $limite;
         
-        $sql = "SELECT * FROM tbl_usuario ORDER BY bairro LIMIT $limite OFFSET $offset";
+        $sql = "SELECT * FROM tbl_usuario LIMIT $limite OFFSET $offset";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $registros = [];

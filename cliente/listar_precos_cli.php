@@ -83,7 +83,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Tabela de Preços</h6>
                     <form method="post" action="listar_precos_cli.php">
-                        <input type="search" name="busca" placeholder="Search"><br><br>
+                        <input type="search" name="busca" placeholder="Pesquisar"><br><br>
                     </form>
                     <table class="table">
                         <thead>
@@ -99,7 +99,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 
                                     echo '<tr>
                                         <th scope="row">'.$registro['bairro'].'</th>
-                                        <td>'.$registro['valor'].'</td>
+                                        <td>R$'.$registro['valor'].'</td>
                                         </tr>';
                                         
 
