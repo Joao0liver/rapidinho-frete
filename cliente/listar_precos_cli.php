@@ -13,25 +13,34 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
     include_once("../funcoes.php");
     include_once("../layout/header_cliente.php");
 
-    function obterRegistros($pagina, $limite) {
+    function obterRegistros($pagina, $limite){
 
         $servername = 'localhost';
         $username = 'root';
         $password = '';
         $db = 'rapidinho_teste';
-        
+
         $conn = mysqli_connect($servername, $username, $password, $db);
-        
+
         if (!$conn){
             die();
         }
 
-        $id_user = $_SESSION['id_user'];
-
         $offset = ($pagina - 1) * $limite;
 
-        $sql = "SELECT * FROM tbl_entrega WHERE id_user = $id_user LIMIT $limite OFFSET $offset";
-        $rodar_sql = mysqli_query($conn, $sql);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $busca = $_POST['busca'];
+    
+            $sql = "SELECT * FROM tbl_distancia WHERE bairro LIKE '$busca%' ORDER BY bairro";
+            $rodar_sql = mysqli_query($conn, $sql);
+    
+        }else{
+
+            $sql = "SELECT * FROM tbl_distancia ORDER BY bairro LIMIT $limite OFFSET $offset";
+            $rodar_sql = mysqli_query($conn, $sql);
+
+        }
 
         $registros = [];
         while ($registro = mysqli_fetch_assoc($rodar_sql)){
@@ -42,6 +51,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
         return $registros;
 
     }
+
     function contarRegistros(){
 
         $servername = 'localhost';
@@ -55,20 +65,16 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
             die();
         }
 
-        $id_user = $_SESSION['id_user'];
-
-        $sql = "SELECT COUNT(*) AS total FROM tbl_entrega WHERE id_user = $id_user";
+        $sql = "SELECT COUNT(*) AS total FROM tbl_distancia";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $total = mysqli_fetch_assoc($rodar_sql)['total'];
-
         mysqli_close($conn);
         return $total;
 
-
     }
 
-    $limite = 5;
+    $limite = 20;
 
     $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
@@ -76,25 +82,23 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 
     $registros = obterRegistros($pagina, $limite);
 
-    $totalPaginas = ceil($totalRegistros/ $limite);
+    $totalPaginas = ceil( $totalRegistros / $limite);
 
-}
+
 
 ?>
 <!-- Blank Start -->
-            <div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Solicitações</h6>
+                    <h6 class="mb-4">Tabela de Preços</h6>
+                    <form method="post" action="listar_precos_cli.php">
+                        <input type="search" name="busca" placeholder="Search"><br><br>
+                        <button type="subtmit">Buscar</button>
+                    </form>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Motoboy</th>
-                                <th scope="col">Início</th>
-                                <th scope="col">Fim</th>
-                                <th scope="col">Origem</th>
-                                <th scope="col">Destino</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Bairro</th>
                                 <th scope="col">Valor</th>
                             </tr>
                         </thead>
@@ -104,14 +108,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                 foreach ($registros as $registro){
 
                                     echo '<tr>
-                                        <th scope="row">'.$registro['id_ent'].'</th>
-                                        <td>'.$registro['id_mtboy'].'</td>
-                                        <td>'.$registro['inicio_ent'].'</td>
-                                        <td>'.$registro['fim_ent'].'</td>
-                                        <td>'.$registro['ende_orig'].'</td>
-                                        <td>'.$registro['ende_dest'].'</td>
-                                        <td>'.status_entrega($registro['status_ent']).'</td>
-                                        <td>'.$registro['valor_ent'].'</td>
+                                        <th scope="row">'.$registro['bairro'].'</th>
+                                        <td>'.$registro['valor'].'</td>
                                         </tr>';
                                         
 
@@ -142,5 +140,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 <?php
 
 include_once("../layout/footer.php");
+}
 
 ?>

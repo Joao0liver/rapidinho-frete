@@ -1,69 +1,69 @@
 <?php
 
-include_once("../conexao.php");
-include_once("../funcoes.php");
-include_once("../layout/header_adm.php");
+    include_once("../conexao.php");
+    include_once("../funcoes.php");
+    include_once("../layout/header_adm.php");
 
-$sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
+    $sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
 
-function obterRegistros($pagina, $limite){
+    function obterRegistros($pagina, $limite){
 
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $db = 'rapidinho_teste';
+        $servername = 'localhost';
+        $username = 'root';
+        $password = '';
+        $db = 'rapidinho_teste';
 
-    $conn = mysqli_connect($servername, $username, $password, $db);
+        $conn = mysqli_connect($servername, $username, $password, $db);
 
-    if (!$conn){
-        die();
+        if (!$conn){
+            die();
+        }
+
+        $offset = ($pagina - 1) * $limite;
+        
+        $sql = "SELECT * FROM tbl_usuario ORDER BY bairro LIMIT $limite OFFSET $offset";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+        $registros = [];
+        while ($registro = mysqli_fetch_assoc($rodar_sql)){
+            $registros[] = $registro;
+        }
+
+        mysqli_close($conn);
+        return $registros;
+
+    }
+    function contarRegistros(){
+
+        $servername = 'localhost';
+        $username = 'root';
+        $password = '';
+        $db = 'rapidinho_teste';
+
+        $conn = mysqli_connect($servername, $username, $password, $db);
+
+        if (!$conn){
+            die();
+        }
+
+        $sql = "SELECT COUNT(*) AS total FROM tbl_usuario";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+        $total = mysqli_fetch_assoc($rodar_sql)['total'];
+        mysqli_close($conn);
+        return $total;
+
     }
 
-    $offset = ($pagina - 1) * $limite;
-    
-    $sql = "SELECT * FROM tbl_usuario LIMIT $limite OFFSET $offset";
-    $rodar_sql = mysqli_query($conn, $sql);
+    $limite = 5;
 
-    $registros = [];
-    while ($registro = mysqli_fetch_assoc($rodar_sql)){
-        $registros[] = $registro;
-    }
+    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-    mysqli_close($conn);
-    return $registros;
+    $totalRegistros = contarRegistros();
 
-}
-function contarRegistros(){
+    $registros = obterRegistros($pagina, $limite);
 
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $db = 'rapidinho_teste';
-
-    $conn = mysqli_connect($servername, $username, $password, $db);
-
-    if (!$conn){
-        die();
-    }
-
-    $sql = "SELECT COUNT(*) AS total FROM tbl_usuario";
-    $rodar_sql = mysqli_query($conn, $sql);
-
-    $total = mysqli_fetch_assoc($rodar_sql)['total'];
-    mysqli_close($conn);
-    return $total;
-
-}
-
-$limite = 5;
-
-$pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-$totalRegistros = contarRegistros();
-
-$registros = obterRegistros($pagina, $limite);
-
-$totalPagina = ceil($totalRegistros / $limite);
+    $totalPagina = ceil($totalRegistros / $limite);
 
 ?>
 

@@ -1,75 +1,71 @@
 <?php
 
+    include_once("../conexao.php");
+    include_once("../funcoes.php");
+    include_once("../layout/header_adm.php");
 
+    $sql = mysqli_query($conn, 'SELECT * FROM tbl_motoboy');
 
-include_once("../conexao.php");
-include_once("../funcoes.php");
-include_once("../layout/header_adm.php");
+    function contarRegistros(){
 
-$sql = mysqli_query($conn, 'SELECT * FROM tbl_motoboy');
+    $servername = 'localhost';
+    $username = 'root';
+    $password = '';
+    $db = 'rapidinho_teste';
 
-function contarRegistros(){
+    $conn = mysqli_connect($servername, $username, $password, $db);
 
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$db = 'rapidinho_teste';
+    if (!$conn){
+        die();
+    }
 
-$conn = mysqli_connect($servername, $username, $password, $db);
+    $sql = "SELECT COUNT(*) AS total FROM tbl_motoboy";
+    $rodar_sql = mysqli_query($conn, $sql);
 
-if (!$conn){
-    die();
-}
+    $total = mysqli_fetch_assoc($rodar_sql)['total'];
+    mysqli_close($conn);
 
-$sql = "SELECT COUNT(*) AS total FROM tbl_motoboy";
-$rodar_sql = mysqli_query($conn, $sql);
+    return $total;
 
-$total = mysqli_fetch_assoc($rodar_sql)['total'];
-mysqli_close($conn);
+    }
 
-return $total;
+    function obterRegistros($pagina, $limite){
+    $servername = 'localhost';
+    $username = 'root';
+    $password = '';
+    $db = 'rapidinho_teste';
 
-}
+    $conn = mysqli_connect($servername, $username, $password, $db);
 
-function obterRegistros($pagina, $limite){
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$db = 'rapidinho_teste';
+    if (!$conn){
+        die();
+    }
 
-$conn = mysqli_connect($servername, $username, $password, $db);
+    $offset = ($pagina - 1) * $limite;
+    $sql = "SELECT * FROM tbl_motoboy ORDER BY bairro LIMIT $limite OFFSET $offset";
+    $rodar_sql = mysqli_query($conn, $sql);
 
-if (!$conn){
-    die();
-}
+    $registros = [];
 
-$offset = ($pagina - 1) * $limite;
-$sql = "SELECT * FROM tbl_motoboy LIMIT $limite OFFSET $offset";
-$rodar_sql = mysqli_query($conn, $sql);
+    while($registro = mysqli_fetch_assoc($rodar_sql)){
+        $registros[] = $registro;
+    }
 
-$registros = [];
+    mysqli_close($conn);
 
-while($registro = mysqli_fetch_assoc($rodar_sql)){
-    $registros[] = $registro;
-}
+    return $registros;
 
-mysqli_close($conn);
+    }
 
-return $registros;
+    $limite = 5;
 
-}
+    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-$limite = 5;
+    $totalRegistros = contarRegistros();
 
-$pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $totalPaginas = ceil($totalRegistros / $limite);
 
-$totalRegistros = contarRegistros();
-
-$totalPaginas = ceil($totalRegistros / $limite);
-
-$registros = obterRegistros($pagina, $limite);
-
-
+    $registros = obterRegistros($pagina, $limite);
 
 ?>
 

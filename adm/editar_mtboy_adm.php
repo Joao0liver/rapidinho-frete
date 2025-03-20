@@ -1,43 +1,43 @@
 <?php
 
-include_once("../conexao.php");
-include_once("../layout/header_adm.php");
+    include_once("../conexao.php");
+    include_once("../layout/header_adm.php");
 
-$msg = '<br>';
+    $msg = '<br>';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    $id_mtboy = $_POST['id_mtboy'];
+        $id_mtboy = $_POST['id_mtboy'];
 
-    $nome_mtboy = $_POST['nome_mtboy'];
-    $email_mtboy = $_POST['email_mtboy'];
-    $cpf_mtboy = $_POST['cpf_mtboy'];
-    $tel_mtboy = $_POST['tel_mtboy'];
-    $placa_mtboy = $_POST['placa_mtboy'];
+        $nome_mtboy = $_POST['nome_mtboy'];
+        $email_mtboy = $_POST['email_mtboy'];
+        $cpf_mtboy = $_POST['cpf_mtboy'];
+        $tel_mtboy = $_POST['tel_mtboy'];
+        $placa_mtboy = $_POST['placa_mtboy'];
 
-    $sql = "UPDATE tbl_motoboy SET nome_mtboy='$nome_mtboy', email_mtboy='$email_mtboy', cpf_mtboy='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy' WHERE id_mtboy = $id_mtboy";
-    $rodar_sql = mysqli_query($conn, $sql);
+        $sql = "UPDATE tbl_motoboy SET nome_mtboy='$nome_mtboy', email_mtboy='$email_mtboy', cpf_mtboy='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy' WHERE id_mtboy = $id_mtboy";
+        $rodar_sql = mysqli_query($conn, $sql);
 
-    if ($rodar_sql){
-        $msg = '<font color="green">Atualizado com sucesso!</font>';
-    }else{
-        $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+        if ($rodar_sql){
+            $msg = '<font color="green">Atualizado com sucesso!</font>';
+        }else{
+            $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+        }
+        
+        $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_motoboy WHERE id_mtboy = $id_mtboy");
+        $motoboy = mysqli_fetch_array($sql_atualizado);
+
     }
-    
-    $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_motoboy WHERE id_mtboy = $id_mtboy");
-    $motoboy = mysqli_fetch_array($sql_atualizado);
 
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+        $id_mtboy = $_GET['id_mtboy'];
 
-    $id_mtboy = $_GET['id_mtboy'];
+        $sql = "SELECT * FROM tbl_motoboy WHERE id_mtboy = $id_mtboy";
+        $result = mysqli_query($conn, $sql);
+        $motoboy = mysqli_fetch_array($result);
 
-    $sql = "SELECT * FROM tbl_motoboy WHERE id_mtboy = $id_mtboy";
-    $result = mysqli_query($conn, $sql);
-    $motoboy = mysqli_fetch_array($result);
-
-}
+    }
 
 ?>
 

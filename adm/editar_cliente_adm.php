@@ -1,42 +1,42 @@
 <?php
 
-include_once("../conexao.php");
-include_once("../layout/header_adm.php");
+    include_once("../conexao.php");
+    include_once("../layout/header_adm.php");
 
-$msg = '<br>';
+    $msg = '<br>';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    $id_cliente = $_POST['id_cliente'];
+        $id_cliente = $_POST['id_cliente'];
 
-    $nome_cliente = $_POST['nome_cliente'];
-    $email_cliente = $_POST['email_cliente'];
-    $cpf_cliente = $_POST['cpf_cliente'];
-    $ende_cliente = $_POST['ende_cliente'];
+        $nome_cliente = $_POST['nome_cliente'];
+        $email_cliente = $_POST['email_cliente'];
+        $cpf_cliente = $_POST['cpf_cliente'];
+        $ende_cliente = $_POST['ende_cliente'];
 
-    $sql = "UPDATE tbl_usuario SET nome_user='$nome_cliente', email_user='$email_cliente', cpf_user='$cpf_cliente', ende_user='$ende_cliente' WHERE id_user = $id_cliente";
-    $rodar_sql = mysqli_query($conn, $sql);
+        $sql = "UPDATE tbl_usuario SET nome_user='$nome_cliente', email_user='$email_cliente', cpf_user='$cpf_cliente', ende_user='$ende_cliente' WHERE id_user = $id_cliente";
+        $rodar_sql = mysqli_query($conn, $sql);
 
-    if ($rodar_sql){
-        $msg = '<font color="green">Atualizado com sucesso!</font>';
-    }else{
-        $msg = '<font color="red">Erro ao atualizar cliente!</font>';
+        if ($rodar_sql){
+            $msg = '<font color="green">Atualizado com sucesso!</font>';
+        }else{
+            $msg = '<font color="red">Erro ao atualizar cliente!</font>';
+        }
+        
+        $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente");
+        $cliente = mysqli_fetch_array($sql_atualizado);
+
     }
-    
-    $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente");
-    $cliente = mysqli_fetch_array($sql_atualizado);
 
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+        $id_cliente = $_GET['id_cliente'];
 
-    $id_cliente = $_GET['id_cliente'];
+        $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente";
+        $result = mysqli_query($conn, $sql);
+        $cliente = mysqli_fetch_array($result);
 
-    $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente";
-    $result = mysqli_query($conn, $sql);
-    $cliente = mysqli_fetch_array($result);
-
-}
+    }
 
 ?>
 

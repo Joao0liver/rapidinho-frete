@@ -1,35 +1,35 @@
 <?php
 
-include_once('../conexao.php');
-include_once("../layout/header_adm.php");
+    include_once('../conexao.php');
+    include_once("../layout/header_adm.php");
 
-$msg = '<br>';
+    $msg = '<br>';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    $nome_mtboy = $_POST['nome_mtboy'];
-    $email_mtboy = $_POST['email_mtboy'];
-    $cpf_mtboy = $_POST['cpf_mtboy'];
-    $tel_mtboy = $_POST['tel_mtboy'];
-    $placa_mtboy = $_POST['placa_mtboy'];
-    $senha_mtboy = $_POST['senha_mtboy'];
+        $nome_mtboy = $_POST['nome_mtboy'];
+        $email_mtboy = $_POST['email_mtboy'];
+        $cpf_mtboy = $_POST['cpf_mtboy'];
+        $tel_mtboy = $_POST['tel_mtboy'];
+        $placa_mtboy = $_POST['placa_mtboy'];
+        $senha_mtboy = $_POST['senha_mtboy'];
 
-    if ($nome_mtboy <> '' or $email_mtboy <> '' or $cpf_mtboy <> '' or $tel_mtboy <> '' or $placa_mtboy <> '' or $senha_mtboy <> ''){
+        if ($nome_mtboy <> '' or $email_mtboy <> '' or $cpf_mtboy <> '' or $tel_mtboy <> '' or $placa_mtboy <> '' or $senha_mtboy <> ''){
 
-        $senha_cript = hash('sha256', $senha_mtboy);
+            $senha_cript = hash('sha256', $senha_mtboy);
 
-        $sql = "INSERT INTO tbl_motoboy (nome_mtboy, email_mtboy, cpf_mtboy, tel_mtboy, placa_mtboy, senha_mtboy) VALUES ('$nome_mtboy', '$email_mtboy', '$cpf_mtboy', '$tel_mtboy', '$placa_mtboy', '$senha_cript')";
-        $rodar_sql = mysqli_query($conn, $sql);
+            $sql = "INSERT INTO tbl_motoboy (nome_mtboy, email_mtboy, cpf_mtboy, tel_mtboy, placa_mtboy, senha_mtboy) VALUES ('$nome_mtboy', '$email_mtboy', '$cpf_mtboy', '$tel_mtboy', '$placa_mtboy', '$senha_cript')";
+            $rodar_sql = mysqli_query($conn, $sql);
 
-        if($rodar_sql){
-            $msg = '<font color="green">Cadastrado com sucesso!</font>';
-        }else{
-            $msg = '<font color="red">Falha ao cadastrar!</font>';
+            if($rodar_sql){
+                $msg = '<font color="green">Cadastrado com sucesso!</font>';
+            }else{
+                $msg = '<font color="red">Falha ao cadastrar!</font>';
+            }
+
         }
 
     }
-
-}
 
 ?>
 
@@ -74,5 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 <?php
 
 include_once("../layout/footer.php");
+
 
 ?>

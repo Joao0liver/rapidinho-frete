@@ -72,6 +72,7 @@ $cliente = mysqli_fetch_array($sql);
                 <div class="navbar-nav w-100">
                     <a href="../cliente/listar_solicitacao_cli.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Minhas Solicitações</a>
                     <a href="../cliente/" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Solicitar Entrega</a>
+                    <a href="../cliente/listar_precos_cli.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tabela de Preços</a>
                     <a href="../forms/logout.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Logout</a>
                 </div>
             </nav>
