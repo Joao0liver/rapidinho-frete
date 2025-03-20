@@ -1,5 +1,14 @@
 <?php
 
+session_start();
+
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
+    
+    header('Location: ../index.php');
+    exit();
+    
+}else{
+
 include_once("../layout/header_cliente.php");
 
 ?>
@@ -18,5 +27,6 @@ include_once("../layout/header_cliente.php");
 <?php
 
 include_once("../layout/footer.php");
+}   
 
 ?>
