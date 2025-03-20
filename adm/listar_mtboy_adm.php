@@ -8,16 +8,7 @@
 
     function contarRegistros(){
 
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $db = 'rapidinho_teste';
-
-    $conn = mysqli_connect($servername, $username, $password, $db);
-
-    if (!$conn){
-        die();
-    }
+    $conn = conexao();
 
     $sql = "SELECT COUNT(*) AS total FROM tbl_motoboy";
     $rodar_sql = mysqli_query($conn, $sql);
@@ -30,19 +21,11 @@
     }
 
     function obterRegistros($pagina, $limite){
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $db = 'rapidinho_teste';
-
-    $conn = mysqli_connect($servername, $username, $password, $db);
-
-    if (!$conn){
-        die();
-    }
+        
+    $conn = conexao();
 
     $offset = ($pagina - 1) * $limite;
-    $sql = "SELECT * FROM tbl_motoboy ORDER BY bairro LIMIT $limite OFFSET $offset";
+    $sql = "SELECT * FROM tbl_motoboy LIMIT $limite OFFSET $offset";
     $rodar_sql = mysqli_query($conn, $sql);
 
     $registros = [];

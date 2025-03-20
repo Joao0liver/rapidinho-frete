@@ -15,16 +15,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 
     function obterRegistros($pagina, $limite) {
 
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $db = 'rapidinho_teste';
-        
-        $conn = mysqli_connect($servername, $username, $password, $db);
-        
-        if (!$conn){
-            die();
-        }
+        $conn = conexao();
 
         $id_user = $_SESSION['id_user'];
 
@@ -44,16 +35,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
     }
     function contarRegistros(){
 
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $db = 'rapidinho_teste';
-        
-        $conn = mysqli_connect($servername, $username, $password, $db);
-        
-        if (!$conn){
-            die();
-        }
+        $conn = conexao();
 
         $id_user = $_SESSION['id_user'];
 
@@ -77,8 +59,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
     $registros = obterRegistros($pagina, $limite);
 
     $totalPaginas = ceil($totalRegistros/ $limite);
-
-}
 
 ?>
 <!-- Blank Start -->
@@ -142,5 +122,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 <?php
 
 include_once("../layout/footer.php");
+}
 
 ?>

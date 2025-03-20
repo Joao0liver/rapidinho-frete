@@ -38,6 +38,8 @@ function conexao(){
     if (!$conn){
         die();
     }
+
+    return $conn;
     
 }
 

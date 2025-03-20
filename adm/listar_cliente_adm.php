@@ -8,16 +8,7 @@
 
     function obterRegistros($pagina, $limite){
 
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $db = 'rapidinho_teste';
-
-        $conn = mysqli_connect($servername, $username, $password, $db);
-
-        if (!$conn){
-            die();
-        }
+        $conn = conexao();
 
         $offset = ($pagina - 1) * $limite;
         
@@ -35,16 +26,7 @@
     }
     function contarRegistros(){
 
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $db = 'rapidinho_teste';
-
-        $conn = mysqli_connect($servername, $username, $password, $db);
-
-        if (!$conn){
-            die();
-        }
+        $conn = conexao();
 
         $sql = "SELECT COUNT(*) AS total FROM tbl_usuario";
         $rodar_sql = mysqli_query($conn, $sql);

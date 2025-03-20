@@ -15,16 +15,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 
     function obterRegistros($pagina, $limite){
 
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $db = 'rapidinho_teste';
-
-        $conn = mysqli_connect($servername, $username, $password, $db);
-
-        if (!$conn){
-            die();
-        }
+        $conn = conexao();
 
         $offset = ($pagina - 1) * $limite;
 
@@ -54,16 +45,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 
     function contarRegistros(){
 
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $db = 'rapidinho_teste';
-        
-        $conn = mysqli_connect($servername, $username, $password, $db);
-        
-        if (!$conn){
-            die();
-        }
+        $conn = conexao();
 
         $sql = "SELECT COUNT(*) AS total FROM tbl_distancia";
         $rodar_sql = mysqli_query($conn, $sql);
@@ -93,7 +75,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                     <h6 class="mb-4">Tabela de Preços</h6>
                     <form method="post" action="listar_precos_cli.php">
                         <input type="search" name="busca" placeholder="Search"><br><br>
-                        <button type="subtmit">Buscar</button>
                     </form>
                     <table class="table">
                         <thead>
