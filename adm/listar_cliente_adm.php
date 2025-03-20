@@ -14,14 +14,35 @@ $sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
                     <h6 class="mb-4">Registro de Clientes</h6>
                     <div class="table-responsive">
                         <table class="table">
+                            <script>
+
+                            function confirmaDel(event, id) {
+
+                                event.preventDefault();
+
+                                const confirmacao = confirm("Deseja deletar?");
+
+                                if (confirmacao){
+                                    
+                                    window.location.href = `excluir_cliente_adm.php?id_cliente=${id}`;
+                                    alert("Deletado com sucesso!");
+
+                                }else{
+
+                                    alert("Ação cancelada!");
+
+                                }
+
+                            }
+
+                            </script>
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">E-mail</th>
                                     <th scope="col">CPF</th>
                                     <th scope="col">Endereço</th>
-                                    <th scope="col">Senha</th>
                                     <th scope="col">Status</th>
                                 </tr>
                             </thead>
@@ -35,9 +56,14 @@ $sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
                                         <td>'.$row['email_user'].'</td>
                                         <td>'.$row['cpf_user'].'</td>
                                         <td>'.$row['ende_user'].'</td>
-                                        <td>'.$row['senha_user'].'</td>
                                         <td>'.status($row['status_user']).'</td>
-                                    </tr>';
+                                        <td>
+                                        <a href="editar_cliente_adm.php?id_cliente='.$row['id_user'].'">Editar</a><br>';
+                                        if ($row['status_user'] == 1){
+                                        echo '<a href="excluir_cliente_adm.php?id_cliente='.$row['id_user'].'" onclick="confirmaDel(event, '.$row['id_user'].')">Excluir</a>
+                                        </td>
+                                        </tr>';
+                                        }
                                     }
 
                                 ?>

@@ -69,7 +69,7 @@
                     </div>
                     <a href="../adm/listar_cliente_adm.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Clientes</a>
                     <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Preços</a>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Logout</a>
+                    <a href="../forms/logout.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Logout</a>
                 </div>
             </nav>
         </div>

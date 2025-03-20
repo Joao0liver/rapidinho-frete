@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                             <?php echo $msg.'<br>'; ?>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Cadastrar-se</button>
                         </form>
-                        <p class="text-center mb-0">Já tem uma conta? <a href="">Faça log-in</a></p>
+                        <p class="text-center mb-0">Já tem uma conta? <a href="">Faça login</a></p>
                     </div>
                 </div>
             </div>

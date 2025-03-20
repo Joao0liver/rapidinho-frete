@@ -61,7 +61,7 @@
                 <div class="navbar-nav w-100">
                     <a href="#" class="nav-item nav-link" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Minhas Solicitações</a>
                     <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Solicitar Entrega</a>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Logout</a>
+                    <a href="../forms/logout.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Logout</a>
                 </div>
             </nav>
         </div>
