@@ -6,6 +6,69 @@ include_once("../layout/header_adm.php");
 
 $sql = mysqli_query($conn, 'SELECT * FROM tbl_motoboy');
 
+function contarRegistros(){
+
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$db = 'rapidinho_teste';
+
+$conn = mysqli_connect($servername, $username, $password, $db);
+
+if (!$conn){
+    die();
+}
+
+$sql = "SELECT COUNT(*) AS total FROM tbl_motoboy";
+$rodar_sql = mysqli_query($conn, $sql);
+
+$total = mysqli_fetch_assoc($rodar_sql)['total'];
+mysqli_close($conn);
+
+return $total;
+
+}
+
+function obterRegistros($pagina, $limite){
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$db = 'rapidinho_teste';
+
+$conn = mysqli_connect($servername, $username, $password, $db);
+
+if (!$conn){
+    die();
+}
+
+$offset = ($pagina - 1) * $limite;
+$sql = "SELECT * FROM tbl_motoboy LIMIT $limite OFFSET $offset";
+$rodar_sql = mysqli_query($conn, $sql);
+
+$registros = [];
+
+while($registro = mysqli_fetch_assoc($rodar_sql)){
+    $registros[] = $registro;
+}
+
+mysqli_close($conn);
+
+return $registros;
+
+}
+
+$limite = 5;
+
+$pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$totalRegistros = contarRegistros();
+
+$totalPaginas = ceil($totalRegistros / $limite);
+
+$registros = obterRegistros($pagina, $limite);
+
+
+
 ?>
 
 <!-- Blank Start -->
@@ -51,28 +114,47 @@ $sql = mysqli_query($conn, 'SELECT * FROM tbl_motoboy');
                             <tbody>
                                 <?php
 
-                                    while ($row = mysqli_fetch_array($sql)){
+                                    foreach ($registros as $registro){
+
                                         echo '<tr>
-                                        <th scope="row">'.$row['id_mtboy'].'</th>
-                                        <td>'.$row['nome_mtboy'].'</td>
-                                        <td>'.$row['email_mtboy'].'</td>
-                                        <td>'.$row['cpf_mtboy'].'</td>
-                                        <td>'.$row['tel_mtboy'].'</td>
-                                        <td>'.$row['placa_mtboy'].'</td>
-                                        <td>'.$row['score_mtboy'].'</td>
-                                        <td>'.status($row['status_mtboy']).'</td>
+                                        <th scope="row">'.$registro['id_mtboy'].'</th>
+                                        <td>'.$registro['nome_mtboy'].'</td>
+                                        <td>'.$registro['email_mtboy'].'</td>
+                                        <td>'.$registro['cpf_mtboy'].'</td>
+                                        <td>'.$registro['tel_mtboy'].'</td>
+                                        <td>'.$registro['placa_mtboy'].'</td>
+                                        <td>'.$registro['score_mtboy'].'</td>
+                                        <td>'.status($registro['status_mtboy']).'</td>
                                         <td>
-                                        <a href="editar_mtboy_adm.php?id_mtboy='.$row['id_mtboy'].'"><img src="../layout/img/lapis.png" height="18px" width="18px" style="margin-right: 8px;"></a>';
-                                        if ($row['status_mtboy'] == 1){
-                                        echo '<a href="excluir_mtboy_adm.php?id_mtboy='.$row['id_mtboy'].'" onclick="confirmaDel(event, '.$row['id_mtboy'].')"><img src="../layout/img/lixo.png" height="18px" width="18px"></a>
+                                        <a href="editar_mtboy_adm.php?id_mtboy='.$registro['id_mtboy'].'"><img src="../layout/img/lapis.png" height="18px" width="18px" style="margin-right: 8px;"></a>';
+                                        if ($registro['status_mtboy'] == 1){
+                                        echo '<a href="excluir_mtboy_adm.php?id_mtboy='.$registro['id_mtboy'].'" onclick="confirmaDel(event, '.$registro['id_mtboy'].')"><img src="../layout/img/lixo.png" height="18px" width="18px"></a>
                                         </td>
                                         </tr>';
-                                        }
+                                        
                                     }
+                                }
 
                                 ?>
                             </tbody>
                         </table>
+
+<?php
+
+if ($pagina > 1){
+    echo '<a href="?page='.($pagina - 1).'">Anterior</a>';
+}
+
+for ($i = 1; $i <= $totalPaginas; $i++){
+    echo '<a href="?page='.$i.'">'.$i.'</a>';
+}
+
+if ($pagina < $totalPaginas){
+    echo '<a href="?page='.($pagina + 1).'">Proximo</a>';
+}
+
+?>
+
                     </div>
                 </div>
             </div>
