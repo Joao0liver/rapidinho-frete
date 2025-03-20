@@ -33,6 +33,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         return $registros;
 
     }
+
     function contarRegistros(){
 
         $conn = conexao();
@@ -75,11 +76,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Solicitações</h6>
+                    <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Motoboy</th>
                                 <th scope="col">Início</th>
                                 <th scope="col">Fim</th>
                                 <th scope="col">Origem</th>
@@ -95,7 +96,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
                                     echo '<tr>
                                         <th scope="row">'.$registro['id_ent'].'</th>
-                                        <td>'.$registro['id_mtboy'].'</td>
                                         <td>'.$registro['inicio_ent'].'</td>
                                         <td>'.$registro['fim_ent'].'</td>
                                         <td>'.$registro['ende_orig'].'</td>
@@ -111,6 +111,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             ?>
                         </tbody>
                     </table>
+                    </div>
                     <?php
 
                         if ($pagina > 1){

@@ -56,6 +56,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $registros_mtboy = mysqli_fetch_assoc($rodar_sql);
 
         $nome_mtboy = $registros_mtboy['nome_user'];
+        $foto_mtboy = $registros_mtboy['foto_mtboy'];
 
     }
 
@@ -67,6 +68,10 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                 <div class="bg-light rounded h-100 p-4">
                     <h5 class="mb-4">Detalhes do Pedido</h5>
                     <dl class="row mb-0">
+                        <div class="testimonial-item text-center">
+                            <img class="img-fluid rounded-circle mx-auto mb-4" src="../upload/img_mtboy/<?php echo $registros_mtboy['foto_mtboy'] ?>" style="width: 120px; height: 120px;">
+                        </div>
+
                         <dt class="col-sm-4">Motoboy:</dt>
                         <dd class="col-sm-8"><?php echo $nome_mtboy ?></dd>
 

@@ -84,43 +84,43 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Histórico de Entregas</h6>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Motoboy</th>
-                                <th scope="col">Início</th>
-                                <th scope="col">Fim</th>
-                                <th scope="col">Origem</th>
-                                <th scope="col">Destino</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Pacote</th>
+                                    <th scope="col">Início</th>
+                                    <th scope="col">Fim</th>
+                                    <th scope="col">Origem</th>
+                                    <th scope="col">Destino</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
 
-                                foreach ($registros as $registro){
+                                    foreach ($registros as $registro){
 
-                                    echo '<tr>
-                                        <th scope="row">'.$registro['id_ent'].'</th>
-                                        <td>'.$registro['id_cliente'].'</td>
-                                        <td>'.$registro['id_mtboy'].'</td>
-                                        <td>'.$registro['inicio_ent'].'</td>
-                                        <td>'.$registro['fim_ent'].'</td>
-                                        <td>'.$registro['ende_orig'].'</td>
-                                        <td>'.$registro['ende_dest'].'</td>
-                                        <td>'.status_entrega($registro['status_ent']).'</td>
-                                        <td>'.$registro['valor_ent'].'</td>
-                                        <td><a href="detalhes_ent_mtboy.php?id_ent='.$registro['id_ent'].'">Detalhes</a></td>
-                                        </tr>';
-                                        
-                                }
+                                        echo '<tr>
+                                            <th scope="row">'.$registro['id_ent'].'</th>
+                                            <td>'.$registro['peso_pac'].'kg - '.$registro['larg_pac'].'x'.$registro['comp_pac'].'</td>
+                                            <td>'.$registro['inicio_ent'].'</td>
+                                            <td>'.$registro['fim_ent'].'</td>
+                                            <td>'.$registro['ende_orig'].'</td>
+                                            <td>'.$registro['ende_dest'].'</td>
+                                            <td>'.status_entrega($registro['status_ent']).'</td>
+                                            <td>'.$registro['valor_ent'].'</td>
+                                            <td><a href="detalhes_ent_adm.php?id_ent='.$registro['id_ent'].'">Detalhes</a></td>
+                                            </tr>';
+                                            
+                                    }
 
-                            ?>
-                        </tbody>
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                     <?php
 
                         if ($pagina > 1){

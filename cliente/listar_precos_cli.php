@@ -85,6 +85,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                     <form method="post" action="listar_precos_cli.php">
                         <input type="search" name="busca" placeholder="Pesquisar"><br><br>
                     </form>
+                    <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
@@ -108,6 +109,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             ?>
                         </tbody>
                     </table>
+                    </div>
                     <?php
 
                         if ($pagina > 1){

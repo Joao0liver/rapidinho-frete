@@ -105,7 +105,7 @@ $adm = mysqli_fetch_array($sql);
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="../adm/meu_perfil_adm.php" class="dropdown-item">Meu Perfil</a>
-                            <a href="../forms/logout.php" class="dropdown-item">Log Out</a>
+                            <a href="../forms/logout.php" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>

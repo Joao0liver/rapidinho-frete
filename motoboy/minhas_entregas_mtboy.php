@@ -75,6 +75,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Solicitações</h6>
+                    <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
@@ -99,7 +100,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                         <td>'.$registro['ende_orig'].'</td>
                                         <td>'.$registro['ende_dest'].'</td>
                                         <td>'.status_entrega($registro['status_ent']).'</td>
-                                        <td>R$'.$registro['valor_ent'].'</td>
+                                        <td>R$'.number_format((70/100) * $registro['valor_ent'], 2).'</td>
                                         <td><a href="detalhes_ent_mtboy.php?id_ent='.$registro['id_ent'].'">Detalhes</a></td>
                                         </tr>';
                                         
@@ -109,6 +110,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             ?>
                         </tbody>
                     </table>
+                    </div>
                     <?php
 
                         if ($pagina > 1){

@@ -75,11 +75,13 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Solicitações</h6>
+                    <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">Origem</th>
                                 <th scope="col">Destino</th>
+                                <th scope="col">Pacote</th>
                                 <th scope="col">Valor</th>
                             </tr>
                         </thead>
@@ -91,7 +93,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                         echo '<tr>
                                             <td>'.$registro['ende_orig'].'</td>
                                             <td>'.$registro['ende_dest'].'</td>
-                                            <td>R$'.$registro['valor_ent'].'</td>
+                                            <td>'.$registro['peso_pac'].'kg - '.$registro['larg_pac'].'x'.$registro['comp_pac'].'</td>
+                                            <td>R$'.number_format((70/100) * $registro['valor_ent'], 2).'</td>
                                             <td><a href="solicitacao_aceita_mtboy.php?id_ent='.$registro['id_ent'].'">Aceitar</a></td>
                                             </tr>';
                                             
@@ -101,6 +104,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             ?>
                         </tbody>
                     </table>
+                    </div>
                     <?php
 
                         if ($pagina > 1){

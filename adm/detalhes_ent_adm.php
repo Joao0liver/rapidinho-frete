@@ -2,7 +2,7 @@
 
 session_start();
 
-if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 100){
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 777){
     
     header('Location: ../forms/index.php');
     exit();
@@ -11,7 +11,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     include_once("../conexao.php");
     include_once("../funcoes.php");
-    include_once("../layout/header_mtboy.php");
+    include_once("../layout/header_adm.php");
 
     $msg = "";
 
@@ -38,6 +38,15 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
+    // Obter Informações do Cliente
+
+    $id_cli = $registros_entrega['id_cliente'];
+
+    $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_cli";
+    $rodar_sql = mysqli_query($conn, $sql);
+
+    $registros_cli = mysqli_fetch_assoc($rodar_sql);
+
     // Verificar se um motoboy já está atribuido ao pedido
 
     if ($registros_entrega['id_mtboy'] == null){
@@ -54,8 +63,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $rodar_sql = mysqli_query($conn, $sql);
 
         $registros_mtboy = mysqli_fetch_assoc($rodar_sql);
-
-        $nome_mtboy = $registros_mtboy['nome_user'];
 
     }
 
@@ -89,7 +96,29 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                     <h5 class="mb-4">Detalhes do Pedido</h5>
                     <dl class="row mb-0">
                         <dt class="col-sm-4">ID do Pedido:</dt>
-                        <dd class="col-sm-8"><?php echo $registros_entrega['id_ent'] ?></dd>
+                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $registros_entrega['id_ent'] ?></dd></dl></dd>
+
+
+                        <dt class="col-sm-4">ID do Cliente:</dt>
+                        <dd class="col-sm-8"><?php echo $registros_entrega['id_cliente'] ?></dd>
+
+                        <dt class="col-sm-4">Nome do Cliente:</dt>
+                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $registros_cli['nome_user'] ?></dd></dl></dd>
+
+                        <dt class="col-sm-4">ID do Motoboy:</dt>
+                        <dd class="col-sm-8"><?php echo $registros_entrega['id_mtboy'] ?></dd>
+
+                        <dt class="col-sm-4">Nome do Motoboy:</dt>
+                        <dd class="col-sm-8"><?php echo $registros_mtboy['nome_user'] ?></dd>
+
+                        <dt class="col-sm-4">Foto do Motoboy:</dt>
+                        <dd class="col-sm-8"><img class="img-fluid rounded-circle mx-auto" src="../upload/img_mtboy/<?php echo $registros_mtboy['foto_mtboy'] ?>" style="width: 100px; height: 100px;"></dd>
+
+                        <dt class="col-sm-4">Telefone:</dt>
+                        <dd class="col-sm-8"><?php echo $registros_mtboy['tel_mtboy'] ?></dd>
+
+                        <dt class="col-sm-4">Placa:</dt>
+                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $registros_mtboy['placa_mtboy'] ?></dd></dl></dd>
 
                         <dt class="col-sm-4">Endereço de Retirada:</dt>
                         <dd class="col-sm-8"><?php echo $registros_entrega['ende_orig'] ?></dd>
@@ -106,22 +135,13 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <dd class="col-sm-8"><?php echo $msg; ?></dd>
                             </dl>
                         </dd>
-                        <dt class="col-sm-4">Valor total:</dt>
+                        <dt class="col-sm-4">Valor Total da Entrega:</dt>
                         <dd class="col-sm-8">R$<?php echo $registros_entrega['valor_ent'] ?></dd>
-                        <dt class="col-sm-4"><h5>Valor a receber:</h5></dt>
-                        <dd class="col-sm-8"><h5><font color="green">R$<?php echo number_format((70/100) * $registros_entrega['valor_ent'], 2) ?></font></h5></dd> <!-- number_format = limita as casas decimais -->
+                        <dt class="col-sm-4">Valor Recebido pelo Motoboy:</dt>
+                        <dd class="col-sm-8">R$<?php echo number_format((70/100) * $registros_entrega['valor_ent'], 2) ?></dd> <!-- number_format = limita as casas decimais -->
+                        <dt class="col-sm-4">Valor p/ Empresa:</dt>
+                        <dd class="col-sm-8">R$<?php echo number_format((30/100) * $registros_entrega['valor_ent'], 2) ?></dd>
                     </dl>
-                    <?php
-
-                        if ($registros_entrega['status_ent'] == 1){
-
-                            echo '<form action="finaliza_ent_mtboy.php" method="get">
-                            <button class="btn btn-primary w-100 m-2" type="button" onclick="confirmaDel(event, '.$registros_entrega['id_ent'].')">Finalizar Entrega</button>
-                            </form>';
-
-                        }
-
-                    ?>
                 </div>
             </div>
 <!-- Blank End -->
