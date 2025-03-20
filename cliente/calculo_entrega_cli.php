@@ -15,6 +15,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 
     $msg = '';
 
+    $id_user = $_SESSION['id_user'];
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $ende_col = $_POST['ende_col'];
@@ -22,7 +24,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
         $cep_col = $_POST['cep_col'];
 
         $ende_dest = $_POST['ende_dest'];
-        $bairro_dest = strtolower($_POST['bairro_dest']);
+        $bairro_dest = $_POST['bairro_dest'];
         $cep_dest = $_POST['cep_dest'];
         $nome_dest = $_POST['nome_dest'];
 
@@ -35,42 +37,50 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
             $sql = "SELECT menor_1kg FROM tbl_precos";
             $rodar_sql = mysqli_query($conn, $sql);
             $preco_peso = mysqli_fetch_assoc($rodar_sql);
+            $preco_peso_int = (int)$preco_peso['menor_1kg']; // Transforma o array associativo que vem do SQL em inteiro
 
-        }else if ($peso_pac >= 1 || $peso_pac < 3){
+        }else if ($peso_pac >= 1 && $peso_pac < 3){
 
             $sql = "SELECT 1kg_3kg FROM tbl_precos";
             $rodar_sql = mysqli_query($conn, $sql);
-            $preco_peso = mysqli_fetch_assoc($rodar_sql); 
+            $preco_peso = mysqli_fetch_assoc($rodar_sql);
+            $preco_peso_int = (int)$preco_peso['1kg_3kg']; // Transforma o array associativo que vem do SQL em inteiro
 
-        }else if ($peso_pac >= 3 || $peso_pac < 8){
+        }else if ($peso_pac >= 3 && $peso_pac < 8){
 
             $sql = "SELECT 3kg_8kg FROM tbl_precos";
             $rodar_sql = mysqli_query($conn, $sql);
             $preco_peso = mysqli_fetch_assoc($rodar_sql);
-            print_r($preco_peso);
+            $preco_peso_int = (int)$preco_peso['3kg_8kg']; // Transforma o array associativo que vem do SQL em inteiro
 
-        }else if ($peso_pac >= 8 || $peso_pac <= 12){
+        }else if ($peso_pac >= 8 && $peso_pac <= 12){
 
             $sql = "SELECT 8kg_12kg FROM tbl_precos";
             $rodar_sql = mysqli_query($conn, $sql);
             $preco_peso = mysqli_fetch_assoc($rodar_sql);
-
-        } /* Fim da Comparação do Peso do Pacote com o Valor da Tabela */
-
-        $sql = "SELECT valor FROM tbl_distancia WHERE bairro = '$bairro_dest'";
-        $rodar_sql = mysqli_query($conn, $sql);
-
-        if (mysqli_num_rows($rodar_sql) > 0) {
-
-            $preco_bairro = mysqli_fetch_assoc($rodar_sql);
+            $preco_peso_int = (int)$preco_peso['8kg_12kg']; // Transforma o array associativo que vem do SQL em inteiro
 
         }else{
 
-            $msg = "Bairro não encontrado! Por favor, revise o nome e tente novamente.";
+            $msg = "Peso não compatível!";
 
-        }
+        } /* Fim da Comparação do Peso do Pacote com o Valor da Tabela */
 
-        $preco_total = $preco_bairro;
+        // Valor do frete pelo bairro - tbl_distancia
+
+        $sql = "SELECT valor FROM tbl_distancia WHERE bairro = '$bairro_dest'";
+        $rodar_sql = mysqli_query($conn, $sql);
+        $preco_dist = mysqli_fetch_assoc($rodar_sql);
+
+        $preco_dist_int = (int)$preco_dist['valor'];
+
+        $preco_total = $preco_dist_int + $preco_peso_int; // Valor total da Solitação de Frete
+
+        // Puxar nome do solicitante
+
+        $sql = "SELECT nome_user FROM tbl_usuario WHERE id_user = $id_user";
+        $rodar_sql = mysqli_query($conn, $sql);
+        $nome_user = mysqli_fetch_assoc($rodar_sql);
 
     }
 
@@ -78,16 +88,18 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
 
 <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-                    <div class="col-md-6 text-center">
-                        <h3>This is blank page</h3>
-                        <?php
-
-                            echo $msg;
-                            print_r($preco_total);
-
-                        ?>
-                    </div>
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Resumo da Solicitação</h6>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent"><b>Nome do solicitante:</b> <?php  echo $nome_user['nome_user']?></li>
+                        <li class="list-group-item bg-transparent"><b>Endereço de coleta:</b> <?php  echo $ende_col?>, <?php  echo $bairro_col?></li>
+                        <li class="list-group-item bg-transparent"><b>Nome do Destinatário:</b> <?php  echo $nome_dest?></li>
+                        <li class="list-group-item bg-transparent"><b>Endereço de entrega:</b> <?php  echo $ende_dest?>, <?php  echo $bairro_dest?></li>
+                        <li class="list-group-item bg-transparent"><p class="h4">Valor: <font color="green">R$<?php  echo $preco_total?></font></p></li>
+                    </ul>
+                    <p><img src="../layout/img/bandeiras_cartao.png" width="35%" height="35%"><div id="emailHelp" class="form-text"><font color="red">*Pagamento no ato da coleta</font></div></p>
+                    
+                    <button class="btn btn-primary w-100 m-2" type="button">Finalizar</button>
                 </div>
             </div>
 <!-- Blank End -->

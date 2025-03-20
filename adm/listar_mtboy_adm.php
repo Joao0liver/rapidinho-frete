@@ -50,6 +50,16 @@
 
     $registros = obterRegistros($pagina, $limite);
 
+    // Limitação da quantidade de links visíveis da paginação V
+
+    $maxLinks = 5; // Número de links de página visíveis
+
+    // Garante que o valor não seja inferior a 1
+    $inicio = max(1, $pagina - floor($maxLinks / 2));
+
+    // Garante que o valor não ultrapasse o total de páginas
+    $fim = min($totalPaginas, $inicio + $maxLinks - 1);
+
 ?>
 
 <!-- Blank Start -->
@@ -126,12 +136,20 @@ if ($pagina > 1){
     echo '<a href="?page='.($pagina - 1).'">Anterior</a>';
 }
 
-for ($i = 1; $i <= $totalPaginas; $i++){
-    echo '<a href="?page='.$i.'">'.$i.'</a>';
+for ($i = $inicio; $i <= $fim; $i++){
+    if ($i == $pagina){
+
+        echo "<b>$i</b>";
+
+    }else{
+
+        echo '<a href="?page='.$i.'">'.$i.'</a>';
+
+    }
 }
 
 if ($pagina < $totalPaginas){
-    echo '<a href="?page='.($pagina + 1).'">Proximo</a>';
+    echo '<a href="?page='.($pagina + 1).'">Próximo</a>';
 }
 
 ?>
