@@ -95,10 +95,17 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                         <li class="list-group-item bg-transparent"><b>Endereço de coleta:</b> <?php  echo $ende_col?>, <?php  echo $bairro_col?></li>
                         <li class="list-group-item bg-transparent"><b>Nome do Destinatário:</b> <?php  echo $nome_dest?></li>
                         <li class="list-group-item bg-transparent"><b>Endereço de entrega:</b> <?php  echo $ende_dest?>, <?php  echo $bairro_dest?></li>
+                        <div class="border rounded p-4 pb-0 mb-4">
+                                <figure>
+                                    <p class="h6">Informações do Pacote</p>
+                                    <figcaption class="blockquote-form">
+                                        <p>Peso: <?php echo $peso_pac.'kg'; ?><br>Largura: <?php echo $larg_pac.'cm'; ?><br>Comprimento: <?php echo $comp_pac.'cm'; ?><br><br>Valor do pacote: <?php echo 'R$'.$preco_peso_int; ?></p>
+                                    </figcaption>
+                                </figure>
+                        </div>
                         <li class="list-group-item bg-transparent"><p class="h4">Valor: <font color="green">R$<?php  echo $preco_total?></font></p></li>
                     </ul>
                     <p><img src="../layout/img/bandeiras_cartao.png" width="35%" height="35%"><div id="emailHelp" class="form-text"><font color="red">*Pagamento no ato da coleta</font></div></p>
-                    
                     <button class="btn btn-primary w-100 m-2" type="button">Finalizar</button>
                 </div>
             </div>
