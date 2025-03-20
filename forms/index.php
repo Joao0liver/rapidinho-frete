@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $cript_senha_form = hash('sha256',$senha);
 
-    if ($result['senha_user'] == $cript_senha_form and $result['status_user'] == 1) {    // as senhas conferem!
+    if ($result['senha_user'] == $cript_senha_form and $result['status_user'] == 1) {    // as senhas conferem! - status (ativo/inativo) do usuário!
 
         session_start();
 
@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <strong>Erro!</strong> Login ou senha inválida.
       </div>';
     }
+
 }
 ?>
 
