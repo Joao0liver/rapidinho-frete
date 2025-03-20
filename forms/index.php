@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['id_user'] = $result['id_user'];
         $_SESSION['email_user'] = $result['email_user'];
         echo 'entrou';
-        header('Location: cliente/menu.php');
+        header('Location: ../cliente/menu.php');
         exit();
     } else {
         $msg = '<div class="alert alert-error">

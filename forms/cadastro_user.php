@@ -1,0 +1,139 @@
+<?php
+
+include_once('../conexao.php');
+
+$msg = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    $nome_user = $_POST['nome_user'];
+    $email_user = $_POST['email_user'];
+    $cpf_user = $_POST['cpf_user'];
+    $ende_user = $_POST['ende_user'];
+    $senha_user = $_POST['senha_user'];
+
+    if ($nome_user <> '' or $email_user <> '' or $cpf_user <> '' or $ende_user <> '' or $senha_user <> ''){
+
+        $senha_cript = hash('sha256', $senha_user);
+
+        $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, ende_user, senha_user) VALUES ('$nome_user', '$email_user', '$cpf_user', '$ende_user', '$senha_cript')";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+        if($rodar_sql){
+            $msg = 'Cadastrado com sucesso!';
+        }else{
+            $msg = 'Falha ao cadastrar!';
+        }
+
+    }
+
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>DASHMIN - Bootstrap Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="../layout/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../layout/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../layout/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../layout/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../layout/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sign Up Start -->
+        <div class="container-fluid">
+            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                    <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <a href="../layout/index.html" class="">
+                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>RAPIDINHO</h3>
+                            </a>
+                            <h4>Cadastro</h4>
+                        </div>
+                        <form method="post" action="cadastro_user.php">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="nome_user" class="form-control" id="floatingText" required>
+                                <label for="floatingText">Nome</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email_user" class="form-control" id="floatingInput" required>
+                                <label for="floatingInput">Email</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" name="cpf_user" class="form-control" id="floatingPassword" required>
+                                <label for="floatingPassword">CPF</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="ende_user" class="form-control" id="floatingInput" required>
+                                <label for="floatingInput">Endereço</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" name="senha_user" class="form-control" id="floatingInput" required>
+                                <label for="floatingInput">Senha</label>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <a href="">Esqueci a senha</a>
+                            </div>
+                            <?php echo $msg.'<br>'; ?>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Cadastrar-se</button>
+                        </form>
+                        <p class="text-center mb-0">Já tem uma conta? <a href="">Faça log-in</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sign Up End -->
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../layout/lib/chart/chart.min.js"></script>
+    <script src="../layout/lib/easing/easing.min.js"></script>
+    <script src="../layout/lib/waypoints/waypoints.min.js"></script>
+    <script src="../layout/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../layout/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../layout/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../layout/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../layout/js/main.js"></script>
+</body>
+
+</html>
