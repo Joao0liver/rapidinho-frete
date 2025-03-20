@@ -32,6 +32,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
         $larg_pac = $_POST['larg_pac'];
         $comp_pac = $_POST['comp_pac'];
 
+        // Calcúlo de Valor Total
+
         if ($peso_pac < 1) { /* Início da Comparação do Peso do Pacote com o Valor da Tabela */
 
             $sql = "SELECT menor_1kg FROM tbl_precos";
@@ -81,6 +83,10 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
         $sql = "SELECT nome_user FROM tbl_usuario WHERE id_user = $id_user";
         $rodar_sql = mysqli_query($conn, $sql);
         $nome_user = mysqli_fetch_assoc($rodar_sql);
+
+        // Inserir no Banco - tbl_entrega
+
+        $sql = "INSERT INTO tbl_entrega (id_user, inicio_ent)";
 
     }
 

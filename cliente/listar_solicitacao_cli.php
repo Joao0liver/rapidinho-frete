@@ -101,7 +101,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null){
                                         <td>'.$registro['ende_orig'].'</td>
                                         <td>'.$registro['ende_dest'].'</td>
                                         <td>'.status_entrega($registro['status_ent']).'</td>
-                                        <td>'.$registro['valor_ent'].'</td>
+                                        <td>R$  '.$registro['valor_ent'].'</td>
+                                        <td><a href="detalhes_solicitacao_cli.php?id_ent='.$registro['id_ent'].'">Detalhes</a></td>
                                         </tr>';
                                         
 
