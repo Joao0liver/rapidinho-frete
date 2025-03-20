@@ -2,10 +2,10 @@
 
 include_once("../conexao.php");
 
-$id_cliente = $_SESSION['id_user'];
+$id_mtboy = $_SESSION['id_user'];
 
-$sql = mysqli_query($conn, "SELECT nome_user FROM tbl_usuario WHERE id_user = $id_cliente");
-$cliente = mysqli_fetch_array($sql);
+$sql = mysqli_query($conn, "SELECT nome_user FROM tbl_usuario WHERE id_user = $id_mtboy");
+$mtboy = mysqli_fetch_array($sql);
 
 ?>
 
@@ -65,7 +65,7 @@ $cliente = mysqli_fetch_array($sql);
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0"><?php echo $cliente['nome_user']; ?></h6>
+                        <h6 class="mb-0"><?php echo $mtboy['nome_user']; ?></h6>
                         <span>Motoboy</span>
                     </div>
                 </div>
@@ -93,26 +93,11 @@ $cliente = mysqli_fetch_array($sql);
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificações</span>
+                            <span class="d-none d-lg-inline-flex"><?php echo $mtboy['nome_user']; ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">Ver todas</a>
+                            <a href="#" class="dropdown-item">Meu Perfil</a>
+                            <a href="#" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>

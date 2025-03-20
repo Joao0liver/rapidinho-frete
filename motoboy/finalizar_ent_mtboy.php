@@ -9,7 +9,19 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     
 }else{
 
-    include_once("../layout/header_mtboy.php");
+    include_once("../conexao.php");
+    include_once("../funcoes.php");
+
+    $id_ent = $_GET['id_ent'];
+
+    $sql = "UPDATE tbl_entrega SET fim_ent = NOW(), status_ent = 2 WHERE id_ent = $id_ent";
+    $rodar_sql = mysqli_query($conn, $sql);
+
+    if ($rodar_sql){
+        header('Location: minhas_entregas_mtboy.php');
+    }else{
+        echo "Erro ao finalizar entrega!";
+    }
 
 ?>
 
@@ -17,7 +29,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             <div class="container-fluid pt-4 px-4">
                 <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
                     <div class="col-md-6 text-center">
-                        <h3>This is blank page</h3>
+                        <h3><font color="green">Entrega finalizada!</font></h3>
                     </div>
                 </div>
             </div>

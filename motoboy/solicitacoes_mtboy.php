@@ -86,17 +86,17 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         <tbody>
                             <?php
 
-                                foreach ($registros as $registro){
+                                    foreach ($registros as $registro){
 
-                                    echo '<tr>
-                                        <td>'.$registro['ende_orig'].'</td>
-                                        <td>'.$registro['ende_dest'].'</td>
-                                        <td>R$'.$registro['valor_ent'].'</td>
-                                        <td><a href="solicitacao_aceita_mtboy.php?id_ent='.$registro['id_ent'].'">Aceitar</a></td>
-                                        </tr>';
-                                        
+                                        echo '<tr>
+                                            <td>'.$registro['ende_orig'].'</td>
+                                            <td>'.$registro['ende_dest'].'</td>
+                                            <td>R$'.$registro['valor_ent'].'</td>
+                                            <td><a href="solicitacao_aceita_mtboy.php?id_ent='.$registro['id_ent'].'">Aceitar</a></td>
+                                            </tr>';
+                                            
 
-                                }
+                                    }
 
                             ?>
                         </tbody>

@@ -17,13 +17,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         $conn = conexao();
 
-        //$id_mtboy = $_SESSION['id_mtboy'];
-
-        $id_mtboy = 1; // ID Temporário
+        $id_mtboy = $_SESSION['id_user'];
 
         $offset = ($pagina - 1) * $limite;
 
-        $sql = "SELECT * FROM tbl_entrega WHERE id_mtboy = $id_mtboy LIMIT $limite OFFSET $offset";
+        $sql = "SELECT * FROM tbl_entrega WHERE id_mtboy = $id_mtboy AND status_ent = 1 LIMIT $limite OFFSET $offset";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $registros = [];
@@ -39,11 +37,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         $conn = conexao();
 
-        //$id_mtboy = $_SESSION['id_mtboy'];
+        $id_mtboy = $_SESSION['id_user'];
 
-        $id_mtboy = 1; // ID Temporário
-
-        $sql = "SELECT COUNT(*) AS total FROM tbl_entrega WHERE id_mtboy = $id_mtboy";
+        $sql = "SELECT COUNT(*) AS total FROM tbl_entrega WHERE id_mtboy = $id_mtboy AND status_ent = 1";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $total = mysqli_fetch_assoc($rodar_sql)['total'];
@@ -83,7 +79,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Motoboy</th>
                                 <th scope="col">Início</th>
                                 <th scope="col">Fim</th>
                                 <th scope="col">Origem</th>
@@ -99,14 +94,13 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
                                     echo '<tr>
                                         <th scope="row">'.$registro['id_ent'].'</th>
-                                        <td>'.$registro['id_mtboy'].'</td>
                                         <td>'.$registro['inicio_ent'].'</td>
                                         <td>'.$registro['fim_ent'].'</td>
                                         <td>'.$registro['ende_orig'].'</td>
                                         <td>'.$registro['ende_dest'].'</td>
                                         <td>'.status_entrega($registro['status_ent']).'</td>
                                         <td>R$'.$registro['valor_ent'].'</td>
-                                        <td><a href="detalhes_solicitacao_cli.php?id_ent='.$registro['id_ent'].'">Detalhes</a></td>
+                                        <td><a href="detalhes_ent_mtboy.php?id_ent='.$registro['id_ent'].'">Detalhes</a></td>
                                         </tr>';
                                         
 
