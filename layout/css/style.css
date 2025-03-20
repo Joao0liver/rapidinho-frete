@@ -35,7 +35,7 @@
 }
 
 .btn.btn-primary {
-    color: #FFFFFF;
+    color: #FFFFFF; /*Botão Inferior Direito - Seta */
 }
 
 .btn-square {
@@ -71,10 +71,10 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 250px;
+    width: 260px;
     height: 100vh;
     overflow-y: auto;
-    background: var(--light);
+    background: var(--light); /*Cor da Sidebar*/
     transition: 0.5s;
     z-index: 999;
 }
@@ -82,7 +82,7 @@
 .content {
     margin-left: 250px;
     min-height: 100vh;
-    background: #FFFFFF;
+    background: #FFFFFF; /*Background Principal*/
     transition: 0.5s;
 }
 
@@ -124,9 +124,9 @@
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
     padding: 7px 20px;
-    color: var(--dark);
+    color: var(--dark); /*Textos da Sidebar*/
     font-weight: 500;
-    border-left: 3px solid var(--light);
+    border-left: 3px solid var(--light); /*índices Laterais Esquerdo da Sidebar*/
     border-radius: 0 30px 30px 0;
     outline: none;
 }
@@ -134,7 +134,7 @@
 .sidebar .navbar .navbar-nav .nav-link:hover,
 .sidebar .navbar .navbar-nav .nav-link.active {
     color: var(--primary);
-    background: #FFFFFF;
+    background: #FFFFFF; /*Itens da Sidebar*/
     border-color: var(--primary);
 }
 
@@ -144,13 +144,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #FFFFFF;
+    background: #FFFFFF; /*Botões Circulares Sidebar*/
     border-radius: 40px;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover i,
 .sidebar .navbar .navbar-nav .nav-link.active i {
-    background: var(--light);
+    background: var(--light); /*Botões Circulares Sidebar*/
 }
 
 .sidebar .navbar .dropdown-toggle::after {
@@ -176,13 +176,13 @@
 .content .navbar .navbar-nav .nav-link {
     margin-left: 25px;
     padding: 12px 0;
-    color: var(--dark);
+    color: var(--dark); /* Texto da Navbar*/
     outline: none;
 }
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
+    color: var(--primary); /*Interatividade do texto da Navbar*/
 }
 
 .content .navbar .sidebar-toggler,
@@ -192,7 +192,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #FFFFFF;
+    background: #FFFFFF; /*Botões Navbar*/
     border-radius: 40px;
 }
 
