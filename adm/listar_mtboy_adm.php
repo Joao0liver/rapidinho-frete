@@ -1,5 +1,14 @@
 <?php
 
+session_start();
+
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 777){
+    
+    header('Location: ../forms/index.php');
+    exit();
+    
+}else{
+
     include_once("../conexao.php");
     include_once("../funcoes.php");
     include_once("../layout/header_adm.php");
@@ -25,8 +34,20 @@
     $conn = conexao();
 
     $offset = ($pagina - 1) * $limite;
-    $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 100 LIMIT $limite OFFSET $offset";
-    $rodar_sql = mysqli_query($conn, $sql);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $busca = $_POST['busca'];
+    
+        $sql = "SELECT * FROM tbl_usuario WHERE id_user LIKE $busca AND nivel_user = 100";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+    }else {
+
+        $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 100 LIMIT $limite OFFSET $offset";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+    }
 
     $registros = [];
 
@@ -66,6 +87,9 @@
             <div class="container-fluid pt-4 px-4">    
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Registro de Motoboys</h6>
+                    <form method="post" action="listar_mtboy_adm.php">
+                        <input type="search" name="busca" placeholder="Pesquisar ID"><br><br>
+                    </form>
                     <div class="table-responsive">
                         <table class="table">
                             <script>
@@ -162,5 +186,6 @@ if ($pagina < $totalPaginas){
 <?php
 
 include_once("../layout/footer.php");
+}
 
 ?>

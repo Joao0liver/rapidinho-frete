@@ -95,7 +95,7 @@ $cliente = mysqli_fetch_array($sql);
                             <span class="d-none d-lg-inline-flex"><?php echo $cliente['nome_user']; ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="../motoboy/meu_perfil_adm.php" class="dropdown-item">Meu Perfil</a>
+                            <a href="../cliente/meu_perfil_cli.php" class="dropdown-item">Meu Perfil</a>
                             <a href="../forms/logout.php" class="dropdown-item">Logout</a>
                         </div>
                     </div>

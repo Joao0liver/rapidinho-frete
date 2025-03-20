@@ -1,19 +1,37 @@
 <?php
 
+session_start();
+
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 777){
+    
+    header('Location: ../forms/index.php');
+    exit();
+    
+}else{
+
     include_once("../conexao.php");
     include_once("../funcoes.php");
     include_once("../layout/header_adm.php");
-
-    //$sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
 
     function obterRegistros($pagina, $limite){
 
         $conn = conexao();
 
         $offset = ($pagina - 1) * $limite;
-        
-        $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 10 LIMIT $limite OFFSET $offset";
-        $rodar_sql = mysqli_query($conn, $sql);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $busca = $_POST['busca'];
+    
+            $sql = "SELECT * FROM tbl_usuario WHERE id_user LIKE $busca AND nivel_user = 10";
+            $rodar_sql = mysqli_query($conn, $sql);
+
+        }else{
+
+            $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 10 LIMIT $limite OFFSET $offset";
+            $rodar_sql = mysqli_query($conn, $sql);
+
+        }
 
         $registros = [];
         while ($registro = mysqli_fetch_assoc($rodar_sql)){
@@ -63,6 +81,9 @@
             <div class="container-fluid pt-4 px-4">    
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Registro de Clientes</h6>
+                    <form method="post" action="listar_cliente_adm.php">
+                        <input type="search" name="busca" placeholder="Pesquisar ID"><br><br>
+                    </form>
                     <div class="table-responsive">
                         <table class="table">
                             <script>
@@ -159,5 +180,6 @@
 <?php
 
 include_once("../layout/footer.php");
+}
 
 ?>

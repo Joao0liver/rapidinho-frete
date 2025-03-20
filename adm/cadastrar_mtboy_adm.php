@@ -1,6 +1,16 @@
 <?php
 
-    include_once('../conexao.php');
+session_start();
+
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 777){
+    
+    header('Location: ../forms/index.php');
+    exit();
+    
+}else{
+
+    include_once("../conexao.php");
+    include_once("../funcoes.php");
     include_once("../layout/header_adm.php");
 
     $msg = '<br>';
@@ -137,6 +147,6 @@
 <?php
 
 include_once("../layout/footer.php");
-
+}
 
 ?>

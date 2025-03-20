@@ -1,3 +1,14 @@
+<?php
+
+include_once("../conexao.php");
+
+$id_adm = $_SESSION['id_user'];
+
+$sql = mysqli_query($conn, "SELECT nome_user FROM tbl_usuario WHERE id_user = $id_adm");
+$adm = mysqli_fetch_array($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -49,12 +60,18 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
-                        <span>Admin</span>
+                        <h6 class="mb-0"><?php echo $adm['nome_user']; ?></h6>
+                        <span>Administrador</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Rastreio</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-tachometer-alt me-2"></i>Rastreio</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="../adm/entregas_andamento_adm.php" class="dropdown-item">Entregas</a>
+                            <a href="../adm/historico_entregas_adm.php" class="dropdown-item">Histórico</a>
+                        </div>
+                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Motoboys</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -81,16 +98,13 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <span class="d-none d-lg-inline-flex"><?php echo $adm['nome_user']; ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="../motoboy/meu_perfil_adm.php" class="dropdown-item">My Profile</a>
+                            <a href="../adm/meu_perfil_adm.php" class="dropdown-item">Meu Perfil</a>
                             <a href="../forms/logout.php" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

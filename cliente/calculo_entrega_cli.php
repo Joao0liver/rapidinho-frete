@@ -21,11 +21,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         $ende_col = $_POST['ende_col'];
         $bairro_col = $_POST['bairro_col'];
-        $cep_col = $_POST['cep_col'];
+        //$cep_col = $_POST['cep_col'];
 
         $ende_dest = $_POST['ende_dest'];
         $bairro_dest = $_POST['bairro_dest'];
-        $cep_dest = $_POST['cep_dest'];
+        //$cep_dest = $_POST['cep_dest'];
         $nome_dest = $_POST['nome_dest'];
 
         $peso_pac = $_POST['peso_pac'];

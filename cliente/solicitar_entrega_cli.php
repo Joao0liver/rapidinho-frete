@@ -195,7 +195,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <option>Vina Del Mar</option>
                                 <option>Vivendas da Serra</option>
                             </select>
-                            <input name="cep_col" type="number" class="form-control" id="exampleInputPassword1" placeholder="CEP" style="width: 150px;">
+                            <!--<input name="cep_col" type="number" class="form-control" id="exampleInputPassword1" placeholder="CEP" style="width: 150px;">-->
                             <div id="emailHelp" class="form-text">*Onde o pacote será coletado
                             </div>
                         </div>
@@ -367,7 +367,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <option>Vivendas da Serra</option>
 
                             </select>
-                            <input name="cep_dest" type="number" class="form-control mb-3" id="exampleInputPassword1" placeholder="CEP" style="width: 150px;">
                             <input name="nome_dest" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome do Destinatário" required>
                             <div id="emailHelp" class="form-text">*Fretes realizados apenas dentro do perímetro urbano de Juíz de Fora - MG
                             </div>
