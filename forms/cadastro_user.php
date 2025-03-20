@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $rodar_sql = mysqli_query($conn, $sql);
 
         if($rodar_sql){
-            $msg = 'Cadastrado com sucesso!';
+            $msg = '<font color="green">Cadastrado com sucesso!</font> <br>';
         }else{
-            $msg = 'Falha ao cadastrar!';
+            $msg = '<font color="red">Falha ao cadastrar!</font> <br>';
         }
 
     }
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                                 <label for="floatingInput">Email</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="text" name="cpf_user" class="form-control" id="floatingPassword" required>
+                                <input type="number" name="cpf_user" class="form-control" id="floatingPassword" required>
                                 <label for="floatingPassword">CPF</label>
                             </div>
                             <div class="form-floating mb-3">
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                             <?php echo $msg.'<br>'; ?>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Cadastrar-se</button>
                         </form>
-                        <p class="text-center mb-0">Já tem uma conta? <a href="">Faça login</a></p>
+                        <p class="text-center mb-0">Já tem uma conta? <a href="index.php">Faça login</a></p>
                     </div>
                 </div>
             </div>

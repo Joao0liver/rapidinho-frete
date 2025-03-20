@@ -48,19 +48,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
                                 <input type="hidden" name="id_cliente" value="<?php echo $cliente['id_user'] ?>">
                                 <div class="mb-3">
                                     <label class="form-label">Nome</label>
-                                    <input type="text" name="nome_cliente" value="<?php echo $cliente['nome_user'] ?>" class="form-control">
+                                    <input type="text" name="nome_cliente" style="width: 700px;" value="<?php echo $cliente['nome_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
-                                    <input type="email" name="email_cliente" value="<?php echo $cliente['email_user'] ?>" class="form-control">
+                                    <input type="email" name="email_cliente" style="width: 500px;" value="<?php echo $cliente['email_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">CPF</label>
-                                    <input type="text" name="cpf_cliente" value="<?php echo $cliente['cpf_user'] ?>" class="form-control">
+                                    <input type="number" name="cpf_cliente" style="width: 200px;" value="<?php echo $cliente['cpf_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Endereço</label>
-                                    <input type="text" name="ende_cliente" value="<?php echo $cliente['ende_user'] ?>" class="form-control">
+                                    <input type="text" name="ende_cliente" style="width: 700px;" value="<?php echo $cliente['ende_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <?php echo $msg; ?>

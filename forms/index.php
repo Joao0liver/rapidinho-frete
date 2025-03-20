@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $sql = "SELECT * FROM tbl_usuario WHERE email_user = '$user'";
    
-
+    
     $rodasql = mysqli_query($conn, $sql);
     $result = mysqli_fetch_array($rodasql); 
 
     $cript_senha_form = hash('sha256',$senha);
 
-    if ($result['senha_user'] == $cript_senha_form) {    // as senhas conferem!
+    if ($result['senha_user'] == $cript_senha_form and $result['status_user'] == 1) {    // as senhas conferem!
 
         session_start();
 
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Login</button>
                         </form>
-                        <p class="text-center mb-0">Já tem uma conta? <a href="">Faça login</a></p>
+                        <p class="text-center mb-0">Não tem uma conta? <a href="cadastro_user.php">Crie agora</a></p>
                     </div>
                 </div>
             </div>

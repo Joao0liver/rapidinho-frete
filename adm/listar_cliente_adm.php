@@ -16,24 +16,24 @@ $sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
                         <table class="table">
                             <script>
 
-                            function confirmaDel(event, id) {
+                                function confirmaDel(event, id) {
 
-                                event.preventDefault();
+                                    event.preventDefault();
 
-                                const confirmacao = confirm("Deseja deletar?");
+                                    const confirmacao = confirm("Deseja deletar?");
 
-                                if (confirmacao){
-                                    
-                                    window.location.href = `excluir_cliente_adm.php?id_cliente=${id}`;
-                                    alert("Deletado com sucesso!");
+                                    if (confirmacao){
+                                        
+                                        window.location.href = `excluir_cliente_adm.php?id_cliente=${id}`;
+                                        alert("Deletado com sucesso!");
 
-                                }else{
+                                    }else{
 
-                                    alert("Ação cancelada!");
+                                        alert("Ação cancelada!");
+
+                                    }
 
                                 }
-
-                            }
 
                             </script>
                             <thead>
@@ -58,9 +58,9 @@ $sql = mysqli_query($conn, 'SELECT * FROM tbl_usuario');
                                         <td>'.$row['ende_user'].'</td>
                                         <td>'.status($row['status_user']).'</td>
                                         <td>
-                                        <a href="editar_cliente_adm.php?id_cliente='.$row['id_user'].'">Editar</a><br>';
+                                        <a href="editar_cliente_adm.php?id_cliente='.$row['id_user'].'"><img src="../layout/img/lapis.png" height="18px" width="18px" style="margin-right: 8px;"></a>';
                                         if ($row['status_user'] == 1){
-                                        echo '<a href="excluir_cliente_adm.php?id_cliente='.$row['id_user'].'" onclick="confirmaDel(event, '.$row['id_user'].')">Excluir</a>
+                                        echo '<a href="excluir_cliente_adm.php?id_cliente='.$row['id_user'].'" onclick="confirmaDel(event, '.$row['id_user'].')"><img src="../layout/img/lixo.png" height="18px" width="18px"></a>
                                         </td>
                                         </tr>';
                                         }
