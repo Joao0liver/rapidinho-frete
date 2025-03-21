@@ -86,7 +86,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         <input type="search" name="busca" placeholder="Pesquisar"><br><br>
                     </form>
                     <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" style="color: #003879">
                         <thead>
                             <tr>
                                 <th scope="col">Bairro</th>

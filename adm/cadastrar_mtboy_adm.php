@@ -112,7 +112,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                     <input type="text" name="nome_mtboy" class="form-control" style="width: 700px;" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagem">Foto de Perfil:</label>
+                                    <label class="form-label" for="imagem">Foto de Perfil:</label>
                                     <input type="file" name="imagem" id="imagem" required>
                                 </div>
                                 <div class="mb-3">

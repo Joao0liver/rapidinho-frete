@@ -77,7 +77,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Solicitações</h6>
                     <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" style="color: #003879">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
