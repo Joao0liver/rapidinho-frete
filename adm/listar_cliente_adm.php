@@ -85,7 +85,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         <input type="search" name="busca" placeholder="Pesquisar ID"><br><br>
                     </form>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" style="color: #003879">
                             <script>
 
                                 function confirmaDel(event, id) {

@@ -54,7 +54,7 @@ $mtboy = mysqli_fetch_array($sql);
 
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
+        <div class="sidebar pe-4 pb-3 bg-light">
             <nav class="navbar bg-light navbar-light">
                 <a href="../motoboy/menu.php" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img src="../layout/img/logo.png" height="50px" width="50px" style="margin-right: 10px;">RAPIDINHO</h3>
@@ -88,7 +88,7 @@ $mtboy = mysqli_fetch_array($sql);
                     <h2 class="text-primary mb-0"><img src="../layout/img/logo.png" height="45px" width="45px"></h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
+                    <i class="fa fa-bars" style="color: #003879"></i>
                 </a>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
