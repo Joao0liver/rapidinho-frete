@@ -1,5 +1,6 @@
 <?php
 
+ini_set('display_errors', 0);
 include_once("../layout/header_index.php");
 include_once("../conexao.php");
 

@@ -21,7 +21,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         $offset = ($pagina - 1) * $limite;
 
-        $sql = "SELECT * FROM tbl_entrega WHERE id_mtboy = $id_mtboy AND status_ent = 1 LIMIT $limite OFFSET $offset";
+        $sql = "SELECT * FROM tbl_entrega WHERE id_mtboy = $id_mtboy AND status_ent = 1 ORDER BY inicio_ent ASC LIMIT $limite OFFSET $offset";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $registros = [];

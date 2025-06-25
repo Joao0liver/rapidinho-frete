@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                         </div>
                         <form method="post" action="cadastro_user.php">
                             <div class="form-floating mb-3">
-                                <input type="text" name="nome_user" class="form-control" id="floatingText" required>
+                                <input type="text" pattern="[A-Za-z]+" name="nome_user" class="form-control" id="floatingText" required>
                                 <label for="floatingText">Nome</label>
                             </div>
                             <div class="form-floating mb-3">
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                                 <label for="floatingInput">Email</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="number" name="cpf_user" class="form-control" id="floatingPassword" required>
+                                <input type="number" pattern="[0-9]{11}" name="cpf_user" class="form-control" id="floatingPassword" required>
                                 <label for="floatingPassword">CPF</label>
                             </div>
                             <div class="form-floating mb-3">

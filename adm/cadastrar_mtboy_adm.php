@@ -109,7 +109,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             <form method="post" action="cadastrar_mtboy_adm.php" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label class="form-label">Nome</label>
-                                    <input type="text" name="nome_mtboy" class="form-control" style="width: 700px;" required>
+                                    <input type="text" pattern="[A-Za-z]+" name="nome_mtboy" class="form-control" style="width: 700px;" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="imagem">Foto de Perfil:</label>
@@ -121,11 +121,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">CPF</label>
-                                    <input type="number" name="cpf_mtboy" class="form-control" style="width: 200px;" required>
+                                    <input type="number" pattern="[0-9]{11}" name="cpf_mtboy" class="form-control" style="width: 200px;" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Telefone</label>
-                                    <input type="number" name="tel_mtboy" class="form-control" style="width: 200px;" required>
+                                    <input type="tel" pattern="[0-9]{11}" name="tel_mtboy" class="form-control" style="width: 200px;" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Placa da Moto</label>

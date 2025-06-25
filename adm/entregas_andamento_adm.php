@@ -21,7 +21,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         $offset = ($pagina - 1) * $limite;
 
-        $sql = "SELECT * FROM tbl_entrega WHERE status_ent = 0 OR status_ent = 1 LIMIT $limite OFFSET $offset";
+        $sql = "SELECT * FROM tbl_entrega WHERE status_ent = 0 OR status_ent = 1 ORDER BY id_ent DESC LIMIT $limite OFFSET $offset";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $registros = [];
@@ -83,7 +83,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Histórico de Entregas</h6>
+                    <h6 class="mb-4">Entregas em Andamento</h6>
                     <div class="table-responsive">
                         <table class="table" style="color: #003879">
                             <thead>

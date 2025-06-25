@@ -23,12 +23,12 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
             $busca = $_POST['busca'];
     
-            $sql = "SELECT * FROM tbl_usuario WHERE id_user LIKE $busca AND nivel_user = 10";
+            $sql = "SELECT * FROM tbl_usuario WHERE id_user LIKE $busca AND nivel_user = 10 ORDER BY id_user DESC";
             $rodar_sql = mysqli_query($conn, $sql);
 
         }else{
 
-            $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 10 LIMIT $limite OFFSET $offset";
+            $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 10 ORDER BY id_user DESC LIMIT $limite OFFSET $offset";
             $rodar_sql = mysqli_query($conn, $sql);
 
         }
@@ -46,7 +46,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         $conn = conexao();
 
-        $sql = "SELECT COUNT(*) AS total FROM tbl_usuario WHERE nivel_user = 10";
+        $sql = "SELECT COUNT(*) AS total FROM tbl_usuario WHERE nivel_user = 10 ORDER BY id_user DESC";
         $rodar_sql = mysqli_query($conn, $sql);
 
         $total = mysqli_fetch_assoc($rodar_sql)['total'];

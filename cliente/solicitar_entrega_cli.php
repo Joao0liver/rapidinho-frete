@@ -367,15 +367,17 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <option>Vivendas da Serra</option>
 
                             </select>
-                            <input name="nome_dest" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome do Destinatário" required>
+                            <input name="nome_dest" type="text" pattern="[A-Za-z]+" class="form-control mb-3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome do Destinatário" required>
                             <div id="emailHelp" class="form-text">*Fretes realizados apenas dentro do perímetro urbano de Juíz de Fora - MG
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Informações do Pacote</label>
-                            <input name="peso_pac" type="number" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Peso" style="width: 200px;" required>
-                            <input name="larg_pac" type="number" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Largura" style="width: 200px;" required>
-                            <input name="comp_pac" type="number" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Comprimento" style="width: 200px;" required>
+                            <input name="peso_pac" type="number" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Peso (kg)" style="width: 200px;" max="12" required>
+                            <input name="larg_pac" type="number" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Largura (cm)" style="width: 200px;" required>
+                            <input name="comp_pac" type="number" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Comprimento (cm)" style="width: 200px;" required>
+                            <div id="emailHelp" class="form-text">*Limite de peso do pacote = 12kg
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Calcular</button>
                     </form>
