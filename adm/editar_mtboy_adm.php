@@ -25,17 +25,32 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $tel_mtboy = $_POST['tel_mtboy'];
         $placa_mtboy = $_POST['placa_mtboy'];
 
-        $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy' WHERE id_user = $id_mtboy";
-        $rodar_sql = mysqli_query($conn, $sql);
+        $nome_mtboy = tratar_input($nome_mtboy, $conn);
+        $email_mtboy = tratar_input($email_mtboy, $conn);
+        $cpf_mtboy = tratar_input($cpf_mtboy, $conn);
+        $tel_mtboy = tratar_input($tel_mtboy, $conn);
 
-        if ($rodar_sql){
-            $msg = '<font color="green">Atualizado com sucesso!</font>';
+        if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){
+
+            $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy' WHERE id_user = $id_mtboy";
+            $rodar_sql = mysqli_query($conn, $sql);
+
+            if ($rodar_sql){
+                $msg = '<font color="green">Atualizado com sucesso!</font>';
+            }else{
+                $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+            }
+            
+            $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
+            $motoboy = mysqli_fetch_array($sql_atualizado);
+
         }else{
-            $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+            $msg = '<font color="red">Erro ao editar informações! Por favor, revise as informações e tente novamente!</font>';
+            
+            $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
+            $result = mysqli_query($conn, $sql);
+            $motoboy = mysqli_fetch_array($result);
         }
-        
-        $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
-        $motoboy = mysqli_fetch_array($sql_atualizado);
 
     }
 
@@ -59,7 +74,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <input type="hidden" name="id_mtboy" value="<?php echo $motoboy['id_user'] ?>">
                                 <div class="mb-3">
                                     <label class="form-label">Nome</label>
-                                    <input type="text" name="nome_mtboy" style="width: 700px;" value="<?php echo $motoboy['nome_user'] ?>" class="form-control">
+                                    <input type="text" pattern="[A-Za-z\s]+" name="nome_mtboy" style="width: 700px;" value="<?php echo $motoboy['nome_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
@@ -67,11 +82,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">CPF</label>
-                                    <input type="number" name="cpf_mtboy" style="width: 200px;" value="<?php echo $motoboy['cpf_user'] ?>" class="form-control">
+                                    <input type="number" pattern="[0-9]{11}" name="cpf_mtboy" style="width: 200px;" value="<?php echo $motoboy['cpf_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Telefone</label>
-                                    <input type="text" name="tel_mtboy" style="width: 200px;" value="<?php echo $motoboy['tel_mtboy'] ?>" class="form-control">
+                                    <input type="text" pattern="[0-9]{11}" name="tel_mtboy" style="width: 200px;" value="<?php echo $motoboy['tel_mtboy'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Placa da Moto</label>

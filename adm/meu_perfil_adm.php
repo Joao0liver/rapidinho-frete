@@ -34,7 +34,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         <li class="list-group-item bg-transparent"><b>Identificação:</b> <?php echo $dados_adm['id_user'] ?></li>
                         <li class="list-group-item bg-transparent"><b>E-mail:</b> <?php echo $dados_adm['email_user'] ?></li>
                         <li class="list-group-item bg-transparent"><b>CPF:</b> <?php echo $dados_adm['cpf_user'] ?></li>
-                        <li class="list-group-item bg-transparent"><b>Endereço:</b> <?php echo $dados_adm['ende_user'].' - '.$dados_adm['bairro_user'] ?></li>
                         <li class="list-group-item bg-transparent"><b>Status:</b> <?php echo status($dados_adm['status_user']); ?></li>
                     </ul>
                 </div>

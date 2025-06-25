@@ -55,7 +55,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <input type="hidden" name="id_dist" value="<?php echo $distancia['id_dist'] ?>">
                                 <div class="mb-3">
                                     <label class="form-label">Bairro</label>
-                                    <input type="text" name="bairro" style="width: 700px;" value="<?php echo $distancia['bairro'] ?>" class="form-control" readonly>
+                                    <input type="text" pattern="[A-Za-z\s]+" name="bairro" style="width: 700px;" value="<?php echo $distancia['bairro'] ?>" class="form-control" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Valor</label>

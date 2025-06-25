@@ -43,4 +43,37 @@ function conexao(){
     
 }
 
+function tratar_input($input, $conn){
+
+    if (filter_var($input, FILTER_VALIDATE_INT)){ // Se o input for do tipo inteiro, sendo CPF ou Telefone
+
+        if (!preg_match("/^[0-9]{11}+$/", $input)) {
+            return -1;
+        }else{
+            $input = mysqli_real_escape_string($conn, $input);
+            return $input;
+        }
+
+    }elseif (filter_var($input, FILTER_VALIDATE_EMAIL)){ // Se o input for do tipo E-mail
+
+        return $input;
+
+    }elseif (gettype($input) == 'string'){  // Se o input for do tipo String
+
+        if (!preg_match("/^[A-Za-z\s]+$/", $input)) {
+            return -1;
+        }else{
+            $input = filter_var($input, FILTER_SANITIZE_STRING);
+            $input = mysqli_real_escape_string($conn, $input);
+            return $input;
+        }
+
+    }else{
+
+        return -1;
+
+    }
+
+}
+
 ?>

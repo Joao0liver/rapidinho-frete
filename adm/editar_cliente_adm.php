@@ -24,17 +24,31 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $cpf_cliente = $_POST['cpf_cliente'];
         $ende_cliente = $_POST['ende_cliente'];
 
-        $sql = "UPDATE tbl_usuario SET nome_user='$nome_cliente', email_user='$email_cliente', cpf_user='$cpf_cliente', ende_user='$ende_cliente' WHERE id_user = $id_cliente";
-        $rodar_sql = mysqli_query($conn, $sql);
+        $nome_cliente = tratar_input($nome_cliente, $conn);
+        $email_cliente = tratar_input($email_cliente, $conn);
+        $cpf_cliente = tratar_input($cpf_cliente, $conn);
 
-        if ($rodar_sql){
-            $msg = '<font color="green">Atualizado com sucesso!</font>';
+        if ($nome_cliente <> -1 && $email_cliente <> -1 && $cpf_cliente <> -1){
+
+            $sql = "UPDATE tbl_usuario SET nome_user='$nome_cliente', email_user='$email_cliente', cpf_user='$cpf_cliente', ende_user='$ende_cliente' WHERE id_user = $id_cliente";
+            $rodar_sql = mysqli_query($conn, $sql);
+
+            if ($rodar_sql){
+                $msg = '<font color="green">Atualizado com sucesso!</font>';
+            }else{
+                $msg = '<font color="red">Erro ao atualizar cliente!</font>';
+            }
+            
+            $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente");
+            $cliente = mysqli_fetch_array($sql_atualizado);
+
         }else{
-            $msg = '<font color="red">Erro ao atualizar cliente!</font>';
+            $msg = '<font color="red">Erro ao editar informações! Por favor, revise as informações e tente novamente!</font>';
+
+            $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente";
+            $result = mysqli_query($conn, $sql);
+            $cliente = mysqli_fetch_array($result);
         }
-        
-        $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente");
-        $cliente = mysqli_fetch_array($sql_atualizado);
 
     }
 
@@ -58,7 +72,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <input type="hidden" name="id_cliente" value="<?php echo $cliente['id_user'] ?>">
                                 <div class="mb-3">
                                     <label class="form-label">Nome</label>
-                                    <input type="text" name="nome_cliente" style="width: 700px;" value="<?php echo $cliente['nome_user'] ?>" class="form-control">
+                                    <input type="text" pattern="[A-Za-z\s]+" name="nome_cliente" style="width: 700px;" value="<?php echo $cliente['nome_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
@@ -66,7 +80,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">CPF</label>
-                                    <input type="number" name="cpf_cliente" style="width: 200px;" value="<?php echo $cliente['cpf_user'] ?>" class="form-control">
+                                    <input type="number" pattern="[0-9]{11}" name="cpf_cliente" style="width: 200px;" value="<?php echo $cliente['cpf_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Endereço</label>

@@ -65,6 +65,7 @@ $adm = mysqli_fetch_array($sql);
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
+                    <a href="../adm/cadastrar_novo_adm.php" class="nav-item nav-link"><i class="fa fa-file-alt me-2"></i>Cadastrar Admin</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-tachometer-alt me-2"></i>Rastreio</a>
                         <div class="dropdown-menu bg-transparent border-0">
