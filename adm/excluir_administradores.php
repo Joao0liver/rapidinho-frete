@@ -14,6 +14,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     $id_adm = $_GET['id_adm'];
 
+    // Desativa|exclui o administrador trocando o status_user de 1 para 0 (Ativo para Inativo)
     $sql = "UPDATE tbl_usuario SET status_user = 0 WHERE id_user = $id_adm";
     $rodar_sql = mysqli_query($conn, $sql);
 

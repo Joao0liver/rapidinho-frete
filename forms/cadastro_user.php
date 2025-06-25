@@ -4,9 +4,11 @@ include_once('../conexao.php');
 include_once('../funcoes.php');
 
 $msg = '';
+$msgS= '<div id="emailHelp" class="form-text">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</div> <br>';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+    // Captura os dados dos inputs
     $nome_user = $_POST['nome_user'];
     $email_user = $_POST['email_user'];
     $cpf_user = $_POST['cpf_user'];
@@ -14,19 +16,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $bairro_user = $_POST['bairro_user'];
     $senha_user = $_POST['senha_user'];
 
+    // Trata e filtra as informações utilizando as respecticas funções para entrar no banco
     $nome_user = tratar_input($nome_user, $conn);
     $ende_user = tratar_input($ende_user, $conn);
     $email_user = tratar_input($email_user, $conn);
     $cpf_user = tratar_input($cpf_user, $conn);
     $senha_user = tratar_senha($senha_user, $conn);
 
-    if ($nome_user <> '' or $email_user <> '' or $cpf_user <> '' or $ende_user <> '' or $senha_user <> ''){
+    if ($nome_user <> '' or $email_user <> '' or $cpf_user <> '' or $ende_user <> '' or $senha_user <> ''){ // Se os inputs não estiverem vazios
 
-        if ($nome_user <> -1 && $ende_user <> -1 && $email_user <> -1 && $cpf_user <> -1){
+        if ($nome_user <> -1 && $ende_user <> -1 && $email_user <> -1 && $cpf_user <> -1){ // Se o tratamento dos dados ficou correspondente com o desejado
 
-            if ($senha_user <> -1){
+            if ($senha_user <> -1){ // Se a senha estiver no formato correto
 
-                $senha_cript = hash('sha256', $senha_user);
+                $senha_cript = hash('sha256', $senha_user); // Criptografa a senha
 
                 $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, ende_user, bairro_user, senha_user) VALUES ('$nome_user', '$email_user', '$cpf_user', '$ende_user', '$bairro_user', '$senha_cript')";
                 $rodar_sql = mysqli_query($conn, $sql);
@@ -38,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                 }
 
             }else{
-                $msg = '<font color="red">A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</font> <br>';
+                $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</font></div> <br>';
             }
 
         }else{
@@ -293,6 +296,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                                 <input type="password" name="senha_user" class="form-control" id="floatingInput" required>
                                 <label for="floatingInput">Senha</label>
                             </div>
+                            <?php echo $msgS; ?>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <a href="">Esqueci a senha</a>
                             </div>

@@ -113,11 +113,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                     </dl>
                     <?php
 
-                        if ($registros_entrega['status_ent'] == 1){
+                        if ($registros_entrega['status_ent'] == 1){ // Se o status da entrega for "em andamento", imprime o botão para finalizar a entrega
 
-                            echo '<form action="finaliza_ent_mtboy.php" method="get">
-                            <button class="btn btn-primary w-100 m-2" type="button" onclick="confirmaDel(event, '.$registros_entrega['id_ent'].')">Finalizar Entrega</button>
-                            </form>';
+                            echo '<button class="btn btn-primary w-100 m-2" type="button" onclick="confirmaDel(event, '.$registros_entrega['id_ent'].')">Finalizar Entrega</button>';
 
                         }
 

@@ -15,6 +15,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     $id_user = $_SESSION['id_user'];
 
+    // Captura o nome do motoboy logado
     $sql = "SELECT nome_user FROM tbl_usuario WHERE id_user = $id_user";
     $rodar_sql = mysqli_query($conn, $sql);
     $nome_user = mysqli_fetch_assoc($rodar_sql);

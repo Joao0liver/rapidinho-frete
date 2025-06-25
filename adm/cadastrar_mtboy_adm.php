@@ -17,6 +17,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['imagem'])){
 
+        // Armazena os valores dos inputs em variáveis
         $nome_mtboy = $_POST['nome_mtboy'];
         $foto_mtboy = $_FILES['imagem'];
         $email_mtboy = $_POST['email_mtboy'];
@@ -25,17 +26,19 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $placa_mtboy = $_POST['placa_mtboy'];
         $senha_mtboy = $_POST['senha_mtboy'];
 
+        // Trata e filtra os dados antes de entrar no Banco
         $nome_mtboy = tratar_input($nome_mtboy, $conn);
         $email_mtboy = tratar_input($email_mtboy, $conn);
         $cpf_mtboy = tratar_input($cpf_mtboy, $conn);
         $tel_mtboy = tratar_input($tel_mtboy, $conn);
 
-        if ($nome_mtboy <> '' || $foto_mtboy <> '' || $email_mtboy <> '' || $cpf_mtboy <> '' || $tel_mtboy <> '' || $placa_mtboy <> '' || $senha_mtboy <> ''){
+        if ($nome_mtboy <> '' || $foto_mtboy <> '' || $email_mtboy <> '' || $cpf_mtboy <> '' || $tel_mtboy <> '' || $placa_mtboy <> '' || $senha_mtboy <> ''){ // Se os inputs estão preenchidos
 
-            if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){
+            if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){ // Se os dados passaram no tratamento
 
-                $senha_cript = hash('sha256', $senha_mtboy);
+                $senha_cript = hash('sha256', $senha_mtboy); // Criptografa a senha
 
+                // Cadastra o motoboy no Banco
                 $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, tel_mtboy, placa_mtboy, senha_user, nivel_user) VALUES ('$nome_mtboy', '$email_mtboy', '$cpf_mtboy', '$tel_mtboy', '$placa_mtboy', '$senha_cript', 100)";
                 $rodar_sql = mysqli_query($conn, $sql);
 

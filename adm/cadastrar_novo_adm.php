@@ -17,21 +17,24 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        // Captura os dados dos inputs
         $nome_adm = $_POST['nome_adm'];
         $email_adm = $_POST['email_adm'];
         $cpf_adm = $_POST['cpf_adm'];
         $senha_adm = $_POST['senha_adm'];
 
+        // Trata e filtra os dados para entrar no banco
         $nome_adm = tratar_input($nome_adm, $conn);
         $email_adm = tratar_input($email_adm, $conn);
         $cpf_adm = tratar_input($cpf_adm, $conn);
 
-        if ($nome_adm <> '' || $email_adm <> '' || $cpf_adm <> '' || $senha_adm <> ''){
+        if ($nome_adm <> '' || $email_adm <> '' || $cpf_adm <> '' || $senha_adm <> ''){ // Se os campos estiverem preenchidos
 
-            if ($nome_adm <> -1 && $email_adm <> -1 && $cpf_adm <> -1){
+            if ($nome_adm <> -1 && $email_adm <> -1 && $cpf_adm <> -1){ // Se os dados passaram no tratamento
             
-                $senha_cript = hash('sha256', $senha_adm);
+                $senha_cript = hash('sha256', $senha_adm); // Criptografa a senha
 
+                // Cadastra novo administrador
                 $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, senha_user, nivel_user) VALUES ('$nome_adm', '$email_adm', '$cpf_adm', '$senha_cript', 777)";
                 $rodar_sql = mysqli_query($conn, $sql);
 

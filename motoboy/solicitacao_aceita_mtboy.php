@@ -19,6 +19,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         $id_ent = $_GET['id_ent'];
 
+        // Faz uma atualização do status do registro de 0 para 1 (Pendente para Em Andamento)
         $sql = "UPDATE tbl_entrega SET id_mtboy = $id_mtboy, inicio_ent = NOW(), status_ent = 1 WHERE id_ent = $id_ent";
         $rodar_sql = mysqli_query($conn, $sql);
 

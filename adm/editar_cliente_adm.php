@@ -14,9 +14,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../layout/header_adm.php");
 
     $msg = '<br>';
+    $msgS = '<div id="emailHelp" class="form-text">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</div>';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        // Captura os dados para edição
         $id_cliente = $_POST['id_cliente'];
 
         $nome_cliente = $_POST['nome_cliente'];
@@ -24,6 +26,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $cpf_cliente = $_POST['cpf_cliente'];
         $ende_cliente = $_POST['ende_cliente'];
 
+        // Trata e filtra os dados para entrar no Banco
         $nome_cliente = tratar_input($nome_cliente, $conn);
         $email_cliente = tratar_input($email_cliente, $conn);
         $cpf_cliente = tratar_input($cpf_cliente, $conn);
@@ -31,11 +34,12 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         if ($_POST['senha_cliente'] <> ""){ // Caso o campo de senha esteja preenchido
 
+            // Captura, trata, filtra e criptografa a senha
             $senha_cliente = $_POST['senha_cliente'];
             $senha_cliente = tratar_senha($senha_cliente, $conn);
             $senha_cript = hash('sha256', $senha_cliente);
 
-            if ($nome_cliente <> -1 && $email_cliente <> -1 && $cpf_cliente <> -1 && $senha_cliente <> -1){
+            if ($nome_cliente <> -1 && $email_cliente <> -1 && $cpf_cliente <> -1 && $senha_cliente <> -1){ // Se os dados passaram no tratamento
 
                 $sql = "UPDATE tbl_usuario SET nome_user='$nome_cliente', email_user='$email_cliente', cpf_user='$cpf_cliente', ende_user='$ende_cliente', senha_user='$senha_cript' WHERE id_user = $id_cliente";
                 $rodar_sql = mysqli_query($conn, $sql);
@@ -50,7 +54,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                 $cliente = mysqli_fetch_array($sql_atualizado);
 
             }else{
-                $msg = '<font color="red">A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</font>';
+                $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial. Verifique também as informações.</font></div>';
 
                 $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente";
                 $result = mysqli_query($conn, $sql);
@@ -59,7 +63,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         }else{ // Caso o campo de senha não esteja preenchido
 
-            if ($nome_cliente <> -1 && $email_cliente <> -1 && $cpf_cliente <> -1){
+            if ($nome_cliente <> -1 && $email_cliente <> -1 && $cpf_cliente <> -1){ // Se os dados passaram no tratamento
 
                 $sql = "UPDATE tbl_usuario SET nome_user='$nome_cliente', email_user='$email_cliente', cpf_user='$cpf_cliente', ende_user='$ende_cliente' WHERE id_user = $id_cliente";
                 $rodar_sql = mysqli_query($conn, $sql);
@@ -87,6 +91,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 
+        // Captura os dados selecionar a edição na listagem
         $id_cliente = $_GET['id_cliente'];
 
         $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente";
@@ -123,6 +128,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                     <label class="form-label">Nova Senha</label>
                                     <input type="password" name="senha_cliente" class="form-control">
                                 </div>
+                                <?php echo $msgS; ?>
                                 <div class="mb-3">
                                     <?php echo $msg; ?>
                                 </div>

@@ -1,5 +1,6 @@
 <?php
 
+// Define o servidor e o banco de dados que será utilizado
 $servername = 'localhost';
 $username = 'root';
 $password = '';

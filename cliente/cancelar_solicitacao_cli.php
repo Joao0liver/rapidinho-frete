@@ -14,6 +14,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     $id_ent = $_GET['id_ent'];
 
+    // Faz uma atualização do status da solicitação de 0 para 3 (Pendente para Cancelado)
     $sql = "UPDATE tbl_entrega SET status_ent = 3 WHERE id_ent = $id_ent";
     $rodar_sql = mysqli_query($conn, $sql);
 

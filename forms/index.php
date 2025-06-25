@@ -12,19 +12,21 @@ session_start();
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    // Captura os dados dos inputs
     $user = $_POST['login'];
     $senha = $_POST['senha'];
 
+    // Seleciona e armazena os registros do banco
     $sql = "SELECT * FROM tbl_usuario WHERE email_user = '$user' AND status_user = 1";
-    
     $rodasql = mysqli_query($conn, $sql);
     $result = mysqli_fetch_array($rodasql); 
 
+    // Criptografa a senha do login
     $cript_senha_form = hash('sha256',$senha);
 
     if ($result['senha_user'] == $cript_senha_form and $result['status_user'] == 1) {    // as senhas conferem! - status (ativo/inativo) do usuário!
 
-        if ($result['nivel_user'] == 10){
+        if ($result['nivel_user'] == 10){ // Se o nível de usuário for 10 == Cliente
 
             session_start();
 
@@ -34,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../cliente/menu.php');
             exit();
 
-        }elseif ($result['nivel_user'] == 100){
+        }elseif ($result['nivel_user'] == 100){ // Se o nível de usuário for 100 == Motoboy
 
             session_start();
 
@@ -44,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../motoboy/menu.php');
             exit();
 
-        }elseif ($result['nivel_user'] == 777){
+        }elseif ($result['nivel_user'] == 777){ // Se o nível de usuário for 777 == Administrador
 
             session_start();
 

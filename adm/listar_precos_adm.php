@@ -13,20 +13,20 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../funcoes.php");
     include_once("../layout/header_adm.php");
 
-    function obterRegistros($pagina, $limite){
+    function obterRegistros($pagina, $limite){ // Obtém os registros da tabela de preços por bairro
 
         $conn = conexao();
 
-        $offset = ($pagina - 1) * $limite;
+        $offset = ($pagina - 1) * $limite; // Define o offset
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Caso o usuário realize uma busca de bairro
 
             $busca = $_POST['busca'];
     
             $sql = "SELECT * FROM tbl_distancia WHERE bairro LIKE '$busca%' ORDER BY bairro";
             $rodar_sql = mysqli_query($conn, $sql);
     
-        }else{
+        }else{ // Caso não realize uma busca
 
             $sql = "SELECT * FROM tbl_distancia ORDER BY bairro LIMIT $limite OFFSET $offset";
             $rodar_sql = mysqli_query($conn, $sql);
@@ -43,10 +43,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
-    function contarRegistros(){
+    function contarRegistros(){ // Conta os registros para fazer paginação da Lista
 
         $conn = conexao();
 
+        // Faz uma consulta com contagem dos registros da tabela de preços por bairro
         $sql = "SELECT COUNT(*) AS total FROM tbl_distancia";
         $rodar_sql = mysqli_query($conn, $sql);
 
@@ -56,9 +57,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
-    $limite = 20;
+    $limite = 20; // Limite de registros por página
 
-    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página atual
 
     $totalRegistros = contarRegistros();
 

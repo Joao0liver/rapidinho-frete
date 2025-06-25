@@ -13,20 +13,20 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../funcoes.php");
     include_once("../layout/header_adm.php");
 
-    function obterRegistros($pagina, $limite){
+    function obterRegistros($pagina, $limite){ // Obtém os registros de clientes
 
         $conn = conexao();
 
-        $offset = ($pagina - 1) * $limite;
+        $offset = ($pagina - 1) * $limite; // Define o offset
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Caso o usuário realize uma busca de cliente por ID
 
             $busca = $_POST['busca'];
     
             $sql = "SELECT * FROM tbl_usuario WHERE id_user LIKE $busca AND nivel_user = 10 ORDER BY id_user DESC";
             $rodar_sql = mysqli_query($conn, $sql);
 
-        }else{
+        }else{ // Caso não realize uma busca
 
             $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 10 ORDER BY id_user DESC LIMIT $limite OFFSET $offset";
             $rodar_sql = mysqli_query($conn, $sql);
@@ -42,10 +42,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         return $registros;
 
     }
-    function contarRegistros(){
+    function contarRegistros(){ // Conta os registros para fazer paginação da Lista
 
         $conn = conexao();
 
+        // Faz uma consulta com contagem dos registros de clientes
         $sql = "SELECT COUNT(*) AS total FROM tbl_usuario WHERE nivel_user = 10 ORDER BY id_user DESC";
         $rodar_sql = mysqli_query($conn, $sql);
 
@@ -55,9 +56,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
-    $limite = 5;
+    $limite = 5; // Limite de registros por página
 
-    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página atual
 
     $totalRegistros = contarRegistros();
 

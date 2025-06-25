@@ -1,6 +1,6 @@
 <?php
 
-function status($valor){
+function status($valor){ // Converte o valor do status no banco em texto para as listagens de usuário
 
     if ($valor == 1){
         $st_txt = '<font color="green">Ativo</font>';
@@ -12,7 +12,7 @@ function status($valor){
 
 }
 
-function status_entrega($valor){
+function status_entrega($valor){ // Converte o valor do status de entrega no banco em texto para as listagens de entrega
 
     if ($valor == 0){
         $st_txt = '<font color="red">Pendente</font>';
@@ -28,7 +28,7 @@ function status_entrega($valor){
 
 }
 
-function progresso_entrega($valor){
+function progresso_entrega($valor){ // Define a barra de andamento da entrega para os detalhes
 
     if ($valor == 0){ // Status - Entrega Pendente
 
@@ -67,8 +67,9 @@ function progresso_entrega($valor){
 
 }
 
-function conexao(){
+function conexao(){ // Função de conexão usada internamente em algumas estruturas condicionais
 
+    // Define o servidor e o banco de dados que será utilizado
     $servername = 'localhost';
     $username = 'root';
     $password = '';
@@ -84,7 +85,7 @@ function conexao(){
     
 }
 
-function tratar_input($input, $conn){
+function tratar_input($input, $conn){ // Trata e filtra os inputs de usuário (cadastro e edição)
 
     if (filter_var($input, FILTER_VALIDATE_INT)){ // Se o input for do tipo inteiro, sendo CPF ou Telefone
 
@@ -117,7 +118,7 @@ function tratar_input($input, $conn){
 
 }
 
-function tratar_input_solicitacao($input, $conn){
+function tratar_input_solicitacao($input, $conn){ // Trata e filtra os inputs de solicitação e entrega
 
     if (filter_var($input, FILTER_VALIDATE_INT)){
 
@@ -151,7 +152,7 @@ function tratar_input_solicitacao($input, $conn){
 
 }
 
-function tratar_senha($input, $conn){
+function tratar_senha($input, $conn){ // Trata, filtra e exige um formato específico de senha (min. 8 caracteres, incluindo letras, números e um caractere especial)
 
     if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $input)){
         return -1;

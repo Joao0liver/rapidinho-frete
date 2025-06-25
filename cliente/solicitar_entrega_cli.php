@@ -15,6 +15,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     $id_user = $_SESSION['id_user'];
 
+    // Captura os dados do usuário para preencher os campos de endereço e bairro de coleta baseado no cadastro do usuário logado
     $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_user";
     $rodar_sql = mysqli_query($conn, $sql);
 

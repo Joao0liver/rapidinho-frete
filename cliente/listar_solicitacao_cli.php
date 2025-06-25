@@ -13,14 +13,15 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../funcoes.php");
     include_once("../layout/header_cliente.php");
 
-    function obterRegistros($pagina, $limite) {
+    function obterRegistros($pagina, $limite) { // Obtém os registros de solicitação realizadas pelo cliente logado
 
         $conn = conexao();
 
         $id_user = $_SESSION['id_user'];
 
-        $offset = ($pagina - 1) * $limite;
+        $offset = ($pagina - 1) * $limite; // Define o offset
 
+        // Faz uma consulta no banco ordenando das entregas mais recentes para as mais antigas | com Limite e Offset também
         $sql = "SELECT * FROM tbl_entrega WHERE id_cliente = $id_user ORDER BY id_ent DESC LIMIT $limite OFFSET $offset";
         $rodar_sql = mysqli_query($conn, $sql);
 
@@ -34,12 +35,13 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
-    function contarRegistros(){
+    function contarRegistros(){ // Conta os registros para fazer paginação da Lista
 
         $conn = conexao();
 
         $id_user = $_SESSION['id_user'];
 
+        // Faz uma consulta com contagem das solicitações realizadas pelo cliente logado
         $sql = "SELECT COUNT(*) AS total FROM tbl_entrega WHERE id_cliente = $id_user";
         $rodar_sql = mysqli_query($conn, $sql);
 
@@ -51,9 +53,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
-    $limite = 10;
+    $limite = 10; // Limite de registros por página
 
-    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página atual
 
     $totalRegistros = contarRegistros();
 

@@ -14,9 +14,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../layout/header_adm.php");
 
     $msg = '<br>';
+    $msgS = '<div id="emailHelp" class="form-text">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</div>';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        // Captura os dados para edição
         $id_mtboy = $_POST['id_mtboy'];
 
         $nome_mtboy = $_POST['nome_mtboy'];
@@ -25,37 +27,76 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $tel_mtboy = $_POST['tel_mtboy'];
         $placa_mtboy = $_POST['placa_mtboy'];
 
+        // Trata e filtra os dados para entrar no Banco
         $nome_mtboy = tratar_input($nome_mtboy, $conn);
         $email_mtboy = tratar_input($email_mtboy, $conn);
         $cpf_mtboy = tratar_input($cpf_mtboy, $conn);
         $tel_mtboy = tratar_input($tel_mtboy, $conn);
 
-        if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){
+        if ($_POST['senha_mtboy'] <> ""){ // Se a senha estiver preenchida, realiza um método de UPDATE diferente
 
-            $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy' WHERE id_user = $id_mtboy";
-            $rodar_sql = mysqli_query($conn, $sql);
+            // Captura, trata, filtra e criptografa a senha
+            $senha_mtboy = $_POST['senha_mtboy'];
+            $senha_mtboy = tratar_senha($senha_mtboy, $conn);
+            $senha_cript = hash('sha256', $senha_mtboy);
 
-            if ($rodar_sql){
-                $msg = '<font color="green">Atualizado com sucesso!</font>';
+            if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1 && $senha_mtboy <> -1){ // Se os dados passaram no tratamento
+
+                $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy', senha_user = '$senha_cript' WHERE id_user = $id_mtboy";
+                $rodar_sql = mysqli_query($conn, $sql);
+
+                if ($rodar_sql){
+                    $msg = '<font color="green">Atualizado com sucesso!</font>';
+                }else{
+                    $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+                }
+                
+                $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
+                $motoboy = mysqli_fetch_array($sql_atualizado);
+
             }else{
-                $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
-            }
-            
-            $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
-            $motoboy = mysqli_fetch_array($sql_atualizado);
 
-        }else{
-            $msg = '<font color="red">Erro ao editar informações! Por favor, revise as informações e tente novamente!</font>';
-            
-            $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
-            $result = mysqli_query($conn, $sql);
-            $motoboy = mysqli_fetch_array($result);
+                $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial. Verifique também as informações.</font></div>';
+                
+                $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
+                $result = mysqli_query($conn, $sql);
+                $motoboy = mysqli_fetch_array($result);
+
+            }
+
+        }else{ // Se a senha não estiver preenchida, realiza um método de UPDATE diferente
+
+            if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){ // Se os dados passaram no tratamento
+
+                $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy' WHERE id_user = $id_mtboy";
+                $rodar_sql = mysqli_query($conn, $sql);
+
+                if ($rodar_sql){
+                    $msg = '<font color="green">Atualizado com sucesso!</font>';
+                }else{
+                    $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+                }
+                
+                $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
+                $motoboy = mysqli_fetch_array($sql_atualizado);
+
+            }else{
+
+                $msg = '<font color="red">Erro ao editar informações! Por favor, revise as informações e tente novamente!</font>';
+                
+                $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
+                $result = mysqli_query($conn, $sql);
+                $motoboy = mysqli_fetch_array($result);
+
+            }
+
         }
 
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 
+        // Captura os dados selecionar a edição na listagem
         $id_mtboy = $_GET['id_user'];
 
         $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
@@ -92,6 +133,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                     <label class="form-label">Placa da Moto</label>
                                     <input type="text" name="placa_mtboy" style="width: 150px;" value="<?php echo $motoboy['placa_mtboy'] ?>" class="form-control">
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nova Senha</label>
+                                    <input type="password" name="senha_mtboy" class="form-control">
+                                </div>
+                                <?php echo $msgS; ?>
                                 <div class="mb-3">
                                     <?php echo $msg; ?>
                                 </div>

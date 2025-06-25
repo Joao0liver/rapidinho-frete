@@ -13,20 +13,20 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../funcoes.php");
     include_once("../layout/header_cliente.php");
 
-    function obterRegistros($pagina, $limite){
+    function obterRegistros($pagina, $limite){ // Obtém os registros de preços por bairro
 
         $conn = conexao();
 
         $offset = ($pagina - 1) * $limite;
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Se o usuário pesquisou por um bairro em específico
 
             $busca = $_POST['busca'];
     
             $sql = "SELECT * FROM tbl_distancia WHERE bairro LIKE '$busca%' ORDER BY bairro";
             $rodar_sql = mysqli_query($conn, $sql);
     
-        }else{
+        }else{ // Se o usuário não pesquisou por algum bairro
 
             $sql = "SELECT * FROM tbl_distancia ORDER BY bairro LIMIT $limite OFFSET $offset";
             $rodar_sql = mysqli_query($conn, $sql);
@@ -43,7 +43,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
-    function contarRegistros(){
+    function contarRegistros(){ // Conta os registros para fazer paginação da Lista
 
         $conn = conexao();
 
@@ -56,9 +56,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
-    $limite = 20;
+    $limite = 20; // Limite de registros por página
 
-    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Página atual
 
     $totalRegistros = contarRegistros();
 

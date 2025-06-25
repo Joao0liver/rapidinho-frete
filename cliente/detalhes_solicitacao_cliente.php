@@ -16,7 +16,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     $msg = "";
     $aviso = "";
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // Dados após o usuário editar alguma informação
 
         // Coleta os novos dados do formulário
         $id_ent = $_POST['id_ent'];
@@ -32,9 +32,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $larg_pac = $_POST['larg_pac'];
         $comp_pac = $_POST['comp_pac'];
 
+        // Concatena o endereço com o bairro separando-os com "|"
         $ende_inicio = $ende_orig.' | '.$bairro_orig;
         $ende_fim = $ende_dest.' | '.$bairro_dest;
 
+        // Trata e filtra as informações antes de entrar no banco
         $ende_inicio = tratar_input_solicitacao($ende_inicio, $conn);
         $ende_fim = tratar_input_solicitacao($ende_fim, $conn);
         $peso_pac = tratar_input_solicitacao($peso_pac, $conn);
@@ -44,15 +46,16 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         // Só permite a atualização se o status for pendente
         if ($status_ent == 0){
 
-            if ($ende_inicio <> -1 && $ende_fim <> -1 && $peso_pac <> -1 && $larg_pac <> -1 && $comp_pac <> -1){
+            if ($ende_inicio <> -1 && $ende_fim <> -1 && $peso_pac <> -1 && $larg_pac <> -1 && $comp_pac <> -1){ // Só permite a atualização se os dados passaram no tratamento
 
                 $sql = "UPDATE tbl_entrega SET ende_orig='$ende_inicio', ende_dest='$ende_fim', peso_pac=$peso_pac, larg_pac=$larg_pac, comp_pac=$comp_pac WHERE id_ent = $id_ent";
                 $rodar_sql = mysqli_query($conn, $sql);
 
+                // Pega os dados atualizados para preencher o form novamente
                 $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_entrega WHERE id_ent = $id_ent");
                 $registros_entrega = mysqli_fetch_array($sql_atualizado);
 
-                // Divide o endereço em um array com "nome da rua" e "bairro"
+                // Divide o endereço em um array com "nome da rua" e "bairro" para preecher o form novamente
                 $ende_orig = explode('|', $registros_entrega['ende_orig']);
                 $ende_dest = explode('|', $registros_entrega['ende_dest']);
 
@@ -69,7 +72,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+    if ($_SERVER['REQUEST_METHOD'] === 'GET'){ // Dados quando o usuário clica na edição presente na listagem
 
         // Obter Registros/Informações de Entrega
 
@@ -98,6 +101,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         }
 
+        // Retira o separador "|" para colocar o "endereço" no input de endereço e o "bairro" no select de bairro
         $ende_orig = explode('|', $registros_entrega['ende_orig']);
         $ende_dest = explode('|', $registros_entrega['ende_dest']);
 

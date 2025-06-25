@@ -17,13 +17,14 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        // Captura os dados para edição
         $id_dist = $_POST['id_dist'];
 
         $valor = $_POST['valor'];
 
         $valor = tratar_input_solicitacao($valor, $conn);
 
-        if ($valor <> -1){
+        if ($valor <> -1){ // Se o dado passou no tratamento
 
             $sql = "UPDATE tbl_distancia SET valor=$valor WHERE id_dist = $id_dist";
             $rodar_sql = mysqli_query($conn, $sql);
@@ -45,6 +46,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 
+        // Captura os dados selecionar a edição na listagem
         $id_dist = $_GET['id_dist'];
 
         $sql = "SELECT * FROM tbl_distancia WHERE id_dist = $id_dist";

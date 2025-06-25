@@ -14,8 +14,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../layout/header_cliente.php");
 
     $msg = '';
-    $finalizado = false;
+    $finalizado = false; // Usado para controlar se o spinner deve aparecer ou não
 
+    // Armazena os dados coletados por post de "cliente/calculo_entrega_cli.php" em variáveis
     $id_user = $_POST['id_user'];
     $preco_total = $_POST['valor_ent'];
     $ende_col = $_POST['ende_orig'];
@@ -24,13 +25,14 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     $larg_pac = $_POST['larg_pac'];
     $comp_pac = $_POST['comp_pac'];
 
+    // Trata e filtra os dados para entrar no Banco
     $ende_col = tratar_input_solicitacao($ende_col, $conn);
     $ende_dest = tratar_input_solicitacao($ende_dest, $conn);
     $peso_pac = tratar_input_solicitacao($peso_pac, $conn);
     $larg_pac = tratar_input_solicitacao($larg_pac, $conn);
     $comp_pac = tratar_input_solicitacao($comp_pac, $conn);
 
-    if ($ende_col <> -1 && $ende_dest <> -1 && $peso_pac <> -1 && $larg_pac <> -1 && $comp_pac <> -1){
+    if ($ende_col <> -1 && $ende_dest <> -1 && $peso_pac <> -1 && $larg_pac <> -1 && $comp_pac <> -1){ // Se os dados passaram no tratamento
 
         // Inserir no Banco - tbl_entrega
 
@@ -52,7 +54,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                     <div class="col-md-6 text-center">
                         <?php
 
-                            if ($finalizado == false) {
+                            if ($finalizado == false) { // Se o INSERT ainda não foi realizado, mostra um spinner de carregamento
 
                                 echo '<div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                                     <span class="sr-only">Loading...</span>
