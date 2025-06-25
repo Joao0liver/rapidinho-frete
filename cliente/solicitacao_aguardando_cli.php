@@ -14,6 +14,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../layout/header_cliente.php");
 
     $msg = '';
+    $finalizado = false;
 
     $id_user = $_POST['id_user'];
     $preco_total = $_POST['valor_ent'];
@@ -37,6 +38,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $rodar_sql = mysqli_query($conn, $sql);
         $msg = '<h4><font color="green">Seu pedido foi criado!</font></h4>
         <h6>Aguarde um de nossos motoboys aceitar a solicitação! Você pode acompanhar o andamento em <a href="listar_solicitacao_cli.php">minhas solicitações</a>.</h6>';
+        $finalizado = true;
 
     }else{
         $msg = '<font color="red">Falha ao finalizar a solicitação! Por favor, revise as informações e tente novamente!</font> <br>';
@@ -48,10 +50,19 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             <div class="container-fluid pt-4 px-4">
                 <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
                     <div class="col-md-6 text-center">
-                        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <br><br><?php echo $msg; ?>
+                        <?php
+
+                            if ($finalizado == false) {
+
+                                echo '<div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>';
+
+                            }else{
+                                echo '<br><br>'.$msg;
+                            }
+                            
+                        ?>
                     </div>
                 </div>
             </div>

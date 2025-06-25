@@ -132,15 +132,15 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">CPF</label>
-                                    <input type="number" pattern="[0-9]{11}" name="cpf_mtboy" class="form-control" style="width: 200px;" required>
+                                    <input type="number" pattern="[0-9]{11}" name="cpf_mtboy" class="form-control" style="width: 200px;" placeholder="XXXXXXXXXXX" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Telefone</label>
-                                    <input type="tel" pattern="[0-9]{11}" name="tel_mtboy" class="form-control" style="width: 200px;" required>
+                                    <input type="tel" pattern="[0-9]{11}" name="tel_mtboy" class="form-control" style="width: 200px;" placeholder="XXXXXXXXXXX" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Placa da Moto</label>
-                                    <input type="text" name="placa_mtboy" class="form-control" style="width: 150px;" required>
+                                    <input type="text" name="placa_mtboy" class="form-control" style="width: 150px;" placeholder="XXXXXXX" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Senha</label>

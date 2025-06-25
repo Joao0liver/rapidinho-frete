@@ -15,8 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $_POST['login'];
     $senha = $_POST['senha'];
 
-    $sql = "SELECT * FROM tbl_usuario WHERE email_user = '$user'";
-   
+    $sql = "SELECT * FROM tbl_usuario WHERE email_user = '$user' AND status_user = 1";
     
     $rodasql = mysqli_query($conn, $sql);
     $result = mysqli_fetch_array($rodasql); 

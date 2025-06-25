@@ -29,7 +29,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $cpf_cliente = tratar_input($cpf_cliente, $conn);
         $ende_cliente = tratar_input($ende_cliente, $conn);
 
-        if (isset($_POST['senha_cliente'])){ // Caso o campo de senha esteja preenchido
+        if ($_POST['senha_cliente'] <> ""){ // Caso o campo de senha esteja preenchido
 
             $senha_cliente = $_POST['senha_cliente'];
             $senha_cliente = tratar_senha($senha_cliente, $conn);
@@ -50,7 +50,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                 $cliente = mysqli_fetch_array($sql_atualizado);
 
             }else{
-                $msg = '<font color="red">Erro ao editar informações! Por favor, revise as informações e tente novamente!</font>';
+                $msg = '<font color="red">A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</font>';
 
                 $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente";
                 $result = mysqli_query($conn, $sql);
@@ -74,7 +74,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                 $cliente = mysqli_fetch_array($sql_atualizado);
 
             }else{
-                $msg = '<font color="red">Erro ao editar informações! Por favor, revise as informações e tente novamente!</font>';
+                $msg = '<font color="red">Erro ao editar os dados! Por favor, revise as informações e tente novamente!</font>';
 
                 $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_cliente";
                 $result = mysqli_query($conn, $sql);
