@@ -74,7 +74,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <input type="hidden" name="id_mtboy" value="<?php echo $motoboy['id_user'] ?>">
                                 <div class="mb-3">
                                     <label class="form-label">Nome</label>
-                                    <input type="text" pattern="[A-Za-z\s]+" name="nome_mtboy" style="width: 700px;" value="<?php echo $motoboy['nome_user'] ?>" class="form-control">
+                                    <input type="text" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" name="nome_mtboy" style="width: 700px;" value="<?php echo $motoboy['nome_user'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>

@@ -120,7 +120,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             <form method="post" action="cadastrar_mtboy_adm.php" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label class="form-label">Nome</label>
-                                    <input type="text" pattern="[A-Za-z\s]+" name="nome_mtboy" class="form-control" style="width: 700px;" required>
+                                    <input type="text" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" name="nome_mtboy" class="form-control" style="width: 700px;" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="imagem">Foto de Perfil:</label>

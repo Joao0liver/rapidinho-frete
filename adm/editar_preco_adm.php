@@ -21,13 +21,21 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         $valor = $_POST['valor'];
 
-        $sql = "UPDATE tbl_distancia SET valor=$valor WHERE id_dist = $id_dist";
-        $rodar_sql = mysqli_query($conn, $sql);
+        $valor = tratar_input_solicitacao($valor, $conn);
 
-        if ($rodar_sql){
-            $msg = '<font color="green">Atualizado com sucesso!</font>';
+        if ($valor <> -1){
+
+            $sql = "UPDATE tbl_distancia SET valor=$valor WHERE id_dist = $id_dist";
+            $rodar_sql = mysqli_query($conn, $sql);
+
+            if ($rodar_sql){
+                $msg = '<font color="green">Atualizado com sucesso!</font>';
+            }else{
+                $msg = '<font color="red">Erro ao atualizar preço!</font>';
+            }
+
         }else{
-            $msg = '<font color="red">Erro ao atualizar cliente!</font>';
+            $msg = '<font color="red">Erro ao atualizar preço!</font>';
         }
         
         $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_distancia WHERE id_dist = $id_dist");
@@ -59,7 +67,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Valor</label>
-                                    <input type="number" step="0.01" name="valor" style="width: 500px;" value="<?php echo $distancia['valor'] ?>" class="form-control">
+                                    <input type="number" pattern="\d+(\.\d{1,2})?" step="0.01" name="valor" style="width: 500px;" value="<?php echo $distancia['valor'] ?>" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <?php echo $msg; ?>

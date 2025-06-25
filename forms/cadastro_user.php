@@ -15,22 +15,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $senha_user = $_POST['senha_user'];
 
     $nome_user = tratar_input($nome_user, $conn);
+    $ende_user = tratar_input($ende_user, $conn);
     $email_user = tratar_input($email_user, $conn);
     $cpf_user = tratar_input($cpf_user, $conn);
+    $senha_user = tratar_senha($senha_user, $conn);
 
     if ($nome_user <> '' or $email_user <> '' or $cpf_user <> '' or $ende_user <> '' or $senha_user <> ''){
 
-        if ($nome_user <> -1 && $email_user <> -1 && $cpf_user <> -1){
+        if ($nome_user <> -1 && $ende_user <> -1 && $email_user <> -1 && $cpf_user <> -1){
 
-            $senha_cript = hash('sha256', $senha_user);
+            if ($senha_user <> -1){
 
-            $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, ende_user, bairro_user, senha_user) VALUES ('$nome_user', '$email_user', '$cpf_user', '$ende_user', '$bairro_user', '$senha_cript')";
-            $rodar_sql = mysqli_query($conn, $sql);
+                $senha_cript = hash('sha256', $senha_user);
 
-            if($rodar_sql){
-                $msg = '<font color="green">Cadastrado com sucesso!</font> <br>';
+                $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, ende_user, bairro_user, senha_user) VALUES ('$nome_user', '$email_user', '$cpf_user', '$ende_user', '$bairro_user', '$senha_cript')";
+                $rodar_sql = mysqli_query($conn, $sql);
+
+                if($rodar_sql){
+                    $msg = '<font color="green">Cadastrado com sucesso!</font> <br>';
+                }else{
+                    $msg = '<font color="red">Falha ao cadastrar! Por favor, revise as informações e tente novamente!</font> <br>';
+                }
+
             }else{
-                $msg = '<font color="red">Falha ao cadastrar! Por favor, revise as informações e tente novamente!</font> <br>';
+                $msg = '<font color="red">A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</font> <br>';
             }
 
         }else{
@@ -99,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                         </div>
                         <form method="post" action="cadastro_user.php">
                             <div class="form-floating mb-3">
-                                <input type="text" pattern="[A-Za-z\s]+" name="nome_user" class="form-control" id="floatingText" required>
+                                <input type="text" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" name="nome_user" class="form-control" id="floatingText" required>
                                 <label for="floatingText">Nome</label>
                             </div>
                             <div class="form-floating mb-3">
@@ -111,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                                 <label for="floatingPassword">CPF</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" name="ende_user" class="form-control" id="floatingInput" required>
+                                <input type="text" pattern="[A-Za-zÀ-ÖØ-öø-ÿ0-9,\s]+" name="ende_user" class="form-control" id="floatingInput" required>
                                 <label for="floatingInput">Endereço</label>
                             </div>
                             <div class="">

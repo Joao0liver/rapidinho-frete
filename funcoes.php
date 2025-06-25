@@ -101,7 +101,7 @@ function tratar_input($input, $conn){
 
     }elseif (gettype($input) == 'string'){  // Se o input for do tipo String
 
-        if (!preg_match("/^[A-Za-z\s]+$/", $input)) {
+        if (!preg_match("/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/", $input) && !preg_match("/^[A-Za-zÀ-ÖØ-öø-ÿ0-9,\s]+$/", $input)) {
             return -1;
         }else{
             $input = filter_var($input, FILTER_SANITIZE_STRING);
@@ -140,13 +140,25 @@ function tratar_input_solicitacao($input, $conn){
     }elseif (gettype($input) == "string"){
 
         $input = filter_var($input, FILTER_SANITIZE_STRING);
-            $input = mysqli_real_escape_string($conn, $input);
-            return $input;
+        $input = mysqli_real_escape_string($conn, $input);
+        return $input;
         
     }else{
 
         return -1;
         
+    }
+
+}
+
+function tratar_senha($input, $conn){
+
+    if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $input)){
+        return -1;
+    }else{
+        $input = filter_var($input, FILTER_SANITIZE_STRING);
+        $input = mysqli_real_escape_string($conn, $input);
+        return $input;
     }
 
 }

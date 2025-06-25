@@ -1,0 +1,183 @@
+<?php
+
+session_start();
+
+if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['nivel_user'] <> 777){
+    
+    header('Location: ../forms/index.php');
+    exit();
+    
+}else{
+
+    include_once("../conexao.php");
+    include_once("../funcoes.php");
+    include_once("../layout/header_adm.php");
+
+    function obterRegistros($pagina, $limite){
+
+        $conn = conexao();
+
+        $offset = ($pagina - 1) * $limite;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $busca = $_POST['busca'];
+    
+            $sql = "SELECT * FROM tbl_usuario WHERE id_user LIKE $busca AND nivel_user = 777 ORDER BY id_user DESC";
+            $rodar_sql = mysqli_query($conn, $sql);
+
+        }else{
+
+            $sql = "SELECT * FROM tbl_usuario WHERE nivel_user = 777 ORDER BY id_user DESC LIMIT $limite OFFSET $offset";
+            $rodar_sql = mysqli_query($conn, $sql);
+
+        }
+
+        $registros = [];
+        while ($registro = mysqli_fetch_assoc($rodar_sql)){
+            $registros[] = $registro;
+        }
+
+        mysqli_close($conn);
+        return $registros;
+
+    }
+    function contarRegistros(){
+
+        $conn = conexao();
+
+        $sql = "SELECT COUNT(*) AS total FROM tbl_usuario WHERE nivel_user = 777 ORDER BY id_user DESC";
+        $rodar_sql = mysqli_query($conn, $sql);
+
+        $total = mysqli_fetch_assoc($rodar_sql)['total'];
+        mysqli_close($conn);
+        return $total;
+
+    }
+
+    $limite = 5;
+
+    $pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+    $totalRegistros = contarRegistros();
+
+    $registros = obterRegistros($pagina, $limite);
+
+    $totalPagina = ceil($totalRegistros / $limite);
+
+    // Limitação da quantidade de links visíveis da paginação V
+
+    $maxLinks = 5; // Número de links de página visíveis
+
+    // Garante que o valor não seja inferior a 1
+    $inicio = max(1, $pagina - floor($maxLinks / 2));
+
+    // Garante que o valor não ultrapasse o total de páginas
+    $fim = min($totalPagina, $inicio + $maxLinks - 1);
+
+?>
+
+<!-- Blank Start -->
+            <div class="container-fluid pt-4 px-4">    
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Registro de Clientes</h6>
+                    <form method="post" action="listar_administradores.php">
+                        <input type="search" name="busca" placeholder="Pesquisar ID"><br><br>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table" style="color: #003879">
+                            <script>
+
+                                function confirmaDel(event, id) {
+
+                                    event.preventDefault();
+
+                                    const confirmacao = confirm("Deseja deletar?");
+
+                                    if (confirmacao){
+                                        
+                                        window.location.href = `excluir_administradores.php?id_adm=${id}`;
+                                        alert("Deletado com sucesso!");
+
+                                    }else{
+
+                                        alert("Ação cancelada!");
+
+                                    }
+
+                                }
+
+                            </script>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">E-mail</th>
+                                    <th scope="col">CPF</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+
+                                    foreach ($registros as $registro) {
+
+                                        echo '<tr>
+                                        <th scope="row">'.$registro['id_user'].'</th>
+                                        <td>'.$registro['nome_user'].'</td>
+                                        <td>'.$registro['email_user'].'</td>
+                                        <td>'.$registro['cpf_user'].'</td>
+                                        <td>'.status($registro['status_user']).'</td>
+                                        <td>
+                                        <a href="editar_administradores.php?id_adm='.$registro['id_user'].'"><img src="../layout/img/lapis.png" height="18px" width="18px" style="margin-right: 8px;"></a>';
+                                        if ($registro['status_user'] == 1){
+                                        echo '<a href="excluir_cliente_adm.php?id_adm='.$registro['id_user'].'" onclick="confirmaDel(event, '.$registro['id_user'].')"><img src="../layout/img/lixo.png" height="18px" width="18px"></a>
+                                        </td>
+                                        </tr>';
+                                        }
+
+
+                                    }
+
+                                ?>
+
+                            </tbody>
+                        </table>
+                        <?php
+
+                            echo "<div>";
+
+                            if ($pagina > 1){
+                                echo '<a href="?page='.($pagina - 1).'">Anterior</a>';
+                            }
+    
+                            for ($i = $inicio; $i <= $fim; $i++){
+                                if ($i == $pagina){
+    
+                                    echo "<b>$i</b>";
+    
+                                }else{
+    
+                                    echo '<a href="?page='.$i.'">'.$i.'</a>';
+    
+                                }
+                            }
+    
+                            if ($pagina < $totalPagina){
+                                echo '<a href="?page='.($pagina + 1).'">Próximo</a>';
+                            }
+
+                            echo "</div>";
+
+                        ?>
+                    </div>
+                </div>
+            </div>
+<!-- Blank End -->
+
+<?php
+
+include_once("../layout/footer.php");
+}
+
+?>

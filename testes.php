@@ -1,14 +1,14 @@
 <?php
 
+include_once('conexao.php');
+
 $input = $_POST['campo'];
 
+$input = filter_var($input, FILTER_SANITIZE_STRING);
+$input = mysqli_real_escape_string($conn, $input);
 
 
-if (filter_var($input, FILTER_VALIDATE_INT)) {
-    print("é e-mail");
-} elseif (gettype($input) == "string") {
-    print("é texto");
-}
+echo $input;
 
 ?>
 
