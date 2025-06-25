@@ -8,6 +8,8 @@ $msgS= '<div id="emailHelp" class="form-text">*A senha deve ter pelo menos 8 car
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+    $verificado = false;
+
     // Captura os dados dos inputs
     $nome_user = $_POST['nome_user'];
     $email_user = $_POST['email_user'];
@@ -27,25 +29,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         if ($nome_user <> -1 && $ende_user <> -1 && $email_user <> -1 && $cpf_user <> -1){ // Se o tratamento dos dados ficou correspondente com o desejado
 
-            if ($senha_user <> -1){ // Se a senha estiver no formato correto
+            // Verifica se o E-mail ou CPF já estão cadastrados no sistema
+            $sql = "SELECT * FROM tbl_usuario";
+            $rodar_sql = mysqli_query($conn, $sql);
 
-                $senha_cript = hash('sha256', $senha_user); // Criptografa a senha
+            $registros = [];
+            while ($registro = mysqli_fetch_assoc($rodar_sql)){
+                $registros[] = $registro;
+            }
 
-                $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, ende_user, bairro_user, senha_user) VALUES ('$nome_user', '$email_user', '$cpf_user', '$ende_user', '$bairro_user', '$senha_cript')";
-                $rodar_sql = mysqli_query($conn, $sql);
+            foreach ($registros as $registro){
 
-                if($rodar_sql){
-                    $msg = '<font color="green">Cadastrado com sucesso!</font> <br>';
+                if($email_user == $registro['email_user'] || $cpf_user == $registro['cpf_user']){ // Um ou outro
+                    $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+                    $verificado = false;
+                    break;
                 }else{
-                    $msg = '<font color="red">Falha ao cadastrar! Por favor, revise as informações e tente novamente!</font> <br>';
+                    $verificado = true;
                 }
 
-            }else{
-                $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</font></div> <br>';
+            }
+
+            if ($verificado == true){ // Se o E-mail e CPF não foram cadastrados no sistema
+
+                if ($senha_user <> -1){ // Se a senha estiver no formato correto
+
+                    $senha_cript = hash('sha256', $senha_user); // Criptografa a senha
+
+                    $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, ende_user, bairro_user, senha_user) VALUES ('$nome_user', '$email_user', '$cpf_user', '$ende_user', '$bairro_user', '$senha_cript')";
+                    $rodar_sql = mysqli_query($conn, $sql);
+
+                    if($rodar_sql){
+                        $msg = '<font color="green">Cadastrado com sucesso!</font> <br>';
+                    }else{
+                        $msg = '<font color="red">Falha ao cadastrar! Por favor, revise as informações e tente novamente!</font> <br>';
+                    }
+
+                }else{
+                    $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</font></div> <br>';
+                }
+
+            }else{ // Se o E-mail e CPF já estão presentes no Banco de Dados
+                $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
             }
 
         }else{
-            $msg = '<font color="red">Falha ao cadastrar! Por favor, revise as informações e tente novamente!</font>';
+            $msg = '<font color="red">Falha ao cadastrar! Por favor, revise as informações e tente novamente!</font> <br>';
         }
 
     }

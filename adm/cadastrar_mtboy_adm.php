@@ -17,6 +17,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['imagem'])){
 
+        $verificado = false;
+
         // Armazena os valores dos inputs em variáveis
         $nome_mtboy = $_POST['nome_mtboy'];
         $foto_mtboy = $_FILES['imagem'];
@@ -36,74 +38,101 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
             if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){ // Se os dados passaram no tratamento
 
-                $senha_cript = hash('sha256', $senha_mtboy); // Criptografa a senha
-
-                // Cadastra o motoboy no Banco
-                $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, tel_mtboy, placa_mtboy, senha_user, nivel_user) VALUES ('$nome_mtboy', '$email_mtboy', '$cpf_mtboy', '$tel_mtboy', '$placa_mtboy', '$senha_cript', 100)";
+                // Verifica se o E-mail ou CPF já estão cadastrados no sistema
+                $sql = "SELECT * FROM tbl_usuario";
                 $rodar_sql = mysqli_query($conn, $sql);
 
-                if($rodar_sql){
-                    $msg = '<font color="green">Cadastrado com sucesso!</font>';
-                }else{
-                    $msg = '<font color="red">Falha ao cadastrar!</font>';
+                $registros = [];
+                while ($registro = mysqli_fetch_assoc($rodar_sql)){
+                    $registros[] = $registro;
                 }
 
-                // Pegar ID do Cadastro
+                foreach ($registros as $registro){
 
-                $sql = "SELECT id_user FROM tbl_usuario WHERE cpf_user = $cpf_mtboy";
-                $rodar_sql = mysqli_query($conn, $sql);
-                $result = mysqli_fetch_assoc($rodar_sql);
+                    if($email_mtboy == $registro['email_user'] || $cpf_mtboy == $registro['cpf_user']){ // Um ou outro
+                        $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+                        $verificado = false;
+                        break;
+                    }else{
+                        $verificado = true;
+                    }
 
-                $id_mtboy = $result['id_user'];
-
-                // UPLOAD IMAGEM ------------------------------------------------------------------------
-
-                // Diretório onde as imagens serão armazenadas
-                $diretorioDestino = '../upload/img_mtboy/';
-
-                // Obtém o arquivo enviado
-                $imagem = $_FILES['imagem'];
-                
-                // Verifica se houve algum erro no upload
-                if ($imagem['error'] != UPLOAD_ERR_OK) {
-                    die("Erro no upload da imagem.");
                 }
 
-                // Obtém a extensão do arquivo
-                $extensao = pathinfo($imagem['name'], PATHINFO_EXTENSION);
+                if ($verificado == true){ // Se o E-mail e CPF não foram cadastrados no sistema
 
-                // Extensões permitidas
-                $extensoesPermitidas = ['jpg', 'jpeg', 'png'];
+                    $senha_cript = hash('sha256', $senha_mtboy); // Criptografa a senha
 
-                // Converte a extensão para minúscula para comparar
-                $extensao = strtolower($extensao);
+                    // Cadastra o motoboy no Banco
+                    $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, tel_mtboy, placa_mtboy, senha_user, nivel_user) VALUES ('$nome_mtboy', '$email_mtboy', '$cpf_mtboy', '$tel_mtboy', '$placa_mtboy', '$senha_cript', 100)";
+                    $rodar_sql = mysqli_query($conn, $sql);
 
-                // Verifica se a extensão do arquivo é válida
-                if (!in_array($extensao, $extensoesPermitidas)) {
-                    die("Tipo de arquivo inválido. Somente imagens JPG, JPEG e PNG são permitidas.");
-                }
+                    if($rodar_sql){
+                        $msg = '<font color="green">Cadastrado com sucesso!</font>';
+                    }else{
+                        $msg = '<font color="red">Falha ao cadastrar!</font>';
+                    }
 
-                // Obtém o caminho completo do arquivo temporário
-                $caminhoTemporario = $imagem['tmp_name'];
+                    // Pegar ID do Cadastro
 
-                // Gera o hash SHA-256 do arquivo
-                $novoNome = hash('sha256', time().$token = bin2hex(random_bytes(32)));
+                    $sql = "SELECT id_user FROM tbl_usuario WHERE cpf_user = $cpf_mtboy";
+                    $rodar_sql = mysqli_query($conn, $sql);
+                    $result = mysqli_fetch_assoc($rodar_sql);
 
-                // Nome final do arquivo, com a extensão
-                $novoCaminho = $diretorioDestino . $novoNome . '.' . $extensao;
+                    $id_mtboy = $result['id_user'];
 
-                $nome_banco = $novoNome . '.' . $extensao;
+                    // UPLOAD IMAGEM ------------------------------------------------------------------------
 
-                // Move o arquivo para o diretório de destino com o novo nome
-                if (move_uploaded_file($caminhoTemporario, $novoCaminho)) {
+                    // Diretório onde as imagens serão armazenadas
+                    $diretorioDestino = '../upload/img_mtboy/';
 
-                    include_once('../conexao.php');
+                    // Obtém o arquivo enviado
+                    $imagem = $_FILES['imagem'];
+                    
+                    // Verifica se houve algum erro no upload
+                    if ($imagem['error'] != UPLOAD_ERR_OK) {
+                        die("Erro no upload da imagem.");
+                    }
 
-                    $sql = "UPDATE tbl_usuario SET foto_mtboy = '$nome_banco' WHERE id_user = $id_mtboy";
-                    $roda_sql = mysqli_query($conn, $sql);
+                    // Obtém a extensão do arquivo
+                    $extensao = pathinfo($imagem['name'], PATHINFO_EXTENSION);
 
-                } else {
-                    echo "Erro ao mover o arquivo para o diretório final.";
+                    // Extensões permitidas
+                    $extensoesPermitidas = ['jpg', 'jpeg', 'png'];
+
+                    // Converte a extensão para minúscula para comparar
+                    $extensao = strtolower($extensao);
+
+                    // Verifica se a extensão do arquivo é válida
+                    if (!in_array($extensao, $extensoesPermitidas)) {
+                        die("Tipo de arquivo inválido. Somente imagens JPG, JPEG e PNG são permitidas.");
+                    }
+
+                    // Obtém o caminho completo do arquivo temporário
+                    $caminhoTemporario = $imagem['tmp_name'];
+
+                    // Gera o hash SHA-256 do arquivo
+                    $novoNome = hash('sha256', time().$token = bin2hex(random_bytes(32)));
+
+                    // Nome final do arquivo, com a extensão
+                    $novoCaminho = $diretorioDestino . $novoNome . '.' . $extensao;
+
+                    $nome_banco = $novoNome . '.' . $extensao;
+
+                    // Move o arquivo para o diretório de destino com o novo nome
+                    if (move_uploaded_file($caminhoTemporario, $novoCaminho)) {
+
+                        include_once('../conexao.php');
+
+                        $sql = "UPDATE tbl_usuario SET foto_mtboy = '$nome_banco' WHERE id_user = $id_mtboy";
+                        $roda_sql = mysqli_query($conn, $sql);
+
+                    } else {
+                        echo "Erro ao mover o arquivo para o diretório final.";
+                    }
+
+                }else{ // Se o E-mail e CPF já estão presentes no Banco de Dados
+                    $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
                 }
 
             }else{

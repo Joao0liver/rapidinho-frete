@@ -17,6 +17,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        $verificado = false;
+
         // Captura os dados dos inputs
         $nome_adm = $_POST['nome_adm'];
         $email_adm = $_POST['email_adm'];
@@ -32,16 +34,43 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
             if ($nome_adm <> -1 && $email_adm <> -1 && $cpf_adm <> -1){ // Se os dados passaram no tratamento
             
-                $senha_cript = hash('sha256', $senha_adm); // Criptografa a senha
-
-                // Cadastra novo administrador
-                $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, senha_user, nivel_user) VALUES ('$nome_adm', '$email_adm', '$cpf_adm', '$senha_cript', 777)";
+                // Verifica se o E-mail ou CPF já estão cadastrados no sistema
+                $sql = "SELECT email_user, cpf_user FROM tbl_usuario";
                 $rodar_sql = mysqli_query($conn, $sql);
 
-                if($rodar_sql){
-                    $msg = '<font color="green">Cadastrado com sucesso!</font>';
-                }else{
-                 $msg = '<font color="red">Falha ao cadastrar!</font>';
+                $registros = [];
+                while ($registro = mysqli_fetch_assoc($rodar_sql)){
+                    $registros[] = $registro;
+                }
+
+                foreach ($registros as $registro){
+
+                    if($email_adm == $registro['email_user'] || $cpf_adm == $registro['cpf_user']){ // Um ou outro
+                        $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+                        $verificado = false;
+                        break;
+                    }else{
+                        $verificado = true;
+                    }
+
+                }
+
+                if ($verificado == true){ // Se o E-mail e CPF não foram cadastrados no sistema
+
+                    $senha_cript = hash('sha256', $senha_adm); // Criptografa a senha
+
+                    // Cadastra novo administrador
+                    $sql = "INSERT INTO tbl_usuario (nome_user, email_user, cpf_user, senha_user, nivel_user) VALUES ('$nome_adm', '$email_adm', '$cpf_adm', '$senha_cript', 777)";
+                    $rodar_sql = mysqli_query($conn, $sql);
+
+                    if($rodar_sql){
+                        $msg = '<font color="green">Cadastrado com sucesso!</font>';
+                    }else{
+                    $msg = '<font color="red">Falha ao cadastrar!</font>';
+                    }
+
+                }else{ // Se o E-mail e CPF já estão presentes no Banco de Dados
+                    $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
                 }
 
             }else{
