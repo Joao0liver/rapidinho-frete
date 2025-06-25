@@ -27,16 +27,18 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $tel_mtboy = $_POST['tel_mtboy'];
         $placa_mtboy = $_POST['placa_mtboy'];
         $senha_mtboy = $_POST['senha_mtboy'];
+        $foto = $_FILES['imagem'];
 
         // Trata e filtra os dados antes de entrar no Banco
         $nome_mtboy = tratar_input($nome_mtboy, $conn);
         $email_mtboy = tratar_input($email_mtboy, $conn);
         $cpf_mtboy = tratar_input($cpf_mtboy, $conn);
         $tel_mtboy = tratar_input($tel_mtboy, $conn);
+        $foto = verificar_imagem($foto);
 
         if ($nome_mtboy <> '' || $foto_mtboy <> '' || $email_mtboy <> '' || $cpf_mtboy <> '' || $tel_mtboy <> '' || $placa_mtboy <> '' || $senha_mtboy <> ''){ // Se os inputs estão preenchidos
 
-            if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){ // Se os dados passaram no tratamento
+            if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1 && $foto <> -1){ // Se os dados passaram no tratamento
 
                 // Verifica se o E-mail ou CPF já estão cadastrados no sistema
                 $sql = "SELECT * FROM tbl_usuario";

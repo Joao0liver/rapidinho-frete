@@ -164,4 +164,27 @@ function tratar_senha($input, $conn){ // Trata, filtra e exige um formato especÃ
 
 }
 
+function verificar_imagem($foto){
+
+    $verificado = false;
+    $extensao = pathinfo($foto['name'], PATHINFO_EXTENSION);
+    $extensoesPermitidas = ['jpg', 'jpeg', 'png'];
+
+    foreach ($extensoesPermitidas as $frmt ){
+        if ($extensao == $frmt){
+            $verificado = true;
+            break;
+        }else{
+            $verificado = false;
+        }
+    }
+
+    if ($verificado == true){
+        return 1;
+    }else{
+        return -1;
+    }
+
+}
+
 ?>
