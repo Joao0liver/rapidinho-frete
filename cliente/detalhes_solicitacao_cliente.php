@@ -83,8 +83,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         }
 
-        $ende_orig = explode(',', $registros_entrega['ende_orig']);
-        $ende_dest = explode(',', $registros_entrega['ende_dest']);
+        $ende_orig = explode('|', $registros_entrega['ende_orig']);
+        $ende_dest = explode('|', $registros_entrega['ende_dest']);
 
         // Verificar se um motoboy já está atribuido ao pedido
 

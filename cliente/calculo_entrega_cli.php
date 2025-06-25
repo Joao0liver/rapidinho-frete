@@ -85,8 +85,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
         // Concatenar Endereços com os respectivos Bairros
 
-        $ende_inicio = $ende_col.', '.$bairro_col;
-        $ende_fim = $ende_dest.', '.$bairro_dest;
+        $ende_inicio = $ende_col.' | '.$bairro_col;
+        $ende_fim = $ende_dest.' | '.$bairro_dest;
 
     }
 

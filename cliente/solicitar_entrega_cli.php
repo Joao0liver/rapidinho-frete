@@ -29,8 +29,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                     <form method="post" action="calculo_entrega_cli.php">
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Endereço de Coleta <font color="red" size="2">*</font></label>
-                            <input name="ende_col" type="text" class="form-control mb-3" id="exampleInputPassword1" placeholder="Endereço" value="<?php echo $result['ende_user'] ?>" required>
-                            <select name="bairro_col" id="bairro_col" class="form-select mb-3" style="width: 200px;" required>
+                            <input name="ende_col" type="text" class="form-control mb-3" id="exampleInputPassword1" placeholder="Endereço" style="color: black;" value="<?php echo $result['ende_user'] ?>" required>
+                            <select name="bairro_col" id="bairro_col" class="form-select mb-3" style="width: 200px; color: black;" required>
                                 <?php echo '<option>'.$result['bairro_user'].'</option>';?>
                                 <option>Aeroporto</option>
                                 <option>Adolfo Vireque</option>
@@ -201,8 +201,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Endereço de Destino <font color="red" size="2">*</font></label>
-                            <input name="ende_dest" type="text" class="form-control mb-3" id="exampleInputPassword1" placeholder="Endereço" required>
-                            <select name="bairro_dest" id="bairro_dest" class="form-select mb-3" style="width: 200px;" required>
+                            <input name="ende_dest" type="text" class="form-control mb-3" id="exampleInputPassword1" placeholder="Endereço" style="color: black;" required>
+                            <select name="bairro_dest" id="bairro_dest" class="form-select mb-3" style="width: 200px; color: black;" required>
                                 <option>Aeroporto</option>
                                 <option>Adolfo Vireque</option>
                                 <option>Alto Grajau</option>
@@ -370,9 +370,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Informações do Pacote <font color="red" size="2">*</font></label>
-                            <input name="peso_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Peso (kg)" style="width: 200px;" max="12" required>
-                            <input name="larg_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Largura (cm)" style="width: 200px;" required>
-                            <input name="comp_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Comprimento (cm)" style="width: 200px;" required>
+                            <input name="peso_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Peso (kg)" style="width: 200px; color: black;" max="12" required>
+                            <input name="larg_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Largura (cm)" style="width: 200px; color: black;" required>
+                            <input name="comp_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Comprimento (cm)" style="width: 200px; color: black;" required>
                             <div id="emailHelp" class="form-text">*Limite de peso do pacote = 12kg
                             </div>
                         </div>
