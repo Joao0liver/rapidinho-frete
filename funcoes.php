@@ -121,7 +121,7 @@ function tratar_input_solicitacao($input, $conn){
 
     if (filter_var($input, FILTER_VALIDATE_INT)){
 
-        if (!preg_match("/^[0-9]{2}+$/", $input)) {
+        if (!preg_match("/^\d+(\.\d{1,2})?$/", $input)) {
             return -1;
         }else{
             $input = mysqli_real_escape_string($conn,$input);
@@ -130,10 +130,23 @@ function tratar_input_solicitacao($input, $conn){
 
     }elseif (filter_var($input, FILTER_VALIDATE_FLOAT)){
 
-        if (!preg_match("/^[0-9]{3}+$/", $input)) {
+        if (!preg_match("/^\d+(\.\d{1,2})?$/", $input)) {
             return -1;
+        }else{
+            $input = mysqli_real_escape_string($conn,$input);
+            return $input;
         }
 
+    }elseif (gettype($input) == "string"){
+
+        $input = filter_var($input, FILTER_SANITIZE_STRING);
+            $input = mysqli_real_escape_string($conn, $input);
+            return $input;
+        
+    }else{
+
+        return -1;
+        
     }
 
 }

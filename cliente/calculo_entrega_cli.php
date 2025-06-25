@@ -38,28 +38,28 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             $sql = "SELECT menor_1kg FROM tbl_precos";
             $rodar_sql = mysqli_query($conn, $sql);
             $preco_peso = mysqli_fetch_assoc($rodar_sql);
-            $preco_peso_int = (int)$preco_peso['menor_1kg']; // Transforma o array associativo que vem do SQL em inteiro
+            $preco_peso_float = (float)$preco_peso['menor_1kg']; // Transforma o array associativo que vem do SQL em inteiro
 
         }else if ($peso_pac >= 1 && $peso_pac < 3){
 
             $sql = "SELECT 1kg_3kg FROM tbl_precos";
             $rodar_sql = mysqli_query($conn, $sql);
             $preco_peso = mysqli_fetch_assoc($rodar_sql);
-            $preco_peso_int = (int)$preco_peso['1kg_3kg']; // Transforma o array associativo que vem do SQL em inteiro
+            $preco_peso_float = (float)$preco_peso['1kg_3kg']; // Transforma o array associativo que vem do SQL em inteiro
 
         }else if ($peso_pac >= 3 && $peso_pac < 8){
 
             $sql = "SELECT 3kg_8kg FROM tbl_precos";
             $rodar_sql = mysqli_query($conn, $sql);
             $preco_peso = mysqli_fetch_assoc($rodar_sql);
-            $preco_peso_int = (int)$preco_peso['3kg_8kg']; // Transforma o array associativo que vem do SQL em inteiro
+            $preco_peso_float = (float)$preco_peso['3kg_8kg']; // Transforma o array associativo que vem do SQL em inteiro
 
         }else if ($peso_pac >= 8 && $peso_pac <= 12){
 
             $sql = "SELECT 8kg_12kg FROM tbl_precos";
             $rodar_sql = mysqli_query($conn, $sql);
             $preco_peso = mysqli_fetch_assoc($rodar_sql);
-            $preco_peso_int = (int)$preco_peso['8kg_12kg']; // Transforma o array associativo que vem do SQL em inteiro
+            $preco_peso_float = (float)$preco_peso['8kg_12kg']; // Transforma o array associativo que vem do SQL em inteiro
 
         }else{
 
@@ -73,9 +73,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $rodar_sql = mysqli_query($conn, $sql);
         $preco_dist = mysqli_fetch_assoc($rodar_sql);
 
-        $preco_dist_int = (int)$preco_dist['valor'];
+        $preco_dist_float = (float)$preco_dist['valor'];
 
-        $preco_total = $preco_dist_int + $preco_peso_int; // Valor total da Solitação de Frete
+        $preco_total = $preco_dist_float + $preco_peso_float; // Valor total da Solitação de Frete
 
         // Puxar nome do solicitante
 
@@ -104,7 +104,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <figure>
                                     <p class="h6">Informações do Pacote</p>
                                     <figcaption class="blockquote-form">
-                                        <p>Peso: <?php echo $peso_pac.'kg'; ?><br>Largura: <?php echo $larg_pac.'cm'; ?><br>Comprimento: <?php echo $comp_pac.'cm'; ?><br><br>Valor do pacote: <?php echo 'R$'.$preco_peso_int; ?></p>
+                                        <p>Peso: <?php echo $peso_pac.'kg'; ?><br>Largura: <?php echo $larg_pac.'cm'; ?><br>Comprimento: <?php echo $comp_pac.'cm'; ?><br><br>Valor do pacote: <?php echo 'R$'.$preco_peso_float; ?></p>
                                     </figcaption>
                                 </figure>
                         </div>

@@ -370,9 +370,9 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Informações do Pacote <font color="red" size="2">*</font></label>
-                            <input name="peso_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Peso (kg)" style="width: 200px; color: black;" max="12" required>
-                            <input name="larg_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Largura (cm)" style="width: 200px; color: black;" required>
-                            <input name="comp_pac" type="number" pattern="[0-9]{2}" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Comprimento (cm)" style="width: 200px; color: black;" required>
+                            <input name="peso_pac" type="number" pattern="\d+(\.\d{1,2})?" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Peso (kg)" style="width: 200px; color: black;" max="12" required>
+                            <input name="larg_pac" type="number" pattern="\d+(\.\d{1,2})?" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Largura (cm)" style="width: 200px; color: black;" required>
+                            <input name="comp_pac" type="number" pattern="\d+(\.\d{1,2})?" step="0.01" class="form-control mb-3" id="exampleInputPassword1" placeholder="Comprimento (cm)" style="width: 200px; color: black;" required>
                             <div id="emailHelp" class="form-text">*Limite de peso do pacote = 12kg
                             </div>
                         </div>

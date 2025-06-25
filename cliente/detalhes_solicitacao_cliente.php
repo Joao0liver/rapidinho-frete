@@ -14,6 +14,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../layout/header_cliente.php");
 
     $msg = "";
+    $aviso = "";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -31,25 +32,39 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $larg_pac = $_POST['larg_pac'];
         $comp_pac = $_POST['comp_pac'];
 
-        $ende_inicio = $ende_orig.', '.$bairro_orig;
-        $ende_fim = $ende_dest.', '.$bairro_dest;
+        $ende_inicio = $ende_orig.' | '.$bairro_orig;
+        $ende_fim = $ende_dest.' | '.$bairro_dest;
+
+        $ende_inicio = tratar_input_solicitacao($ende_inicio, $conn);
+        $ende_fim = tratar_input_solicitacao($ende_fim, $conn);
+        $peso_pac = tratar_input_solicitacao($peso_pac, $conn);
+        $larg_pac = tratar_input_solicitacao($larg_pac, $conn);
+        $comp_pac = tratar_input_solicitacao($comp_pac, $conn);
 
         // Só permite a atualização se o status for pendente
         if ($status_ent == 0){
 
-            $sql = "UPDATE tbl_entrega SET ende_orig='$ende_inicio', ende_dest='$ende_fim', peso_pac=$peso_pac, larg_pac=$larg_pac, comp_pac=$comp_pac WHERE id_ent = $id_ent";
-            $rodar_sql = mysqli_query($conn, $sql);
+            if ($ende_inicio <> -1 && $ende_fim <> -1 && $peso_pac <> -1 && $larg_pac <> -1 && $comp_pac <> -1){
 
-            $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_entrega WHERE id_ent = $id_ent");
-            $registros_entrega = mysqli_fetch_array($sql_atualizado);
+                $sql = "UPDATE tbl_entrega SET ende_orig='$ende_inicio', ende_dest='$ende_fim', peso_pac=$peso_pac, larg_pac=$larg_pac, comp_pac=$comp_pac WHERE id_ent = $id_ent";
+                $rodar_sql = mysqli_query($conn, $sql);
 
-            // Divide o endereço em um array com "nome da rua" e "bairro"
-            $ende_orig = explode(',', $registros_entrega['ende_orig']);
-            $ende_dest = explode(',', $registros_entrega['ende_dest']);
+                $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_entrega WHERE id_ent = $id_ent");
+                $registros_entrega = mysqli_fetch_array($sql_atualizado);
 
-            $nome_mtboy = '<font color="orange">Nenhum motoboy aceitou a solicitação ainda!</font>';
-            $msg = '<font color="red">Pendente</font>';
+                // Divide o endereço em um array com "nome da rua" e "bairro"
+                $ende_orig = explode('|', $registros_entrega['ende_orig']);
+                $ende_dest = explode('|', $registros_entrega['ende_dest']);
 
+                $nome_mtboy = '<font color="orange">Nenhum motoboy aceitou a solicitação ainda!</font>';
+                $msg = '<font color="red">Pendente</font>';
+
+            }else{
+                $aviso = '<font color="red">Falha ao atualizar a solicitação! Por favor, revise as informações e tente novamente!</font> <br>';
+            }
+
+        }else{
+            $aviso = '<font color="red">Falha ao atualizar a solicitação! Parece que ela não está mais pendente!</font> <br>';
         }
 
     }
@@ -492,6 +507,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                     <input type="number" pattern="[0-9]{2}" step="0.01" name="comp_pac" style="width: 200px;" value="<?php echo $registros_entrega['comp_pac']; ?>" class="form-control" <?php if ($registros_entrega['status_ent'] <> 0){ echo "disabled"; }; ?>>
                                     <div id="emailHelp" class="form-text">*Limite de peso do pacote = 12kg
                                     </div>
+                                    <?php echo $aviso; ?>
                                 </div>
                                 <?php
 
