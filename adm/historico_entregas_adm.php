@@ -112,7 +112,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                             <td>'.$registro['ende_dest'].'</td>
                                             <td>'.status_entrega($registro['status_ent']).'</td>
                                             <td>'.$registro['valor_ent'].'</td>
-                                            <td><a href="detalhes_ent_adm.php?id_ent='.$registro['id_ent'].'">Detalhes</a></td>
+                                            <td><a href="detalhes_ent_adm.php?id_ent='.$registro['id_ent'].'"><img src="../layout/img/lupa.webp" height="25px" width="25px"></a></td>
                                             </tr>';
                                             
                                     }
