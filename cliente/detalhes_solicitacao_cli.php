@@ -77,7 +77,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             }else {
 
                                 echo '<div class="testimonial-item text-center">
-                                    <img class="img-fluid rounded-circle mx-auto mb-4" src="../upload/img_mtboy/'.$registros_mtboy["foto_mtboy"].'" style="width: 120px; height: 120px;">
+                                    <img class="img-fluid rounded-circle mx-auto mb-4" src="../upload/img_mtboy/'.$registros_mtboy["foto_mtboy"].'" alt="Sem foto" style="width: 120px; height: 120px;">
                                 </div>';
 
                             }

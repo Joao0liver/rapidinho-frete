@@ -112,7 +112,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         <dd class="col-sm-8"><?php echo $registros_mtboy['nome_user'] ?></dd>
 
                         <dt class="col-sm-4">Foto do Motoboy:</dt>
-                        <dd class="col-sm-8"><img class="img-fluid rounded-circle mx-auto" src="../upload/img_mtboy/<?php echo $registros_mtboy['foto_mtboy'] ?>" style="width: 100px; height: 100px;"></dd>
+                        <dd class="col-sm-8"><img class="img-fluid rounded-circle mx-auto" src="../upload/img_mtboy/<?php echo $registros_mtboy['foto_mtboy'] ?>" alt="Sem foto" style="width: 100px; height: 100px;"></dd>
 
                         <dt class="col-sm-4">Telefone:</dt>
                         <dd class="col-sm-8"><?php echo $registros_mtboy['tel_mtboy'] ?></dd>

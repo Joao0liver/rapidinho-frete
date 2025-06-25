@@ -76,4 +76,25 @@ function tratar_input($input, $conn){
 
 }
 
+function tratar_input_solicitacao($input, $conn){
+
+    if (filter_var($input, FILTER_VALIDATE_INT)){
+
+        if (!preg_match("/^[0-9]{2}+$/", $input)) {
+            return -1;
+        }else{
+            $input = mysqli_real_escape_string($conn,$input);
+            return $input;
+        }
+
+    }elseif (filter_var($input, FILTER_VALIDATE_FLOAT)){
+
+        if (!preg_match("/^[0-9]{3}+$/", $input)) {
+            return -1;
+        }
+
+    }
+
+}
+
 ?>
