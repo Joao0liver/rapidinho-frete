@@ -367,9 +367,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                                 <option>Vivendas da Serra</option>
 
                             </select>
-                            <input name="nome_dest" type="text" pattern="[A-Za-z\s]+" class="form-control mb-3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome do Destinatário" required>
-                            <div id="emailHelp" class="form-text">*Fretes realizados apenas dentro do perímetro urbano de Juíz de Fora - MG
-                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Informações do Pacote <font color="red" size="2">*</font></label>

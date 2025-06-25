@@ -18,11 +18,52 @@ function status_entrega($valor){
         $st_txt = '<font color="red">Pendente</font>';
     }elseif ($valor == 1){
         $st_txt = '<font color="orange">Em andamento</font>';
-    }else{
+    }elseif ($valor == 2){
         $st_txt = '<font color="green">Finalizado</font>';
+    }else{
+        $st_txt = '<font color="gray">Cancelado</font>';
     }
 
     return $st_txt;
+
+}
+
+function progresso_entrega($valor){
+
+    if ($valor == 0){ // Status - Entrega Pendente
+
+        echo '<div class="pg-bar mb-3">
+            <div class="testimonial-item text-center"><img src="../layout/img/ped_pendente.png" height="200px" width="200px"><br><br></div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>
+            </div>
+        </div>';
+
+    }elseif ($valor == 1){ // Status - Entrega em Andamento
+
+        echo '<div class="pg-bar mb-3">
+            <div class="testimonial-item text-center"><img src="../layout/img/ped_andamento.png" height="200px" width="200px"><br><br></div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+            </div>
+        </div>';
+
+    }elseif ($valor == 2) { // Status - Entrega Finalizada
+
+        echo '<div class="pg-bar mb-0">
+            <div class="testimonial-item text-center"><img src="../layout/img/ped_finalizado.png" height="200px" width="200px"><br><br></div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+            </div>
+        </div>';
+
+    }else { // Status - Entrega Cancelada
+
+        echo '<div class="pg-bar mb-0">
+            <div class="testimonial-item text-center"><img src="../layout/img/ped_cancelado.png" height="200px" width="200px"><br><br></div>
+        </div>';
+
+    }
 
 }
 

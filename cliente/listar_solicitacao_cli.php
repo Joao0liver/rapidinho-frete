@@ -77,40 +77,64 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Solicitações</h6>
                     <div class="table-responsive">
-                    <table class="table" style="color: #003879">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Início</th>
-                                <th scope="col">Fim</th>
-                                <th scope="col">Origem</th>
-                                <th scope="col">Destino</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+                        <table class="table" style="color: #003879">
+                            <script>
 
-                                foreach ($registros as $registro){
+                                function confirmaCancel(event, id) {
 
-                                    echo '<tr>
-                                        <th scope="row">'.$registro['id_ent'].'</th>
-                                        <td>'.$registro['inicio_ent'].'</td>
-                                        <td>'.$registro['fim_ent'].'</td>
-                                        <td>'.$registro['ende_orig'].'</td>
-                                        <td>'.$registro['ende_dest'].'</td>
-                                        <td>'.status_entrega($registro['status_ent']).'</td>
-                                        <td>R$  '.$registro['valor_ent'].'</td>
-                                        <td><a href="detalhes_solicitacao_cli.php?id_ent='.$registro['id_ent'].'">Detalhes</a></td>
-                                        </tr>';
+                                    event.preventDefault();
+
+                                    const confirmacao = confirm("Deseja Cancelar a Solicitação?");
+
+                                    if (confirmacao){
                                         
+                                        window.location.href = `cancelar_solicitacao_cli.php?id_ent=${id}`;
+                                        alert("Cancelado com sucesso!");
+
+                                    }else{
+
+                                        alert("Erro ao cancelar solicitação!");
+
+                                    }
 
                                 }
 
-                            ?>
-                        </tbody>
-                    </table>
+                            </script>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Início</th>
+                                    <th scope="col">Fim</th>
+                                    <th scope="col">Origem</th>
+                                    <th scope="col">Destino</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+
+                                    foreach ($registros as $registro){
+
+                                        echo '<tr>
+                                            <th scope="row">'.$registro['id_ent'].'</th>
+                                            <td>'.$registro['inicio_ent'].'</td>
+                                            <td>'.$registro['fim_ent'].'</td>
+                                            <td>'.$registro['ende_orig'].'</td>
+                                            <td>'.$registro['ende_dest'].'</td>
+                                            <td>'.status_entrega($registro['status_ent']).'</td>
+                                            <td>R$  '.$registro['valor_ent'].'</td>
+                                            <td><a href="detalhes_solicitacao_cliente.php?id_ent='.$registro['id_ent'].'"><img src="../layout/img/lupa.webp" height="25px" width="25px"></a></td>';
+                                            if ($registro['status_ent'] == 0){
+                                                echo '<td><a href="cancelar_solicitacao_cli.php?id_ent='.$registro['id_ent'].'" onclick="confirmaCancel(event, '.$registro['id_ent'].')"><img src="../layout/img/cancelar.webp" height="25px" width="25px"></a></td>
+                                                </tr>';
+                                            }
+                                            
+                                    }
+
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                     <?php
 

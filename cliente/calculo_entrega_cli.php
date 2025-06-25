@@ -26,7 +26,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $ende_dest = $_POST['ende_dest'];
         $bairro_dest = $_POST['bairro_dest'];
         //$cep_dest = $_POST['cep_dest'];
-        $nome_dest = $_POST['nome_dest'];
 
         $peso_pac = $_POST['peso_pac'];
         $larg_pac = $_POST['larg_pac'];
@@ -100,7 +99,6 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item bg-transparent"><b>Nome do solicitante:</b> <?php  echo $nome_user['nome_user']?></li>
                         <li class="list-group-item bg-transparent"><b>Endereço de coleta:</b> <?php  echo $ende_col?>, <?php  echo $bairro_col?></li>
-                        <li class="list-group-item bg-transparent"><b>Nome do Destinatário:</b> <?php  echo $nome_dest?></li>
                         <li class="list-group-item bg-transparent"><b>Endereço de entrega:</b> <?php  echo $ende_dest?>, <?php  echo $bairro_dest?></li>
                         <div class="border rounded p-4 pb-0 mb-4">
                                 <figure>
