@@ -18,6 +18,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        $verificado = false;
+
         // Captura os dados para edição
         $id_adm = $_POST['id_adm'];
 
@@ -37,22 +39,64 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             $senha_adm = tratar_senha($senha_adm, $conn);
             $senha_cript = hash('sha256', $senha_adm);
 
-            if ($nome_adm <> -1 && $email_adm <> -1 && $cpf_adm <> -1 && $senha_adm <> -1){ // Se os dados passaram no tratamento
+            if ($nome_adm <> -1 && $email_adm <> -1 && $cpf_adm <> -1){ // Se os dados passaram no tratamento
 
-                $sql = "UPDATE tbl_usuario SET nome_user='$nome_adm', email_user='$email_adm', cpf_user='$cpf_adm', senha_user = '$senha_cript' WHERE id_user = $id_adm";
-                $rodar_sql = mysqli_query($conn, $sql);
+                if ($senha_adm <> -1){ // Se a senha passar no tratamento (formato exigido)
 
-                if ($rodar_sql){
-                    $msg = '<font color="green">Atualizado com sucesso!</font>';
+                    // Verifica se o E-mail ou CPF já estão cadastrados no sistema
+                    $sql = "SELECT email_user, cpf_user, senha_user FROM tbl_usuario";
+                    $rodar_sql = mysqli_query($conn, $sql);
+
+                    $registros = [];
+                    while ($registro = mysqli_fetch_assoc($rodar_sql)){
+                        $registros[] = $registro;
+                    }
+
+                    foreach ($registros as $registro){
+
+                        if($email_adm == $registro['email_user'] && $cpf_adm == $registro['cpf_user'] && $senha_cript == $registro['senha_user']){ // Um e outro
+                            $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+                            $verificado = false;
+                            break;
+                        }else{
+                            $verificado = true;
+                        }
+
+                    }
+
+                    if ($verificado == true){ // Se o E-mail e CPF não foram cadastrados no sistema
+
+                        // Edita os dados do administrador com a senha
+                        $sql = "UPDATE tbl_usuario SET nome_user='$nome_adm', email_user='$email_adm', cpf_user='$cpf_adm', senha_user = '$senha_cript' WHERE id_user = $id_adm";
+                        $rodar_sql = mysqli_query($conn, $sql);
+
+                        if ($rodar_sql){
+                            $msg = '<font color="green">Atualizado com sucesso!</font>';
+                        }else{
+                            $msg = '<font color="red">Erro ao atualizar administrador!</font>';
+                        }
+                        
+                        $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_adm");
+                        $admin = mysqli_fetch_array($sql_atualizado);
+
+                    }else{ // Se o E-mail e CPF já estão presentes no Banco de Dados
+                        $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+
+                        $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_adm";
+                        $result = mysqli_query($conn, $sql);
+                        $admin = mysqli_fetch_array($result);
+                    }
+
                 }else{
-                    $msg = '<font color="red">Erro ao atualizar administrador!</font>';
+                    $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</font></div>';
+
+                    $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_adm";
+                    $result = mysqli_query($conn, $sql);
+                    $admin = mysqli_fetch_array($result);
                 }
-                
-                $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_adm");
-                $admin = mysqli_fetch_array($sql_atualizado);
 
             }else{
-                $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial. Verifique também as informações.</font></div>';
+                $msgS = '<font color="red">Erro ao editar informações! Revise-as e tente novamente!</font>';
 
                 $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_adm";
                 $result = mysqli_query($conn, $sql);
@@ -63,20 +107,52 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
             if ($nome_adm <> -1 && $email_adm <> -1 && $cpf_adm <> -1){ // Se os dados passaram no tratamento
 
-                $sql = "UPDATE tbl_usuario SET nome_user='$nome_adm', email_user='$email_adm', cpf_user='$cpf_adm' WHERE id_user = $id_adm";
+                // Verifica se o E-mail ou CPF já estão cadastrados no sistema
+                $sql = "SELECT email_user, cpf_user FROM tbl_usuario";
                 $rodar_sql = mysqli_query($conn, $sql);
 
-                if ($rodar_sql){
-                    $msg = '<font color="green">Atualizado com sucesso!</font>';
-                }else{
-                    $msg = '<font color="red">Erro ao atualizar administrador!</font>';
+                $registros = [];
+                while ($registro = mysqli_fetch_assoc($rodar_sql)){
+                    $registros[] = $registro;
                 }
-                
-                $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_adm");
-                $admin = mysqli_fetch_array($sql_atualizado);
+
+                foreach ($registros as $registro){
+
+                    if($email_adm == $registro['email_user'] && $cpf_adm == $registro['cpf_user']){ // Um e outro
+                        $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+                        $verificado = false;
+                        break;
+                    }else{
+                        $verificado = true;
+                    }
+
+                }
+
+                if ($verificado == true){ // Se o E-mail e CPF não foram cadastrados no sistema
+
+                    // Edita os dados do administrador sem a senha
+                    $sql = "UPDATE tbl_usuario SET nome_user='$nome_adm', email_user='$email_adm', cpf_user='$cpf_adm' WHERE id_user = $id_adm";
+                    $rodar_sql = mysqli_query($conn, $sql);
+
+                    if ($rodar_sql){
+                        $msg = '<font color="green">Atualizado com sucesso!</font>';
+                    }else{
+                        $msg = '<font color="red">Erro ao atualizar administrador!</font>';
+                    }
+                    
+                    $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_adm");
+                    $admin = mysqli_fetch_array($sql_atualizado);
+
+                }else{ // Se o E-mail e CPF já estão presentes no Banco de Dados
+                    $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+
+                    $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_adm";
+                    $result = mysqli_query($conn, $sql);
+                    $admin = mysqli_fetch_array($result);
+                }
 
             }else{
-                $msg = '<font color="red">Erro ao editar informações! Por favor, revise as informações e tente novamente!</font>';
+                $msg = '<font color="red">Erro ao editar informações! Revise-as e tente novamente!</font>';
 
                 $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_adm";
                 $result = mysqli_query($conn, $sql);

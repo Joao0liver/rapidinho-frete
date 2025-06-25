@@ -18,6 +18,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        $verificado = false;
+
         // Captura os dados para edição
         $id_mtboy = $_POST['id_mtboy'];
 
@@ -40,23 +42,65 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             $senha_mtboy = tratar_senha($senha_mtboy, $conn);
             $senha_cript = hash('sha256', $senha_mtboy);
 
-            if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1 && $senha_mtboy <> -1){ // Se os dados passaram no tratamento
+            if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){ // Se os dados passaram no tratamento
 
-                $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy', senha_user = '$senha_cript' WHERE id_user = $id_mtboy";
-                $rodar_sql = mysqli_query($conn, $sql);
+                if ($senha_mtboy <> -1){ // Se a senha passar no tratamento (formato exigido)
 
-                if ($rodar_sql){
-                    $msg = '<font color="green">Atualizado com sucesso!</font>';
+                    // Verifica se o E-mail ou CPF já estão cadastrados no sistema
+                    $sql = "SELECT email_user, cpf_user, senha_user FROM tbl_usuario";
+                    $rodar_sql = mysqli_query($conn, $sql);
+
+                    $registros = [];
+                    while ($registro = mysqli_fetch_assoc($rodar_sql)){
+                        $registros[] = $registro;
+                    }
+
+                    foreach ($registros as $registro){
+
+                        if($email_mtboy == $registro['email_user'] && $cpf_mtboy == $registro['cpf_user'] && $senha_cript == $registro['senha_user']){ // Um e outro
+                            $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+                            $verificado = false;
+                            break;
+                        }else{
+                            $verificado = true;
+                        }
+
+                    }
+
+                    if ($verificado == true){ // Se o E-mail e CPF não foram cadastrados no sistema
+
+                        // Edita os dados do motoboy com a senha
+                        $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy', senha_user = '$senha_cript' WHERE id_user = $id_mtboy";
+                        $rodar_sql = mysqli_query($conn, $sql);
+
+                        if ($rodar_sql){
+                            $msg = '<font color="green">Atualizado com sucesso!</font>';
+                        }else{
+                            $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+                        }
+                        
+                        $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
+                        $motoboy = mysqli_fetch_array($sql_atualizado);
+
+                    }else{ // Se o E-mail e CPF já estão presentes no Banco de Dados
+                        $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+
+                        $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
+                        $result = mysqli_query($conn, $sql);
+                        $motoboy = mysqli_fetch_array($result);
+                    }
+
                 }else{
-                    $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+                    $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial. Verifique também as informações.</font></div>';
+
+                    $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
+                    $result = mysqli_query($conn, $sql);
+                    $motoboy = mysqli_fetch_array($result);
                 }
-                
-                $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
-                $motoboy = mysqli_fetch_array($sql_atualizado);
 
             }else{
 
-                $msgS = '<div id="emailHelp" class="form-text"><font color="red">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial. Verifique também as informações.</font></div>';
+                $msgS = '<font color="red">Erro ao editar informações! Revise-as e tente novamente!</font>';
                 
                 $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
                 $result = mysqli_query($conn, $sql);
@@ -68,21 +112,53 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
             if ($nome_mtboy <> -1 && $email_mtboy <> -1 && $cpf_mtboy <> -1 && $tel_mtboy <> -1){ // Se os dados passaram no tratamento
 
-                $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy' WHERE id_user = $id_mtboy";
+                // Verifica se o E-mail ou CPF já estão cadastrados no sistema
+                $sql = "SELECT email_user, cpf_user, senha_user FROM tbl_usuario";
                 $rodar_sql = mysqli_query($conn, $sql);
 
-                if ($rodar_sql){
-                    $msg = '<font color="green">Atualizado com sucesso!</font>';
-                }else{
-                    $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+                $registros = [];
+                while ($registro = mysqli_fetch_assoc($rodar_sql)){
+                    $registros[] = $registro;
                 }
-                
-                $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
-                $motoboy = mysqli_fetch_array($sql_atualizado);
+
+                foreach ($registros as $registro){
+
+                    if($email_mtboy == $registro['email_user'] && $cpf_mtboy == $registro['cpf_user']){ // Um e outro
+                        $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+                        $verificado = false;
+                        break;
+                    }else{
+                        $verificado = true;
+                    }
+
+                }
+
+                if ($verificado == true){ // Se o E-mail e CPF não foram cadastrados no sistema
+
+                    // Edita os dados do motoboy com a senha
+                    $sql = "UPDATE tbl_usuario SET nome_user='$nome_mtboy', email_user='$email_mtboy', cpf_user='$cpf_mtboy', tel_mtboy='$tel_mtboy', placa_mtboy='$placa_mtboy' WHERE id_user = $id_mtboy";
+                    $rodar_sql = mysqli_query($conn, $sql);
+
+                    if ($rodar_sql){
+                        $msg = '<font color="green">Atualizado com sucesso!</font>';
+                    }else{
+                        $msg = '<font color="red">Erro ao atualizar motoboy!</font>';
+                    }
+                    
+                    $sql_atualizado = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy");
+                    $motoboy = mysqli_fetch_array($sql_atualizado);
+
+                }else{ // Se o E-mail e CPF já estão presentes no Banco de Dados
+                    $msg = '<font color="red">E-mail ou CPF já cadastrados no sistema!</font> <br>';
+
+                    $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
+                    $result = mysqli_query($conn, $sql);
+                    $motoboy = mysqli_fetch_array($result);
+                }
 
             }else{
 
-                $msg = '<font color="red">Erro ao editar informações! Por favor, revise as informações e tente novamente!</font>';
+                $msg = '<font color="red">Erro ao editar informações! Revise-as e tente novamente!</font>';
                 
                 $sql = "SELECT * FROM tbl_usuario WHERE id_user = $id_mtboy";
                 $result = mysqli_query($conn, $sql);
