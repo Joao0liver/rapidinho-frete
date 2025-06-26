@@ -12,6 +12,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     include_once("../conexao.php");
     include_once("../funcoes.php");
     include_once("../layout/header_adm.php");
+    ini_set('display_errors', '0');
 
     $msg = '<br>';
     $msgS = '<div id="emailHelp" class="form-text">*A senha deve ter pelo menos 8 caracteres, incluindo letras, números e um caractere especial.</div>';

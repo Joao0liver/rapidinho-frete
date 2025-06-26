@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="../layout/img/favicon.ico" rel="icon">
+    <link href="../layout/img/rapidinho.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
