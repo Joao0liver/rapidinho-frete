@@ -54,6 +54,7 @@ Este projeto utiliza (ou pode utilizar) as seguintes tecnologias:
 
 ## Estrutura do Projeto
 
+```
 rapidinho-frete/
 │
 ├── adm/                   # Funcionalidades e páginas para administrador
@@ -84,3 +85,4 @@ rapidinho-frete/
 │
 ├── LICENSE.txt            # Termos de licença do projeto
 ├── READ-ME.txt            # Instruções básicas ou anotações sobre o projeto
+```
