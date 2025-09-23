@@ -7,7 +7,7 @@
 ## Índice
 
 - [Visão Geral](#visão-geral)  
-- [Funcionalidades](#funcionalidades📈)  
+- [Funcionalidades](#funcionalidades)  
 - [Tecnologias](#tecnologias)
 - [Metodologia](#metodologia)
 - [Ferramentas](#ferramentas)
@@ -27,7 +27,7 @@ O Rapidinho Frete tem como objetivo facilitar o agendamento, acompanhamento e ge
 
 ---
 
-## Funcionalidades 📈
+## Funcionalidades
 
 Algumas funcionalidades presentes no sistema são:
 
