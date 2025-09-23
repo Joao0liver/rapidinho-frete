@@ -25,7 +25,7 @@ O Rapidinho Frete tem como objetivo facilitar o agendamento, acompanhamento e ge
 
 ---
 
-## Funcionalidades
+## Funcionalidades 📈
 
 Algumas funcionalidades esperadas/marcantes:
 
@@ -39,7 +39,7 @@ Algumas funcionalidades esperadas/marcantes:
 
 ---
 
-## Tecnologias
+## Tecnologias 👨‍💻
 
 Este projeto utiliza (ou pode utilizar) as seguintes tecnologias:
 
@@ -51,7 +51,7 @@ Este projeto utiliza (ou pode utilizar) as seguintes tecnologias:
 
 ---
 
-## Estrutura do Projeto
+## Estrutura do Projeto 🗂️
 
 ```
 rapidinho-frete/
