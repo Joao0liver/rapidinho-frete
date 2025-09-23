@@ -11,7 +11,7 @@
 - [Tecnologias](#tecnologias)
 - [Estrutura do Projeto](#estrutura-do-projeto)  
 - [Licença](LICENSE.txt)
-- [Documentação](Documentação/)
+- [Documentação (Primeira Versão) 📚](Documentação/)
 
 ---
 
@@ -27,27 +27,28 @@ O Rapidinho Frete tem como objetivo facilitar o agendamento, acompanhamento e ge
 
 ## Funcionalidades 📈
 
-Algumas funcionalidades esperadas/marcantes:
+Algumas funcionalidades presentes no sistema são:
 
-- Cadastro de clientes  
-- Cadastro de motoboys 
-- Criação e gerenciamento de pedidos de frete  
-- Acompanhamento do status de entrega (ex: pendente, em rota, entregue)  
-- Cálculo de custos de frete baseado em distância/volume/peso  
-- Dashboard para visualização rápida de métricas de entrega  
-- Autenticação/autorização para diferentes perfis (ex: administrador, motorista)  
+- Cadastro de clientes, administradores e motoboys
+- Edição e visualização dos usuários cadastrados
+- Criação e gerenciamento de pedidos de frete
+- Visualização do histórico de entregas e solicitações (com diferenciação dependendo do perfil)
+- Acompanhamento do status de entrega (pendente, em andamento, entregue) 
+- Cálculo de custos de frete baseado em distância/dimensões do pacote/peso  
+- Dashboard para visualização de métricas financeiras das entregas para administradores
+- Autenticação/autorização de login para diferentes níveis de perfil (administrador, motoboy e cliente)
 
 ---
 
 ## Tecnologias 👨‍💻
 
-Este projeto utiliza (ou pode utilizar) as seguintes tecnologias:
+Este projeto utiliza as seguintes tecnologias:
 
 - Backend: *PHP + JavaScript*  
-- Framework web/API: *---*  
+- Framework web/API: *Bootstrap*  
 - Banco de Dados: *MySQL*  
 - Frontend: *HTML + CSS (Responsivo) | FREE HTML TEMPLATE LICENSE BY HTML Codex*
-- Outras: *Sass*
+- Outras: *Sass, Chart, Owl Carousel, Tempus Dominus, Waypoints*
 
 ---
 
