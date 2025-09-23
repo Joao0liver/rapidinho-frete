@@ -1,6 +1,6 @@
-# Rapidinho Frete 🚚
+# Rapidinho Frete 🏍️📦
 
-**Rapidinho Frete** é um sistema/projeto para gerenciamento de fretes/transporte rápido. Este documento apresenta informações para instalação, uso, estrutura, contribuição e licenças.
+**Rapidinho Frete** é um sistema para gerenciamento de fretes/transporte rápido de encomendas ou pacotes feitas por motoboys.
 
 ---
 
@@ -17,9 +17,11 @@
 
 ## Visão Geral
 
-O Rapidinho Frete tem como objetivo facilitar o agendamento, acompanhamento e gestão de entregas/fretes. Ele permite que usuários cadastrem pedidos, motoristas, gerenciem rotas, status de entrega, etc.  
+O Rapidinho Frete tem como objetivo facilitar o agendamento, acompanhamento e gestão de entregas/fretes. Ele permite que usuários cadastrem pedidos, motoboys, gerenciem rotas, status de entrega, etc.  
 
 É ideal para empresas de logística, entregas expressas e marketplaces que necessitam de um sistema simples e eficaz de frete.
+
+⚠️ Importante: o sistema foi desenvolvido com base em uma demanda de Juiz de Fora - MG. Portanto, está nichado para esse município, mas com possibilidade de expansão para atuação em outras cidades.
 
 ---
 
@@ -28,7 +30,7 @@ O Rapidinho Frete tem como objetivo facilitar o agendamento, acompanhamento e ge
 Algumas funcionalidades esperadas/marcantes:
 
 - Cadastro de clientes  
-- Cadastro de motoristas/frotas  
+- Cadastro de motoboys 
 - Criação e gerenciamento de pedidos de frete  
 - Acompanhamento do status de entrega (ex: pendente, em rota, entregue)  
 - Cálculo de custos de frete baseado em distância/volume/peso  
@@ -45,7 +47,7 @@ Este projeto utiliza (ou pode utilizar) as seguintes tecnologias:
 - Framework web/API: *---*  
 - Banco de Dados: *MySQL*  
 - Frontend: *HTML + CSS (Responsivo) | FREE HTML TEMPLATE LICENSE BY HTML Codex*
-- Outras: *---*
+- Outras: *Sass*
 
 ---
 
