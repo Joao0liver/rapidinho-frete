@@ -12,7 +12,7 @@
 - [Metodologia 🔍](#metodologia)
 - [Ferramentas 🔧](#ferramentas)
 - [Estrutura do Projeto 🗂️](#estrutura-do-projeto)
-- [Documentação (Primeira Versão) 📚](Documentação/)
+- [Documentação (Branch "documentacao") 📚](https://github.com/Joao0liver/rapidinho-frete/blob/documentacao/)
 - [Licença 🔑](LICENSE.txt)
 
 ---
