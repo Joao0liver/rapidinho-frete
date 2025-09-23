@@ -14,7 +14,7 @@ $cliente = mysqli_fetch_array($sql);
 
 <head>
     <meta charset="utf-8">
-    <title>Cliente - Rapidinho Fretes</title>
+    <title>Cliente - Rapidinho Frete</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -57,7 +57,7 @@ $cliente = mysqli_fetch_array($sql);
         <div class="sidebar pe-4 pb-3 bg-light">
             <nav class="navbar bg-light navbar-light">
                 <a href="menu.php" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><img src="../layout/img/logo.png" height="50px" width="50px" style="margin-right: 10px;">RAPIDINHO</h3>
+                    <img src="../layout/img/logo.png" height="50px" width="50px" style="margin-right: 22px;"><img src="../layout/img/txt_rfrete.png">
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
