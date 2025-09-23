@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php echo '<br>'.$msg; ?>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <a href="">Esqueci minha senha</a>
+                                <!--<a href="">Esqueci minha senha</a>-->
                             </div>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Login</button>
                         </form>

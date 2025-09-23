@@ -153,31 +153,31 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             <h6 class="mb-4">Cadastrar Motoboy</h6>
                             <form method="post" action="cadastrar_mtboy_adm.php" enctype="multipart/form-data">
                                 <div class="mb-3">
-                                    <label class="form-label">Nome</label>
+                                    <label class="form-label">Nome <font color="red" size="2">*</font></label>
                                     <input type="text" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" name="nome_mtboy" class="form-control" style="width: 700px;" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="imagem">Foto de Perfil:</label>
+                                    <label class="form-label" for="imagem">Foto de Perfil: <font color="red" size="2">*</font></label>
                                     <input type="file" name="imagem" id="imagem" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Email</label>
+                                    <label class="form-label">Email <font color="red" size="2">*</font></label>
                                     <input type="email" name="email_mtboy" class="form-control" style="width: 500px;" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">CPF</label>
+                                    <label class="form-label">CPF <font color="red" size="2">*</font></label>
                                     <input type="number" pattern="[0-9]{11}" name="cpf_mtboy" class="form-control" style="width: 200px;" placeholder="XXXXXXXXXXX" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Telefone</label>
+                                    <label class="form-label">Telefone <font color="red" size="2">*</font></label>
                                     <input type="tel" pattern="[0-9]{11}" name="tel_mtboy" class="form-control" style="width: 200px;" placeholder="XXXXXXXXXXX" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Placa da Moto</label>
+                                    <label class="form-label">Placa da Moto <font color="red" size="2">*</font></label>
                                     <input type="text" name="placa_mtboy" class="form-control" style="width: 150px;" placeholder="XXXXXXX" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Senha</label>
+                                    <label class="form-label">Senha <font color="red" size="2">*</font></label>
                                     <input type="password" name="senha_mtboy" class="form-control" style="width: 600px;" required>
                                 </div>
                                 <div class="mb-3">

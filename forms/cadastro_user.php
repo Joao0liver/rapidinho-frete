@@ -140,19 +140,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                         <form method="post" action="cadastro_user.php">
                             <div class="form-floating mb-3">
                                 <input type="text" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" name="nome_user" class="form-control" id="floatingText" required>
-                                <label for="floatingText">Nome</label>
+                                <label for="floatingText">Nome <font color="red" size="2">*</font></label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="email" name="email_user" class="form-control" id="floatingInput" required>
-                                <label for="floatingInput">Email</label>
+                                <label for="floatingInput">Email <font color="red" size="2">*</font></label>
                             </div>
                             <div class="form-floating mb-4">
                                 <input type="number" pattern="[0-9]{11}" name="cpf_user" class="form-control" id="floatingPassword" required>
-                                <label for="floatingPassword">CPF</label>
+                                <label for="floatingPassword">CPF <font color="red" size="2">*</font></label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="text" pattern="[A-Za-zÀ-ÖØ-öø-ÿ0-9,\s]+" name="ende_user" class="form-control" id="floatingInput" required>
-                                <label for="floatingInput">Endereço</label>
+                                <label for="floatingInput">Endereço <font color="red" size="2">*</font></label>
                             </div>
                             <div class="">
                                 <select name="bairro_user" id="bairro_user" class="form-select mb-3" style="width: 150px;" required>
@@ -323,11 +323,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="password" name="senha_user" class="form-control" id="floatingInput" required>
-                                <label for="floatingInput">Senha</label>
+                                <label for="floatingInput">Senha <font color="red" size="2">*</font></label>
                             </div>
                             <?php echo $msgS; ?>
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <a href="">Esqueci a senha</a>
+                                <!--<a href="">Esqueci a senha</a>-->
                             </div>
                             <?php echo $msg.'<br>'; ?>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Cadastrar-se</button>

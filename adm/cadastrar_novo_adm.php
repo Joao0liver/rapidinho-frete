@@ -89,19 +89,19 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             <h6 class="mb-4">Cadastrar Novo Administrador</h6>
                             <form method="post" action="cadastrar_novo_adm.php" enctype="multipart/form-data">
                                 <div class="mb-3">
-                                    <label class="form-label">Nome</label>
+                                    <label class="form-label">Nome <font color="red" size="2">*</font></label>
                                     <input type="text" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" name="nome_adm" class="form-control" style="width: 700px;" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Email</label>
+                                    <label class="form-label">Email <font color="red" size="2">*</font></label>
                                     <input type="email" name="email_adm" class="form-control" style="width: 500px;" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">CPF</label>
+                                    <label class="form-label">CPF <font color="red" size="2">*</font></label>
                                     <input type="number" pattern="[0-9]{11}" name="cpf_adm" class="form-control" style="width: 200px;" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Senha</label>
+                                    <label class="form-label">Senha <font color="red" size="2">*</font></label>
                                     <input type="password" name="senha_adm" class="form-control" style="width: 600px;" required>
                                 </div>
                                 <div class="mb-3">

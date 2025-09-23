@@ -52,6 +52,8 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     if ($registros_entrega['id_mtboy'] == null){
 
         $nome_mtboy = '<font color="orange">Nenhum motoboy aceitou a solicitação ainda!</font>';
+        $tel_mtboy = '-----------';
+        $placa_mtboy = '------';
 
     }else {
 
@@ -63,6 +65,11 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
         $rodar_sql = mysqli_query($conn, $sql);
 
         $registros_mtboy = mysqli_fetch_assoc($rodar_sql);
+
+        $nome_mtboy = $registros_mtboy['nome_user'];
+        $foto_mtboy = $registros_mtboy['foto_mtboy'];
+        $tel_mtboy = $registros_mtboy['tel_mtboy'];
+        $placa_mtboy = $registros_mtboy['placa_mtboy'];
 
     }
 
@@ -96,35 +103,35 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                     <h5 class="mb-4">Detalhes do Pedido</h5>
                     <dl class="row mb-0">
                         <dt class="col-sm-4">ID do Pedido:</dt>
-                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $registros_entrega['id_ent'] ?></dd></dl></dd>
+                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $registros_entrega['id_ent']; ?></dd></dl></dd>
 
 
                         <dt class="col-sm-4">ID do Cliente:</dt>
-                        <dd class="col-sm-8"><?php echo $registros_entrega['id_cliente'] ?></dd>
+                        <dd class="col-sm-8"><?php echo $registros_entrega['id_cliente']; ?></dd>
 
                         <dt class="col-sm-4">Nome do Cliente:</dt>
-                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $registros_cli['nome_user'] ?></dd></dl></dd>
+                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $registros_cli['nome_user']; ?></dd></dl></dd>
 
                         <dt class="col-sm-4">ID do Motoboy:</dt>
-                        <dd class="col-sm-8"><?php echo $registros_entrega['id_mtboy'] ?></dd>
+                        <dd class="col-sm-8"><?php echo $registros_entrega['id_mtboy']; ?></dd>
 
                         <dt class="col-sm-4">Nome do Motoboy:</dt>
-                        <dd class="col-sm-8"><?php echo $registros_mtboy['nome_user'] ?></dd>
+                        <dd class="col-sm-8"><?php echo $nome_mtboy; ?></dd>
 
                         <dt class="col-sm-4">Foto do Motoboy:</dt>
-                        <dd class="col-sm-8"><img class="img-fluid rounded-circle mx-auto" src="../upload/img_mtboy/<?php echo $registros_mtboy['foto_mtboy'] ?>" alt="Sem foto" style="width: 100px; height: 100px;"></dd>
+                        <dd class="col-sm-8"><img class="img-fluid rounded-circle mx-auto" src="../upload/img_mtboy/<?php echo $foto_mtboy; ?>" alt="Sem foto" style="width: 100px; height: 100px;"></dd>
 
                         <dt class="col-sm-4">Telefone:</dt>
-                        <dd class="col-sm-8"><?php echo $registros_mtboy['tel_mtboy'] ?></dd>
+                        <dd class="col-sm-8"><?php echo $tel_mtboy; ?></dd>
 
                         <dt class="col-sm-4">Placa:</dt>
-                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $registros_mtboy['placa_mtboy'] ?></dd></dl></dd>
+                        <dd class="col-sm-8"><dl class="row"><dd class="col-sm-8"><?php echo $placa_mtboy; ?></dd></dl></dd>
 
                         <dt class="col-sm-4">Endereço de Retirada:</dt>
-                        <dd class="col-sm-8"><?php echo $registros_entrega['ende_orig'] ?></dd>
+                        <dd class="col-sm-8"><?php echo $registros_entrega['ende_orig']; ?></dd>
 
                         <dt class="col-sm-4">Endereço de Entrega:</dt>
-                        <dd class="col-sm-8"><?php echo $registros_entrega['ende_dest'] ?></dd>
+                        <dd class="col-sm-8"><?php echo $registros_entrega['ende_dest']; ?></dd>
 
                         <dt class="col-sm-4 text-truncate">Características do Pacote:</dt>
                         <dd class="col-sm-8"><?php echo $registros_entrega['peso_pac'].'kg - '.$registros_entrega['comp_pac'].'cm x '.$registros_entrega['larg_pac'].'cm'; ?></dd>
@@ -136,7 +143,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                             </dl>
                         </dd>
                         <dt class="col-sm-4">Valor Total da Entrega:</dt>
-                        <dd class="col-sm-8">R$<?php echo $registros_entrega['valor_ent'] ?></dd>
+                        <dd class="col-sm-8">R$<?php echo $registros_entrega['valor_ent']; ?></dd>
                         <dt class="col-sm-4">Valor Recebido pelo Motoboy:</dt>
                         <dd class="col-sm-8">R$<?php echo number_format((70/100) * $registros_entrega['valor_ent'], 2) ?></dd> <!-- number_format = limita as casas decimais -->
                         <dt class="col-sm-4">Valor p/ Empresa:</dt>
