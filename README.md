@@ -9,9 +9,11 @@
 - [Visão Geral](#visão-geral)  
 - [Funcionalidades](#funcionalidades)  
 - [Tecnologias](#tecnologias)
-- [Estrutura do Projeto](#estrutura-do-projeto)  
-- [Licença](LICENSE.txt)
+- [Metodologia](#metodologia)
+- [Ferramentas](#ferramentas)
+- [Estrutura do Projeto](#estrutura-do-projeto)
 - [Documentação (Primeira Versão) 📚](Documentação/)
+- [Licença](LICENSE.txt)
 
 ---
 
@@ -36,7 +38,7 @@ Algumas funcionalidades presentes no sistema são:
 - Acompanhamento do status de entrega (pendente, em andamento, entregue) 
 - Cálculo de custos de frete baseado em distância/dimensões do pacote/peso  
 - Dashboard para visualização de métricas financeiras das entregas para administradores
-- Autenticação/autorização de login para diferentes níveis de perfil (administrador, motoboy e cliente)
+- Autenticação de login para diferentes níveis de perfil (administrador, motoboy e cliente)
 
 ---
 
@@ -59,6 +61,18 @@ A metodologia usada para esse projeto:
 - Metodologia de Desenvolvimento FDD (*Feature Driven Development* – Baseado em Funcionalidades *Adaptado)
 - Controle de Requisitos
 - Versionamento de Software
+
+---
+
+## Ferramentas 🛠️
+
+As ferramentas usadas no desenvolvimento:
+
+- XAMPP (Ambiente de Desenvolvimento Web)
+- DBDesigner (Software de Modelagem de Banco de Dados)
+- Dia Portable (Software de Diagramação)
+- Visual Studio Code (IDE)
+- GitHub + Google Drive
 
 ---
 
