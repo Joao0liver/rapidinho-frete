@@ -52,6 +52,16 @@ Este projeto utiliza as seguintes tecnologias:
 
 ---
 
+## Metodologia 🔍
+
+A metodologia usada para esse projeto:
+
+- Metodologia de Desenvolvimento FDD (*Feature Driven Development* – Baseado em Funcionalidades *Adaptado)
+- Controle de Requisitos
+- Versionamento de Software
+
+---
+
 ## Estrutura do Projeto 🗂️
 
 ```
