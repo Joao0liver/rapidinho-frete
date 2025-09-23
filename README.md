@@ -21,7 +21,7 @@ O Rapidinho Frete tem como objetivo facilitar o agendamento, acompanhamento e ge
 
 É ideal para empresas de logística, entregas expressas e marketplaces que necessitam de um sistema simples e eficaz de frete.
 
-⚠️ Importante: o sistema foi desenvolvido com base em uma demanda de Juiz de Fora - MG. Portanto, está nichado para esse município, mas com possibilidade de expansão para atuação em outras cidades.
+⚠️**Importante:** o sistema foi desenvolvido com base em uma demanda de Juiz de Fora - MG. Portanto, está nichado para esse município, mas com possibilidade de expansão para atuação em outras cidades.
 
 ---
 
