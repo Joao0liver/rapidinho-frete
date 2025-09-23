@@ -15,6 +15,7 @@
 - [Como Contribuir](#como-contribuir)  
 - [Roadmap](#roadmap)  
 - [Licença](#licença)
+- [Documentação](#Documentação/DSWAF)
 
 ---
 
