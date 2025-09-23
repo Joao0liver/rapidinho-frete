@@ -7,13 +7,13 @@
 ## Índice
 
 - [Visão Geral](#visão-geral)  
-- [Funcionalidades](#funcionalidades)  
-- [Tecnologias](#tecnologias)
-- [Metodologia](#metodologia)
-- [Ferramentas](#ferramentas)
-- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Funcionalidades 📈](#funcionalidades)  
+- [Tecnologias 👨‍💻](#tecnologias)
+- [Metodologia 🔍](#metodologia)
+- [Ferramentas 🔧](#ferramentas)
+- [Estrutura do Projeto 🗂️](#estrutura-do-projeto)
 - [Documentação (Primeira Versão) 📚](Documentação/)
-- [Licença](LICENSE.txt)
+- [Licença 🔑](LICENSE.txt)
 
 ---
 
