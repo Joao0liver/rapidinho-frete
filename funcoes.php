@@ -187,4 +187,15 @@ function verificar_imagem($foto){
 
 }
 
+function tratar_data($input, $conn){
+
+    if (gettype($input) == "string"){
+        $input = mysqli_real_escape_string($conn,$input);
+        return $input;
+    }else{
+        return -1;
+    }
+
+}
+
 ?>

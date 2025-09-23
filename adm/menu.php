@@ -35,37 +35,47 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
     $msg_mes = 'R$0.00';
     $lucro_dia = 'R$0.00';
     $lucro_mes = 'R$0.00';
-    $dia_form = $dia;
-    $mes_form = $mes;
+    $dia_form = '--';
+    $mes_form = '--';
+    $ano_form = '----';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         // Captura o dia e mês vindo do formulário select
+        $ano_form = $_POST['ano'];
         $mes_form = $_POST['mes'];
         $dia_form = $_POST['dia'];
 
-        // Soma as vendas diárias conforme selecionado no formulário
-        $sql = "SELECT SUM(valor_ent) FROM tbl_entrega WHERE YEAR(fim_ent) = $ano AND MONTH(fim_ent) = $mes_form AND DAY(fim_ent) = $dia_form";
-        $rodar_sql = mysqli_query($conn, $sql);
-        $venda_dia = mysqli_fetch_array($rodar_sql)[0];
+        $ano_form = tratar_data($ano_form, $conn);
+        $mes_form = tratar_data($mes_form, $conn);
+        $dia_form = tratar_data($dia_form, $conn);
 
-        if (is_null($venda_dia)){
-            $msg_dia = 'R$0.00';
-        }else{
-            $msg_dia = 'R$'.$venda_dia;
-            $lucro_dia = 'R$'.number_format((30/100) * $venda_dia, 2);
-        }
+        if ($ano_form <> -1 && $mes_form <> -1 && $dia_form <> -1){
 
-        // Soma as vendas mensais conforme selecionado no formulário
-        $sql = "SELECT SUM(valor_ent) FROM tbl_entrega WHERE YEAR(fim_ent) = $ano AND MONTH(fim_ent) = $mes_form";
-        $rodar_sql = mysqli_query($conn, $sql);
-        $venda_mes = mysqli_fetch_array($rodar_sql)[0];
+            // Soma as vendas diárias conforme selecionado no formulário
+            $sql = "SELECT SUM(valor_ent) FROM tbl_entrega WHERE YEAR(fim_ent) = $ano_form AND MONTH(fim_ent) = $mes_form AND DAY(fim_ent) = $dia_form";
+            $rodar_sql = mysqli_query($conn, $sql);
+            $venda_dia = mysqli_fetch_array($rodar_sql)[0];
 
-        if (is_null($venda_mes)){
-            $msg_mes = 'R$0.00';
-        }else{
-            $msg_mes = 'R$'.$venda_mes;
-            $lucro_mes = 'R$'.number_format((30/100) * $venda_mes, 2);
+            if (is_null($venda_dia)){
+                $msg_dia = 'R$0.00';
+            }else{
+                $msg_dia = 'R$'.$venda_dia;
+                $lucro_dia = 'R$'.number_format((30/100) * $venda_dia, 2);
+            }
+
+            // Soma as vendas mensais conforme selecionado no formulário
+            $sql = "SELECT SUM(valor_ent) FROM tbl_entrega WHERE YEAR(fim_ent) = $ano_form AND MONTH(fim_ent) = $mes_form";
+            $rodar_sql = mysqli_query($conn, $sql);
+            $venda_mes = mysqli_fetch_array($rodar_sql)[0];
+
+            if (is_null($venda_mes)){
+                $msg_mes = 'R$0.00';
+            }else{
+                $msg_mes = 'R$'.$venda_mes;
+                $lucro_mes = 'R$'.number_format((30/100) * $venda_mes, 2);
+            }
+
         }
 
     }
@@ -75,12 +85,15 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
 
 <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
+                Dados referentes a: <?php echo $dia_form.'/'.$mes_form.'/'.$ano_form; ?>
+            </div>
+            <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Vendas do Dia<?php echo ' ('.$dia_form.')'; ?></p>
+                                <p class="mb-2">Vendas do Dia</p>
                                 <h6 class="mb-0"><?php echo $msg_dia; ?></h6>
                             </div>
                         </div>
@@ -89,7 +102,7 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Vendas do Mês<?php echo ' ('.$mes_form.')'; ?></p>
+                                <p class="mb-2">Vendas do Mês</p>
                                 <h6 class="mb-0"><?php echo $msg_mes; ?></h6>
                             </div>
                         </div>
@@ -116,6 +129,22 @@ if($_SESSION['id_user'] == '' || $_SESSION['email_user'] == null || $_SESSION['n
             </div>
             <div class="container-fluid pt-4 px-4">
                 <form action="menu.php" method="post">
+                    Ano:
+                    <select name="ano" size="1">
+                        <?php 
+                        
+                        for ($i = 2025; $i <= 2099; $i++){
+
+                            if ($ano == $i){
+                                echo '<option value="'.($i).'" selected>'.$i.'</option>';
+                            }else{
+                                echo '<option value="'.($i).'">'.$i.'</option>';
+                            }
+
+                        }
+
+                        ?>
+                    </select>
                     Mês:
                     <select name="mes" size="1">
                         <?php 
