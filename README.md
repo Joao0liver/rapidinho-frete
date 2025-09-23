@@ -44,19 +44,43 @@ Algumas funcionalidades esperadas/marcantes:
 
 Este projeto utiliza (ou pode utilizar) as seguintes tecnologias:
 
-- Backend: *(ex: Node.js, Python, Java, etc.)*  
-- Framework web/API: *(ex: Express, Django, Spring Boot, etc.)*  
-- Banco de Dados: *(ex: PostgreSQL, MySQL, MongoDB)*  
-- Frontend: *(se houver interface web ou mobile)*  
-- Outras: *(Ex: Docker, testes automatizados, CI/CD, etc.)*
+- Backend: *PHP + JavaScript*  
+- Framework web/API: *---*  
+- Banco de Dados: *MySQL*  
+- Frontend: *HTML + CSS (Responsivo)*
+- Outras: *---*
 
 ---
 
-## Instalação
+## Estrutura do Projeto
 
-Siga os passos abaixo para rodar o projeto localmente:
-
-1. Clone o repositório  
-   ```bash
-   git clone https://github.com/Joao0liver/rapidinho-frete.git
-   cd rapidinho-frete
+rapidinho-frete/
+│
+├── adm/                   # Funcionalidades e páginas para administrador
+├── backup/                # Backup do bootstrap
+├── bkp_blank/             # Modelo vazio
+├── cliente/               # Funcionalidades e páginas para cliente
+├── forms/                 # Formulários (login e cadastro)
+│
+├── layout/                # Recursos visuais e estruturais
+│   ├── css/               # Arquivos CSS
+│   ├── img/               # Imagens do sistema
+│   ├── js/                # Scripts JS
+│   ├── lib/               # Bibliotecas externas
+│   ├── scss/              # Pré-processadores CSS
+│   ├── footer.php         # Rodapé geral
+│   ├── header.php         # Cabeçalho genérico
+│   ├── header_adm.php     # Cabeçalho exclusivo para administrador
+│   ├── header_cliente.php # Cabeçalho exclusivo para cliente
+│   ├── header_index.php   # Cabeçalho da página inicial
+│   ├── header_mtboy.php   # Cabeçalho exclusivo para motoboy
+│
+├── motoboy/               # Funcionalidades e páginas para motoboys
+├── upload/                # Pasta para arquivos enviados pelos usuários
+│
+├── conexao.php            # Arquivo de conexão com o banco de dados
+├── funcoes.php            # Funções usadas no sistema
+├── testes.php             # Arquivo para testes
+│
+├── LICENSE.txt            # Termos de licença do projeto
+├── READ-ME.txt            # Instruções básicas ou anotações sobre o projeto
