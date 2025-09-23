@@ -14,7 +14,7 @@
 - [Estrutura do Projeto](#estrutura-do-projeto)  
 - [Como Contribuir](#como-contribuir)  
 - [Roadmap](#roadmap)  
-- [Licença](#licença)
+- [Licença](LICENSE.txt)
 - [Documentação](Documentação/)
 
 ---
