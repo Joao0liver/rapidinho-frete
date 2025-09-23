@@ -8,12 +8,8 @@
 
 - [Visão Geral](#visão-geral)  
 - [Funcionalidades](#funcionalidades)  
-- [Tecnologias](#tecnologias)  
-- [Instalação](#instalação)  
-- [Uso](#uso)  
+- [Tecnologias](#tecnologias)
 - [Estrutura do Projeto](#estrutura-do-projeto)  
-- [Como Contribuir](#como-contribuir)  
-- [Roadmap](#roadmap)  
 - [Licença](LICENSE.txt)
 - [Documentação](Documentação/)
 
@@ -48,7 +44,7 @@ Este projeto utiliza (ou pode utilizar) as seguintes tecnologias:
 - Backend: *PHP + JavaScript*  
 - Framework web/API: *---*  
 - Banco de Dados: *MySQL*  
-- Frontend: *HTML + CSS (Responsivo)*
+- Frontend: *HTML + CSS (Responsivo) | FREE HTML TEMPLATE LICENSE BY HTML Codex*
 - Outras: *---*
 
 ---
