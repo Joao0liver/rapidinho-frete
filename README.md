@@ -7,11 +7,11 @@
 ## Índice
 
 - [Visão Geral](#visão-geral)  
-- [Funcionalidades](#funcionalidades 📈)  
-- [Tecnologias](#tecnologias)
-- [Metodologia](#metodologia)
-- [Ferramentas](#ferramentas)
-- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Funcionalidades](#funcionalidades📈)  
+- [Tecnologias](#tecnologias👨‍💻)
+- [Metodologia](#metodologia🔍)
+- [Ferramentas](#ferramentas🔧)
+- [Estrutura do Projeto](#estrutura-do-projeto🗂️)
 - [Documentação (Primeira Versão) 📚](Documentação/)
 - [Licença](LICENSE.txt)
 
@@ -27,7 +27,7 @@ O Rapidinho Frete tem como objetivo facilitar o agendamento, acompanhamento e ge
 
 ---
 
-## Funcionalidades 📈
+## Funcionalidades📈
 
 Algumas funcionalidades presentes no sistema são:
 
@@ -42,7 +42,7 @@ Algumas funcionalidades presentes no sistema são:
 
 ---
 
-## Tecnologias 👨‍💻
+## Tecnologias👨‍💻
 
 Este projeto utiliza as seguintes tecnologias:
 
@@ -54,7 +54,7 @@ Este projeto utiliza as seguintes tecnologias:
 
 ---
 
-## Metodologia 🔍
+## Metodologia🔍
 
 A metodologia usada para esse projeto:
 
@@ -64,7 +64,7 @@ A metodologia usada para esse projeto:
 
 ---
 
-## Ferramentas 🛠️
+## Ferramentas🔧
 
 As ferramentas usadas no desenvolvimento:
 
@@ -76,7 +76,7 @@ As ferramentas usadas no desenvolvimento:
 
 ---
 
-## Estrutura do Projeto 🗂️
+## Estrutura do Projeto🗂️
 
 ```
 rapidinho-frete/
